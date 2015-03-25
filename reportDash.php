@@ -1,0 +1,57 @@
+<?php/*
+session_start(); 
+if (!isset($_SESSION['logedIn'])) { $_SESSION['logedIn'] = false;}
+if (!isset($_SESSION['AccountType'])) {$_SESSION['AccountType'] = "NONE";}
+if ($_SESSION['loggedIn'] == false) {header('Location: login.php');}
+if ($_SESSION['logedIn'] == true && $_SESSION['AccountType'] == "customer") {header('Location: customerDash.php');}
+elseif ($_SESSION['logedIn'] == true && $_SESSION['AccountType'] == "employee") {header('Location: employeeDash.php');}
+*/
+?>
+
+<!DOCTYPE html>
+    <head>
+        <title>Customer Dash | Chick Cafe</title>
+        <link type="text/css" href="styles.css" rel="stylesheet" media="screen" />
+    </head>
+
+    <body>
+    <header>
+        <a href="index.php"><img align="middle" id="logo" src="images/Logo.png"/></a>
+        <br>
+
+        <div class="nav">
+        <ul>
+            <li><a href="index.php">Home</a></li>
+            <li><a href="managerDash.php">Current Orders</a></li>
+            <li><a href="#">Reports</a></li>
+            <li><a href="#">Employee Accounts</a></li>
+            <li><a href="refund.php">Refund</a></li>
+            <li><a href="#">VIP</a></li>
+            <li><a href="stock.php">Stock</a></li>
+            <li><a href="myAccount.php">My Account</a></li>
+            <li><a href="logoff.php">Logout</a></li>
+        </ul>
+        </div>
+    </header>
+    <body>
+        <nav>
+            <ul id="rDash">
+                <li><i>Report</i></li>
+                    <table style="padding-top:50px;">
+                        <tr><td><li><a href="#">Customer Spending</a></li></td>
+                        <td><li><a href="refundReport.php">Refund</a></li></td>
+                        <td><li><a href="#">Staff Performance</a></li></td></tr>
+                        <tr><td><li><a href="orderReport.php">Order</a></li></td>
+                        <td><li><a href="#">Active Users</a></li></td> 
+                        <td><li><a href="#">Generate All</a></li></td></tr>
+                    </table>
+            </ul>
+        </nav>
+    </body>
+    
+    <footer>
+        <strong>Chick Cafe</strong> is a very <strong>popular</strong> cafeteria in the center of <strong>Islington, London</strong> that offers made to order <strong>food</strong> and <strong>drinks.</strong>
+    </footer>
+
+    </body>
+</html>

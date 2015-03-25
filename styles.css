@@ -1,0 +1,282 @@
+html{
+    width: 100%;
+    height: 100%;
+    margin: 0 auto; 
+    /*background: url(images/bbackground.jpg);*/
+    background: url(images/bg6.jpg);
+    transition:all 0.3s ease;
+    font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;
+}
+body{width:1100px;height: 100%; margin: auto;transition:all 0.3s ease;}
+
+#lognreg{
+  background: rgba(0,0,0,0.5);
+  border-top: 2px solid #fa405a;
+  border-bottom: 2px solid #fa405a;
+  width: 900px;
+
+}
+
+nav{
+	list-style: none;
+  /*display: inline-block;*/
+  margin-bottom:95px; /*Space from top of page*/
+  z-index:5;
+  margin: 10px auto;
+  display: table;
+  width: 900px;
+  background: rgba(0,0,0,0.5);
+  border-top: 2px solid #fa405a;
+  border-bottom: 2px solid #fa405a;
+}
+
+nav ul {
+list-style:none;
+margin:0;
+padding:0;
+display:table-row;
+white-space:nowrap;
+margin-top: 50px;
+}
+
+.tftable{
+  padding: 20px;
+}
+
+nav ul li{ /*First visible list items*/
+  padding: 15px;
+  z-index:5;
+  list-style: none;
+  float: left;
+}
+
+nav li i{
+	font-size: 18px;
+  text-decoration: none;
+  color: #fff;
+  z-index:5;
+}
+
+nav ul li ul{
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  /*visibility: hidden;*/
+  -webkit-transiton: all 0.2s;
+  -moz-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  -transition: all 0.2s;
+  display: block;
+  list-style: none;
+  padding: 20px;
+  z-index:5;
+  position: relative;
+}
+
+.sub_menu li{
+    -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+  color: black;
+  float: left;
+  z-index:5;
+}
+
+nav li:hover ul {
+  background: black;
+  z-index:5;
+}
+
+/**Table**/
+table.tftable {
+  font-size:12px;
+  color:#333333;
+  width:100%;
+  border-width: 1px;
+  border-color: #729ea5;
+  border-collapse: collapse;
+}
+table.tftable th {
+  font-size:12px;
+  background-color:#DADFE1;
+  border-width: 1px;
+  padding: 8px;
+  border-style: solid;
+  border-color: #EEEEEE;
+  text-align:left;
+}
+table.tftable tr {background-color:#EEEEEE;}
+table.tftable td {
+  font-size:12px;
+  border-width: 1px;
+  padding: 8px;
+  border-style: solid;
+  border-color: #DADFE1;
+  width: 100%;
+}
+/**Table End**/
+
+header{
+text-align: center;
+margin-top: 80px;
+margin: auto;
+padding: 20px;
+}
+
+footer{width: 700px; font-size: 20px; text-align: center; padding:70px; margin: auto;}
+
+strong{font-size: 27px;color: #fa405a;}
+
+/* login button on index page */
+#log_main{text-decoration:none;background: rgba(0,0,0,0.5);padding:15px;color:white;border-top: 1px solid #fa405a;border-bottom: 1px solid #fa405a;}
+#log_main:hover{color:#fa405a;}
+/* end login button */
+
+/* Used for buttons class*/
+.button {
+    border: none;
+    display: block;
+    background: rgba(0,0,0,0.7);
+    height: 40px;
+    width: 75px;
+    color: #fff;
+    font-size: 12px;
+    /*text-align: center;*/
+    border-radius: 5px;
+    -webkit-transition: all 0.15s linear;
+    -moz-transition: all 0.15s linear;
+    transition: all 0.15s linear;
+    float: right;
+    margin-right: 15px;
+    margin-top: 3px;
+}
+
+.button:hover {
+  background: rgba(250,64,90,0.7);
+}
+
+/******
+
+FLAT FORM FOR THE LOGIN/REGISTER PAGE
+
+******/
+#lognreg{
+    background: black;
+    width: 500px;
+}
+
+.flat-form {
+  background: #ECECEC;
+  background: rgba(236,236,236,0.7);
+  margin: 0 auto;
+  margin-left: 100px;
+  width: 390px;
+  padding-bottom: 10px;
+  position: relative;
+  font-family: 'Roboto';
+float: left;
+border: 2px solid black;
+}
+
+.title {
+  background: rgba(191,191,191,0.5);
+  height: 42px;
+  margin: 0 auto;
+  padding: 0;
+  list-style-type: none;
+  width: 390px;
+  position: relative;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.title a {
+  display: block;
+  float: left;
+  text-decoration: none;
+  color: black;
+  font-size: 30px;
+  padding: 5px 0px 0px 10px;
+  /*border-right: 1px solid @tab-border;*/
+
+}
+
+.form-action {
+  padding: 0 10px;
+  position: relative;
+}
+
+.form-action p { /* text ontop of text feilds */
+  font-size: 12px;
+  padding-bottom: 5px;
+  line-height: 20px;
+  width: 90%;
+  padding-left: 15px;
+}
+
+form {
+  padding-right: 20px !important;
+}
+
+form ul li{
+   list-style: none;
+}
+
+.text,  /* login page text feilds */
+form input[type=password] {
+  width: 90%;
+  height: 30px;
+  margin-bottom: 10px;
+  padding-left: 15px;
+  background: #fff;
+  border: none;
+  outline: none;
+}
+
+#account{
+  background: rgba(0,0,0,0.5);
+  width: 900px;
+    border-top: 2px solid #fa405a;
+  border-bottom: 2px solid #fa405a;
+  margin: auto;
+  margin-top: 10px;
+}
+
+#account p{
+  color:white;
+  font-size: 20px;
+}
+
+/*********************************/
+.nav{
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  /*margin-right: -25px; /*positions with large img*/
+  /*margin-top: 75px; /*positions with bottom of logo*/
+  background: rgba(0,0,0,0.5); /*black transparent background*/
+  border-top: 2px solid #fa405a; /*pink border top and bottom*/
+  border-bottom: 2px solid #fa405a;
+}
+
+.nav ul li{
+  float: left;
+  list-style: none;
+}
+
+.nav ul li a{
+  font-size: 20px;
+  padding-right: 40px;
+  text-decoration: none;
+  color: white;
+}
+
+.nav ul li a:hover{
+  color: #fa405a;
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+
+.fade{opacity:0.5;}
+.fade:hover{opacity:1;}
