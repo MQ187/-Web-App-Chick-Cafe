@@ -16,17 +16,18 @@ $max=count($_SESSION['basket']); //check how many items are in the basket.
 		<link type="text/css" href="styles.css" rel="stylesheet" media="screen" />
 	</head>
 	<body>
+		<?php 
+if ($max < 1){
+	echo "<center><h1>There is nothing in your basket! want to order?</h1><br><a href=index.php>Menu</a></center>";
+}
+else{
+	?>
 <table id="tfhover" class="tftable" border="1">
 <tr>
 <th>Title</th><th>Description</th><th>Price</th><th>Type</th><th>Add</th><th>Quantity</th><th>Remove</th><th>Total</th>
 </tr>
 
-<?php 
-if ($max < 1){
-	echo "There is nothing in your basket! wnat to order?";
-	echo "<a href=index.php>Menu</a>";
-}
-else{
+<?php
 $total = 0;
 for($i=0;$i<$max;$i++){
 
@@ -68,13 +69,15 @@ for($i=0;$i<$max;$i++){
 			$total = $total + $sum;
 		}
 	}
-}
+
 echo '<tr><td colspan="6"></td><td><b>Total:</b></td><td> &pound;' . $total . '</td></tr>';
 echo "<tr><td colspan='9'><center><form action=new_order.php method=POST>
 			    <input type='hidden' value='order.php' name='returnto'/>
 			    <input type=submit name=order value= 'Confirm Order' />
-			    </form></center></td></tr>"
+			    </form></center></td></tr>";
+echo '</table>';
+}
 ?>
-</table>
+
 </body>
 </html>

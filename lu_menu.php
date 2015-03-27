@@ -83,7 +83,7 @@
                             echo '<td>'. $des[$i] .'</td>';
                             echo '<td> &pound;'. $price[$i] .'</td>';
                             echo '<td>'. $type[$i] .'</td>';
-                            if($userType=='customer'){echo "<td><form action=basket.php method=POST>
+                            if($userType=='customer'){echo "<td><form action=addBasket.php method=POST>
                                                             <input type='hidden' value='".$id[$x]."' name='product_id' />
                                                             <input type='hidden' value='lu_menu.php' name='returnto' />
                                                             <input type=submit name=id value=Add />
@@ -119,7 +119,7 @@
                             echo '<td>'. $des[$i] .'</td>';
                             echo '<td> &pound;'. $price[$i] .'</td>';
                             echo '<td>'. $type[$i] .'</td>';
-                            if($userType=='customer'){echo "<td><form action=basket.php method=POST>
+                            if($userType=='customer'){echo "<td><form action=addBasket.php method=POST>
                                                             <input type=submit name=id value=Add />
                                                             </form></td>";}
                             echo '</tr>';

@@ -28,6 +28,10 @@
     }
     //checks if the ingredients needed for each one of these products exists. if even one is missing, error! message 6 sent back.
 
+    if(!is_array($_SESSION['basket'])){
+        $_SESSION['basket']=array();
+    }
+
     $max=count($_SESSION['basket']);
     $flag=0;
     for($i=0;$i<$max;$i++){
@@ -38,15 +42,8 @@
     }
     //checks if the product already exists in the basket array.
     if ($flag=0){ 
-        if(is_array($_SESSION['basket'])){
-            $_SESSION['basket'][$max]['product_id']=$product_id;
-            $_SESSION['basket'][$max]['qty']=$quantity;
-        }
-        else{
-            $_SESSION['basket']=array();
-            $_SESSION['basket'][0]['product_id']=$product_id;
-            $_SESSION['basket'][0]['qty']=$quantity;
-        }
+        $_SESSION['basket'][$max]['product_id']=$product_id;
+        $_SESSION['basket'][$max]['quantity']=$quantity;
     }   
     //checks if the basket exists at all, if not it creates one. populate with the new data in either case.
     elseif ($flag=1){
