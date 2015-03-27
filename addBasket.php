@@ -3,7 +3,8 @@
     // Connect to the Database and Select the tts database.
 
 	
-	$product_id = $_POST['itemid'];
+	$product_id = $_POST['product_id'];
+    $quantity = $_POST['quantity'];
 	$missing = 0;
 
 	$question = 'SELECT availability FROM itemIngredients LEFT JOIN Ingredients WHERE itemIngredients.idItem = :id';
@@ -27,47 +28,34 @@
     }
     //checks if the ingredients needed for each one of these products exists. if even one is missing, error! message 6 sent back.
 
-    if(!isset($_SESSION['basket'])){
-    $_SESSION['basket'] = array();
-	}
- 
-	if(check if it exists already)){ //array_key_exists($product_id, $_SESSION['basket']
-		/*
-		1: array_walk ( $_SESSION['basket'], function (&$key) { $key["transaction_date"] = date('d/m/Y',$key["transaction_date"]); } );
-
-		2: foreach($_SESSION['basket'] as &$value) {
-		$newValue = $value['quantity'] + 1
-  		$value['quantity'] = $newValue;
-		*/
-		}
-	}// check if the item is in the array, if it is: add 1
-	else{
-	    $existing_basket = $_SESSION['basket'];
-		$new_item = array("id" => $product_id, "quantity" => 1);
-
-		$_SESSION['basket'] = array_merge($existing_basket, $new_item);
-	}//otherwise, create it.
-
+    $max=count($_SESSION['basket']);
+    $flag=0;
+    for($i=0;$i<$max;$i++){
+        if($product_id==$_SESSION['basket'][$i]['product_id']){
+            $flag=1;
+            break;
+        }
+    }
+    //checks if the product already exists in the basket array.
+    if ($flag=0){ 
+        if(is_array($_SESSION['basket'])){
+            $_SESSION['basket'][$max]['product_id']=$product_id;
+            $_SESSION['basket'][$max]['qty']=$quantity;
+        }
+        else{
+            $_SESSION['basket']=array();
+            $_SESSION['basket'][0]['product_id']=$product_id;
+            $_SESSION['basket'][0]['qty']=$quantity;
+        }
+    }   
+    //checks if the basket exists at all, if not it creates one. populate with the new data in either case.
+    elseif ($flag=1){
+        $old_quantity = $_SESSION['basket'][$i]['quantity'];
+        $new_quantity = $old_quantity + 1;
+        $_SESSION['basket'][$i]['quantity'] = $new_quantity;
+    }
+    //gets the current value in the basket, adds one and replaces it in the session.
+	
 	header('Location: '. $_POST['returnto']);
 	
 ?>
-
-Array
-(
-    [0] => Array
-        (
-            [transaction_user_id] => 359691e27b23f8ef3f8e1c50315cd506
-            [transaction_no] => 19500912050218
-            [transaction_total_amount] => 589.00
-            [transaction_date] => 1335932419
-            [transaction_status] => cancelled
-        )
-
-    [1] => Array
-        (
-            [transaction_user_id] => 9def02e6337b888d6dbe5617a172c18d
-            [transaction_no] => 36010512050819
-            [transaction_total_amount] => 79.00
-            [transaction_date] => 1336476696
-            [transaction_status] => cancelled
-        )
