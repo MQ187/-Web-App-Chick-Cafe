@@ -3,3 +3,4 @@
 2 - LOGIN - wrong password / email combination.
 3 - REGISTER - Passwords don't match.
 4 - REGISTER - Username already exists.
+6 - ORDER - Out of stock
