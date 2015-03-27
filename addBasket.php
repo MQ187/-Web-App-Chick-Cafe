@@ -4,7 +4,7 @@
 
 	
 	$product_id = $_POST['product_id'];
-    $quantity = $_POST['quantity'];
+    $quantity = 1;
 	$missing = 0;
 
 	$question = 'SELECT availability FROM itemIngredients LEFT JOIN Ingredients WHERE itemIngredients.idItem = :id';

@@ -71,7 +71,8 @@
 
                             $i=1;
                             foreach ($fetch as $key) {
-        
+                                
+                               $id[$i] = $key['iditem']; 
                                $pname[$i] = $key['name'];
                                $des[$i] = $key['description'];
                                $price[$i] = $key['price'];
@@ -82,6 +83,8 @@
                             echo '<td> &pound;'. $price[$i] .'</td>';
                             echo '<td>'. $type[$i] .'</td>';
                             if($userType=='customer'){echo "<td><form action=basket.php method=POST>
+                                                            <input type='hidden' value='".$id[$x]."' name='product_id' />
+                                                            <input type='hidden' value='lu_menu.php' name='returnto' />
                                                             <input type=submit name=id value=Add />
                                                             </form></td>";}
                             echo '</tr>';
