@@ -57,5 +57,7 @@
     //gets the current value in the basket, adds one and replaces it in the session.
 	
 	header('Location: '. $_POST['returnto']);
+
+    echo "223";
 	
 ?>
