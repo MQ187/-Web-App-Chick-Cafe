@@ -21,7 +21,7 @@ $id = $_SESSION['id'];
 ?>
 <!DOCTYPE html>
     <head>
-        <title>Employee Report | Chick Cafe</title>
+        <title>Stock | Chick Cafe</title>
         <link type="text/css" href="styles.css" rel="stylesheet" media="screen" />
         <link rel="icon" type="image/x-ico" href="favicon.ico" />
         <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
@@ -78,7 +78,7 @@ $id = $_SESSION['id'];
 
                              $i=1;
                              foreach ($fetch as $key) {
-        
+                                $idstock[$i] = $key['idIngredients'];
                                 $pname[$i] = $key['name'];
                                 $des[$i] = $key['availability'];
                                 $price[$i] = $key['price'];
@@ -87,15 +87,17 @@ $id = $_SESSION['id'];
                             echo '<td>'. $pname[$i] .'</td>';
                             echo '<td>'. $des[$i] .'</td>';
                             echo '<td> &pound;'. $price[$i] .'</td>';
-                            if($userType=='manager'){echo "<td><form action=update_stock.php method=POST>
-                                                            <input type=submit name=id value=Update />
-                                                            </form></td>";}
+                            if($userType=='manager'){   echo "<td><form action=update_stock.php method=POST>
+                                                              <input type=submit name=visID value=Update />
+                                                              <input type=hidden name=stockid value=$idstock[$i] />
+                                                              </form></td>";  
+                            }
                             echo '</tr>';
                             $i++;
-
                             }
                         ?>
                         </table>
+                        <p style="text-align:center;"><a style="text-decoration:none;color:white; "href="add_stock.php">Add</a></p> 
                 </li>  
             </ul>
         </nav>
