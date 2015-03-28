@@ -58,7 +58,7 @@
 	    $_SESSION['email'] = $email;
 		$_SESSION['logedIn'] = true;
 		$_SESSION['message'] = "0";
-		$_SESSION['userType'] = "Customer";
+		$_SESSION['userType'] = "customer";
 
 		header('Location: customerDash.php');
 
