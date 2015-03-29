@@ -66,35 +66,72 @@ $id = $_SESSION['id'];
             <ul>
                 <li><i>Stock</i>
                         <table id="tfhover" class="tftable" border="1">
+                        <tr><form action="stock.php" method="POST">
+                        	<input style="float:right;"type="submit" value="Search" />
+                            <input style="float:right;"type="text" name="search_name"/>
+                            </form>
+                       	</tr>
                         <tr>
                         <th>Name</th><th>Availability</th><th>Price</th><?php if($userType=='manager'){echo"<th>Update</th>";}?>
                         </tr>
                         <?php
-                            // Connect to the Database and Select the ccdb database.
-                             $question="SELECT * FROM `ingredients`";
-                             $sth = $db->prepare($question);
-                             $execute = $sth->execute();
-                             $fetch = $sth->fetchAll();
+                        	if(!empty($_REQUEST['search_name'])){
 
-                             $i=1;
-                             foreach ($fetch as $key) {
-                                $idstock[$i] = $key['idIngredients'];
-                                $pname[$i] = $key['name'];
-                                $des[$i] = $key['availability'];
-                                $price[$i] = $key['price'];
+                        		$sname = mysql_real_escape_string($_REQUEST['search_name']);
 
-                            echo '<tr>';
-                            echo '<td>'. $pname[$i] .'</td>';
-                            echo '<td>'. $des[$i] .'</td>';
-                            echo '<td> &pound;'. $price[$i] .'</td>';
-                            if($userType=='manager'){   echo "<td><form action=update_stock.php method=POST>
-                                                              <input type=submit name=visID value=Update />
-                                                              <input type=hidden name=stockid value=$idstock[$i] />
-                                                              </form></td>";  
-                            }
-                            echo '</tr>';
-                            $i++;
-                            }
+                        		// Connect to the Database and Select the ccdb database.
+	                             $question="SELECT * FROM `ingredients` WHERE name LIKE '%".$sname."%'";
+	                             $sth = $db->prepare($question);
+	                             $execute = $sth->execute();
+	                             $fetch = $sth->fetchAll();
+
+	                             $i=1;
+	                             foreach ($fetch as $key) {
+	                                $idstock[$i] = $key['idIngredients'];
+	                                $pname[$i] = $key['name'];
+	                                $des[$i] = $key['availability'];
+	                                $price[$i] = $key['price'];
+
+	                            echo '<tr>';
+	                            echo '<td>'. $pname[$i] .'</td>';
+	                            echo '<td>'. $des[$i] .'</td>';
+	                            echo '<td> &pound;'. $price[$i] .'</td>';
+	                            if($userType=='manager'){   echo "<td><form action=update_stock.php method=POST>
+	                                                              <input type=submit name=visID value=Update />
+	                                                              <input type=hidden name=stockid value=$idstock[$i] />
+	                                                              </form></td>";  
+	                            }
+	                            echo '</tr>';
+	                            $i++;
+	                            }
+
+                        	}else{
+	                            // Connect to the Database and Select the ccdb database.
+	                             $question="SELECT * FROM `ingredients`";
+	                             $sth = $db->prepare($question);
+	                             $execute = $sth->execute();
+	                             $fetch = $sth->fetchAll();
+
+	                             $i=1;
+	                             foreach ($fetch as $key) {
+	                                $idstock[$i] = $key['idIngredients'];
+	                                $pname[$i] = $key['name'];
+	                                $des[$i] = $key['availability'];
+	                                $price[$i] = $key['price'];
+
+	                            echo '<tr>';
+	                            echo '<td>'. $pname[$i] .'</td>';
+	                            echo '<td>'. $des[$i] .'</td>';
+	                            echo '<td> &pound;'. $price[$i] .'</td>';
+	                            if($userType=='manager'){   echo "<td><form action=update_stock.php method=POST>
+	                                                              <input type=submit name=visID value=Update />
+	                                                              <input type=hidden name=stockid value=$idstock[$i] />
+	                                                              </form></td>";  
+	                            }
+	                            echo '</tr>';
+	                            $i++;
+	                            }
+                        	}
                         ?>
                         </table>
                         <p style="text-align:center;"><a style="text-decoration:none;color:white; "href="add_stock.php">Add</a></p> 
