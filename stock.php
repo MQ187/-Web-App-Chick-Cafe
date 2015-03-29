@@ -72,7 +72,7 @@ $id = $_SESSION['id'];
                             </form>
                        	</tr>
                         <tr>
-                        <th>Name</th><th>Availability</th><th>Price</th><?php if($userType=='manager'){echo"<th>Update</th>";}?>
+                        <th>Name</th><th>Availability</th><th>Price</th><?php if($userType=='manager'){echo"<th>Update</th><th>Delete</th>";}?>
                         </tr>
                         <?php
                         	if(!empty($_REQUEST['search_name'])){
@@ -96,10 +96,14 @@ $id = $_SESSION['id'];
 	                            echo '<td>'. $pname[$i] .'</td>';
 	                            echo '<td>'. $des[$i] .'</td>';
 	                            echo '<td> &pound;'. $price[$i] .'</td>';
-	                            if($userType=='manager'){   echo "<td><form action=update_stock.php method=POST>
-	                                                              <input type=submit name=visID value=Update />
-	                                                              <input type=hidden name=stockid value=$idstock[$i] />
-	                                                              </form></td>";  
+	                            if($userType=='manager'){    echo "<td><form action=update_stock.php method=POST>
+                                                                  <input type=submit name=visID value=Update />
+                                                                  <input type=hidden name=stockid value=$idstock[$i] />
+                                                                  </form></td>"; 
+                                                            echo "<td><form action=stock.php method=POST>
+                                                                  <input type='submit' value='Delete' name='Delete'/>
+                                                                  <input type=hidden name=stockid value=$idstock[$i] />
+                                                                  </form></td>";   
 	                            }
 	                            echo '</tr>';
 	                            $i++;
@@ -126,12 +130,22 @@ $id = $_SESSION['id'];
 	                            if($userType=='manager'){   echo "<td><form action=update_stock.php method=POST>
 	                                                              <input type=submit name=visID value=Update />
 	                                                              <input type=hidden name=stockid value=$idstock[$i] />
-	                                                              </form></td>";  
+	                                                              </form></td>"; 
+                                                            echo "<td><form action=stock.php method=POST>
+                                                                  <input type='submit' value='Delete' name='Delete'/>
+                                                                  <input type=hidden name=stockid value=$idstock[$i] />
+                                                                  </form></td>";       
 	                            }
 	                            echo '</tr>';
 	                            $i++;
 	                            }
                         	}
+                            if(isset($_POST['Delete'])){
+                                $question = "DELETE FROM `ingredients` WHERE idIngredients = '$_POST[stockid]'";
+                                $sth = $db->prepare($question);
+                                $execute = $sth->execute();
+                                echo '<META HTTP-EQUIV="Refresh" Content="0; URL=stock.php">';
+                            }
                         ?>
                         </table>
                         <p style="text-align:center;"><a style="text-decoration:none;color:white; "href="add_stock.php">Add</a></p> 
