@@ -84,12 +84,12 @@ $id = $_SESSION['id'];
                 $i=1;
                 foreach($fetch as $key){
                     echo '<form action="update_user.php" method="POST">';
-                    echo '<tr><td><p>First Name:</p></td><td><input type="text" name="name" size="20" maxlength="45" placeholder=' . $key['name'].'></td></tr>';
-                    echo '<tr><td><p>Surname:</p></td><td><input type="text" name="surname" size="20" maxlength="45" placeholder=' . $key['surname'].'></td></tr>';
-                    echo '<tr><td><p>E-mail:</p></td><td><input type="email" name="email" size="20" maxlength="45" placeholder=' . $key['email'].'></td></tr>'; 
-                    echo '<tr><td><p>Password:</p></td><td><input type="password" size="20" maxlength="8" name="password" placeholder="New Password"></td></tr>';
-                    echo '<tr><td><p>Password:</p></td><td><input type="password" size="20" maxlength="8" name="password2" placeholder="New Password Again"></td></tr>';
-                    echo '<tr><td><p>Phone:</p></td><td><input type="text" name="phone" size="20" maxlength="12" placeholder=' . $key['phone'].'></td></tr>';
+                    echo '<tr><td><p>First Name:</p></td><td><input type="text" name="name" size="20" maxlength="45" value=' . $key['name'].'></td></tr>';
+                    echo '<tr><td><p>Surname:</p></td><td><input type="text" name="surname" size="20" maxlength="45" value=' . $key['surname'].'></td></tr>';
+                    echo '<tr><td><p>E-mail:</p></td><td><input type="email" name="email" size="20" maxlength="45" value=' . $key['email'].'></td></tr>'; 
+                    echo '<tr><td><p>Password:</p></td><td><input type="password" size="20" maxlength="8" name="password" value=' . $key['password'].'></td></tr>';
+                    echo '<tr><td><p>Password:</p></td><td><input type="password" size="20" maxlength="8" name="password2" value=' . $key['password'].'></td></tr>';
+                    echo '<tr><td><p>Phone:</p></td><td><input type="text" name="phone" size="20" maxlength="12" value=' . $key['phone'].'></td></tr>';
                     $i++;
                             }
                 break;
@@ -102,10 +102,10 @@ $id = $_SESSION['id'];
                 $i=1;
                 foreach($fetch as $key){
                     echo '<form action="update_user.php" method="POST">';
-                    echo '<tr><td><p>Name:</p></td><td><input type="text" name="name" size="20" maxlength="45" placeholder=' . $key['name'].'></td></tr>';
-                    echo '<tr><td><p>E-mail:</p></td><td><input type="email" name="email" size="20" maxlength="45" placeholder=' . $key['email'].'></td></tr>'; 
-                    echo '<tr><td><p>Password:</p></td><td><input type="password" size="20" maxlength="8" name="password" placeholder="New Password"></td></tr>';
-                    echo '<tr><td><p>Password:</p></td><td><input type="password" size="20" maxlength="8" name="password2" placeholder="New Password Again"></td></tr>';
+                    echo '<tr><td><p>Name:</p></td><td><input type="text" name="name" size="20" maxlength="45" value=' . $key['name'].'></td></tr>';
+                    echo '<tr><td><p>E-mail:</p></td><td><input type="email" name="email" size="20" maxlength="45" value=' . $key['email'].'></td></tr>'; 
+                    echo '<tr><td><p>Password:</p></td><td><input type="password" size="20" maxlength="8" name="password" value=' . $key['password'].'></td></tr>';
+                    echo '<tr><td><p>Password:</p></td><td><input type="password" size="20" maxlength="8" name="password2" value=' . $key['password'].'></td></tr>';
                     $i++;
                 }
                 break;
@@ -118,10 +118,10 @@ $id = $_SESSION['id'];
                 $i=1;
                 foreach($fetch as $key){
                     echo '<form action="update_user.php" method="POST">';
-                    echo '<tr><td><p>Name:</p></td><td><input type="text" name="name" size="20" maxlength="45" placeholder=' . $key['name'].'></td></tr>';
-                    echo '<tr><td><p>E-mail:</p></td><td><input type="email" name="email" size="20" maxlength="45" placeholder=' . $key['email'].'></td></tr>'; 
-                    echo '<tr><td><p>Password:</p></td><td><input type="password" size="20" maxlength="8" name="password" placeholder="New Password"></td></tr>';
-                    echo '<tr><td><p>Password:</p></td><td><input type="password" size="20" maxlength="8" name="password2" placeholder="New Password Again"></td></tr>';
+                    echo '<tr><td><p>Name:</p></td><td><input type="text" name="name" size="20" maxlength="45" value=' . $key['name'].'></td></tr>';
+                    echo '<tr><td><p>E-mail:</p></td><td><input type="email" name="email" size="20" maxlength="45" value=' . $key['email'].'></td></tr>'; 
+                    echo '<tr><td><p>Password:</p></td><td><input type="password" size="20" maxlength="8" name="password" value=' . $key['password'].'></td></tr>';
+                    echo '<tr><td><p>Password:</p></td><td><input type="password" size="20" maxlength="8" name="password2" value=' . $key['password'].'></td></tr>';
                     $i++;
                 }
                 break;
