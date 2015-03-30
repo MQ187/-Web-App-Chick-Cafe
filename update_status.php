@@ -7,7 +7,7 @@
 
 	if(isset($_POST['prepare'])){
 		$_SESSION['startTime'] = new DateTime();
-		$question2="UPDATE `order` SET orderStatus='Preparing', idEmployee='$_SESSION[id]' WHERE idorder='$_POST[id]'";
+		$question2="UPDATE `order` SET orderStatus='Preparing', idEmployee='$_SESSION[id]' WHERE idorder='$_POST[prepare]'";
 		$sth = $db->prepare($question2);
 		$sth->execute();
 	}
@@ -17,7 +17,7 @@
 		$i = $_SESSION['startTime']->diff($endTime);
 		$end = $i->format('%h:%i:%s');
 
-        $question2="UPDATE `order` SET orderStatus='Completed', timeCompleted='$end' WHERE idorder='$_POST[id]'";
+        $question2="UPDATE `order` SET orderStatus='Completed', timeCompleted='$end' WHERE idorder='$_POST[ready]'";
         $sth = $db->prepare($question2);
         $sth->execute();
     }

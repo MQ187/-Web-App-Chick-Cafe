@@ -60,8 +60,8 @@ elseif ($_SESSION['logedIn'] == true && $_SESSION['AccountType'] == "manager") {
                                 echo '<td>'. $priority[$i] .'</td>';
                                 echo '<td>'. $status[$i] .'</td>';
                                 echo "<td><form action=update_status.php method=\"POST\">"
-                                   . "<input type=\"submit\" name=\"prepare\" value=\"$idorder[$i]\" />"
-                                   . "<input type=\"hidden\" name=\"id\" value=\"$idorder[$i]\" />"
+                                   . "<input type=\"submit\" value=\"Prepare\" />"
+                                   . "<input type=\"hidden\" name=\"prepare\" value=\"$idorder[$i]\" />"
                                    . "</form></td>";
                                 echo '</tr>';
                             	$i++;
@@ -97,8 +97,8 @@ elseif ($_SESSION['logedIn'] == true && $_SESSION['AccountType'] == "manager") {
                                 echo '<td>'. $priority[$i] .'</td>';
                                 echo '<td>'. $status[$i] .'</td>';
                                 echo "<td><form action=update_status.php method=\"POST\">"
-                                   . "<input type=\"submit\" name=\"ready\" value=\"$idorder[$i]\" />"
-                                   . "<input type=\"hidden\" name=\"id\" value=\"$idorder[$i]\" />"
+                                   . "<input type=\"submit\" value=\"Ready\" />"
+                                   . "<input type=\"hidden\" name=\"ready\" value=\"$idorder[$i]\" />"
                                    . "</form></td>";
                                 echo '</tr>';
                                 $i++;
