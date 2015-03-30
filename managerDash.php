@@ -28,6 +28,7 @@ elseif ($_SESSION['logedIn'] == true && $_SESSION['AccountType'] == "employee") 
             <li><a href="refund.php">Refund</a></li>
             <li><a href="#">VIP</a></li>
             <li><a href="stock.php">Stock</a></li>
+            <li><a href="items.php">Items</a></li>
             <li><a href="myAccount.php">My Account</a></li>
             <li><a href="logoff.php">Logout</a></li>
         </ul>
