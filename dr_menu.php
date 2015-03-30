@@ -1,3 +1,7 @@
+<?php
+require_once("messages.php");
+//adds the check for all possible errors as well as the warnings.
+?>
 <!DOCTYPE html>
 	<head>
 		<title>Main | Chick Cafe</title>
@@ -81,7 +85,7 @@
                             echo '<td>'. $des[$i] .'</td>';
                             echo '<td> &pound;'. $price[$i] .'</td>';
                             echo '<td>'. $type[$i] .'</td>';
-                            if($userType=='customer'){echo "<td><form action=addBasket.php method=POST>
+                            if($userType=='customer'){echo "<td><form action='addBasket.php method=POST>
                                                             <input type='hidden' value='".$id[$x]."' name='product_id' />
                                                             <input type='hidden' value='lu_menu.php' name='returnto' />
                                                             <input type=submit name=id value=Add />

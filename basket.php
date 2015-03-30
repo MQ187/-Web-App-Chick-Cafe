@@ -2,6 +2,8 @@
 session_start();
 require_once("db_config.php");
 // Connect to the Database and Select the ccdb database.
+require_once("messages.php");
+//adds the check for all possible errors as well as the warnings.
 
 if (!isset($_SESSION['basket'])) {
 	$_SESSION['basket'] = array();
@@ -72,6 +74,7 @@ for($i=0;$i<$max;$i++){
 
 echo '<tr><td colspan="6"></td><td><b>Total:</b></td><td> &pound;' . $total . '</td></tr>';
 echo "<tr><td colspan='9'><center><form action=new_order.php method=POST>
+				<input type='checkbox' value='Priority' required= name='priority'/>
 			    <input type='hidden' value='order.php' name='returnto'/>
 			    <input type=submit name=order value= 'Confirm Order' />
 			    </form></center></td></tr>";

@@ -7,7 +7,7 @@
     $quantity = 1;
 	$missing = 0;
 
-	$question = 'SELECT availability FROM itemIngredients LEFT JOIN Ingredients WHERE itemIngredients.idItem = :id';
+	$question = 'SELECT availability FROM Ingredients LEFT JOIN itemIngredients WHERE itemIngredients.idItem = :id';
 	$sth = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 	$sth->execute(array(':id' => $product_id));
 	$fetch = $sth->fetchAll();
@@ -53,6 +53,6 @@
     }
     //gets the current value in the basket, adds one and replaces it in the session.
 	
-	header('Location: '. $_POST['returnto']);
+header('Location: '. $_POST['returnto']);
 	
 ?>
