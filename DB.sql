@@ -325,7 +325,7 @@ CREATE TABLE IF NOT EXISTS `order` (
 
 INSERT INTO `order` (`idorder`, `idCustomer`, `idEmployee`, `orderDate`, `orderTime`, `orderPriority`, `orderStatus`, `etc`, `timeCompleted`) VALUES
 (1, 10, 2, '2015-03-15', '00:15:00', 1, 'Completed', '00:00:00', '00:10:00'),
-(2, 9, 2, '2015-03-17', '12:00:00', 0, 'In Progress', '00:00:15', '00:00:12');
+(2, 9, 2, '2015-03-17', '12:00:00', 0, 'Pending', '00:00:15', '00:00:12');
 
 -- --------------------------------------------------------
 
