@@ -7,8 +7,15 @@ if (!isset($_SESSION['basket'])) {
 }//create the basket if it doesnt exist.
 
 $max=count($_SESSION['basket']); //check how many items are in the basket.
-
+if (isset($_POST['priority'])){
+    $priority = 1;    
+}
+else{
+    $priority = 0;
+}
 $total = 0;
+$etc = 0;
+
 for($i=0;$i<$max;$i++){
     $product_id = $_SESSION['basket'][$i]['product_id'];
     $quantity = $_SESSION['basket'][$i]['quantity'];
@@ -17,7 +24,7 @@ for($i=0;$i<$max;$i++){
 
     $missing = 0;
 
-    $question = 'SELECT availability FROM itemIngredients LEFT JOIN Ingredients WHERE itemIngredients.idItem = :id';
+    $question = 'SELECT availability,preperationTime FROM itemIngredients LEFT JOIN Ingredients WHERE itemIngredients.idItem = :id';
     $sth = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
     $sth->execute(array(':id' => $product_id));
     $fetch = $sth->fetchAll();
@@ -28,6 +35,8 @@ for($i=0;$i<$max;$i++){
         if ($availability[$x]<$quantity){
             $missing++;
         }
+        $timeItems = $quantity * $key['preperationTime'] ;
+        $etc = $etc + $timeItems;
         $x++;
     }
     //checks if the stock is sufficient to place an order
@@ -47,10 +56,36 @@ for($i=0;$i<$max;$i++){
         <?php
         die();
     }
-    //if not, go back to the basket, remove and declare one as missing stock. 
-
-    
-
+    //if not, go back to the basket, remove and declare one as missing stock.  
 }
+//we've checked that the item is available, now we can create the order.
+
+date_default_timezone_set('UTC');
+// set the default timezone to use.
+
+$question="INSERT INTO order(idCustomer,orderDate,orderTime,orderPriority,orderStatus,etc) VALUES(:idCustomer,:orderDate,:orderTime,:orderPriority,:orderStatus,:etc)";
+$add = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+$add->execute(array(':idCustomer' => $_SESSION['id'], ':orderDate' => CURDATE(), ':orderTime' => CURTIME(), ':orderPriority' => $priority, ':orderStatus' => "Pending", ':etc' => $etc));
+//this will create a new order.
+
+for($i=0;$i<$max;$i++){
+    $product_id = $_SESSION['basket'][$i]['product_id'];
+    $quantity = $_SESSION['basket'][$i]['quantity'];
+    $question="INSERT INTO orderItem(idOrder,idItem,quantity) VALUES(:idOrder,:idItem,:quantity)";
+    $add = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+    $add->execute(array(':idOrder' => $idOrder, ':idItem' => $product_id, ':quantity' => $quantity));
+    //create an orderitem for each item in the basket one by one
+
+    $navailability = $availability[$i] - $quantity;
+    //get the current stock of each item & change it.
+
+    $question = 'UPDATE availability SET availability=:navailability LEFT JOIN Ingredients WHERE itemIngredients.idItem = :id';
+    $sth = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+    $sth->execute(array(':availability' => $navailability));
+    //update the stock
+}
+
+header("Location:customerDash.php");
+
 
 ?>
