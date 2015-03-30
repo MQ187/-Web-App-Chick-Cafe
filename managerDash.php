@@ -24,7 +24,7 @@ elseif ($_SESSION['logedIn'] == true && $_SESSION['AccountType'] == "employee") 
             <li><a href="index.php">Home</a></li>
             <li><a href="managerDash.php">Current Orders</a></li>
             <li><a href="reportDash.php">Reports</a></li>
-            <li><a href="#">Employee Accounts</a></li>
+            <li><a href="manage_employees.php">Employee Accounts</a></li>
             <li><a href="refund.php">Refund</a></li>
             <li><a href="#">VIP</a></li>
             <li><a href="stock.php">Stock</a></li>
