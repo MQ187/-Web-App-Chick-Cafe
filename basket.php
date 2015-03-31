@@ -10,7 +10,6 @@ if (!isset($_SESSION['basket'])) {
 }//create the basket if it doesnt exist.
 
 $max=count($_SESSION['basket']); //check how many items are in the basket.
-
 ?>
 <html>
 	<head>
@@ -41,35 +40,36 @@ for($i=0;$i<$max;$i++){
 	$sth->execute(array(':id' => $product_id));
 	$fetch = $sth->fetchAll();
 
-	$i=1;
-		foreach ($fetch as $key) {
+	$x=0;
+	foreach ($fetch as $key) {
 
-			$id[$i] = $key['iditem'];
-			$pname[$i] = $key['name'];
-			$des[$i] = $key['description'];
-			$price[$i] = $key['price'];
-			$type[$i] = $key['type'];
+		$id[$x] = $key['iditem'];
+		$pname[$x] = $key['name'];
+		$des[$x] = $key['description'];
+		$price[$x] = $key['price'];
+		$type[$x] = $key['type'];
 
-			echo '<tr>';
-			echo '<td>'. $pname[$i] .'</td>';
-			echo '<td>'. $des[$i] .'</td>';
-			echo '<td> &pound;'. $price[$i] .'</td>';
-			echo '<td>'. $type[$i] .'</td>';
-			echo "<td><form action=removeBasket.php method=POST>
-			    <input type='hidden' value='". $product_id ."' name='product_id' />
-			    <input type='hidden' value='basket.php' name='returnto' />
-			    <input type=submit name=id value= '-1' />
-			    </form></td>";
-			echo '<td>' . $quantity . '</td>';
-			echo "<td><form action=addBasket.php method=POST>
-			    <input type='hidden' value='".$id[$i]."' name='product_id' />
-			    <input type='hidden' value='basket.php' name='returnto' />
-			    <input type=submit name=id value= '+1' />
-			    </form></td>";
-			$sum = $quantity * $price[$i];
-			echo '<td> &pound;' . $sum . '</td>';
-			$total = $total + $sum;
-		}
+		echo '<tr>';
+		echo '<td>'. $pname[$x] .'</td>';
+		echo '<td>'. $des[$x] .'</td>';
+		echo '<td> &pound;'. $price[$x] .'</td>';
+		echo '<td>'. $type[$x] .'</td>';
+		echo "<td><form action=removeBasket.php method=POST>
+		    <input type='hidden' value=". $product_id ." name='product_id' />
+		    <input type='hidden' value='basket.php' name='returnto' />
+		    <input type=submit name=id value= '-1' />
+		    </form></td>";
+		echo '<td>' . $quantity . '</td>';
+		echo "<td><form action=addBasket.php method=POST>
+		    <input type='hidden' value=".$id[$x]." name='product_id' />
+		    <input type='hidden' value='basket.php' name='returnto' />
+		    <input type=submit name=id value= '+1' />
+		    </form></td>";
+		$sum = $quantity * $price[$x];
+		echo '<td> &pound;' . $sum . '</td>';
+		$total = $total + $sum;
+		$x++;
+	}
 	}
 
 echo '<tr><td colspan="6"></td><td><b>Total:</b></td><td> &pound;' . $total . '</td></tr>';

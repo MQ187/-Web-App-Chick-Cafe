@@ -1,7 +1,12 @@
-<?session_start(); 
+<?php
+session_start(); 
+
+var_dump($_POST['product_id']);
+var_dump($_POST['returnto']);
 
 $product_id = $_POST['product_id'];
 $max=count($_SESSION['basket']);
+
 
 if isset($_POST['quantity']){
     $q = $_POST['quantity'];
@@ -19,7 +24,7 @@ for($i=0;$i<$max;$i++){
     }
 }
 
-if ($flag = 0){
+if ($flag == 0){
 	$_SESSION['message'] = "7"; //Product not in basket.
 	header('Location: '. $_POST['returnto']);
 	die();
