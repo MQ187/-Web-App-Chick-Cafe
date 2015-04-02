@@ -11,6 +11,7 @@ require_once("messages.php");
 	</head>
 
 	<body>
+    <?php require_once("basketNotification.php"); ?>
 	<header>
 		 <a href="index.php"><img align="middle" id="logo" src="images/Logo.png"/></a>
      <div class="nav">

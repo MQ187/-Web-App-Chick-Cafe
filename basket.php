@@ -11,12 +11,62 @@ if (!isset($_SESSION['basket'])) {
 
 $max=count($_SESSION['basket']); //check how many items are in the basket.
 ?>
-<html>
-	<head>
-		<title>Main | Chick Cafe</title>
-		<link type="text/css" href="styles.css" rel="stylesheet" media="screen" />
-	</head>
-	<body>
+<!DOCTYPE html>
+    <head>
+        <title>Main | Chick Cafe</title>
+        <link type="text/css" href="styles.css" rel="stylesheet" media="screen" />
+    </head>
+
+    <body>
+    <header>
+         <a href="index.php"><img align="middle" id="logo" src="images/Logo.png"/></a>
+         <div class="nav">
+            <ul>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="br_menu.php">Breakfast</a></li>
+                <li><a href="lu_menu.php">Lunch</a></li>
+                <li><a href="di_menu.php">Dinner</a></li>
+                <li><a href="dr_menu.php">Drinks</a></li>
+                <?php
+                session_start();
+                if (!isset($_SESSION['logedIn'])) { $_SESSION['logedIn'] = false;}
+                if (!isset($_SESSION['userType'])) {$_SESSION['userType'] = "NONE";}
+                $userType = $_SESSION['userType'];
+                if ($_SESSION['logedIn'] == false){
+                    ?> 
+                    <li><a href="login.php">Login/Register</a></li> 
+                    <?php
+                }
+                else{
+
+                    Switch($userType){
+                        case 'customer':
+                        ?> 
+                        <li><a href="customerDash.php">Dashboard</a></li>
+                        <?php
+                        break;
+                        case 'employee':
+                        ?>
+                        <li><a href="employeeDash.php">Dashboard</a></li>
+                        <?php
+                        break;
+                        case 'manager':
+                        ?>
+                        <li><a href="managerDash.php">Dashboard</a></li>
+                        <?php
+                        break;
+                    }
+                    ?>
+                    <li><a href="logoff.php">Logout</a></li>
+                    <?php
+                }
+                ?>
+            </ul>
+        </div>
+    </header>
+    <body>
+    	<nav>
+            <ul><li><i>My basket</i>
 		<?php 
 if ($max < 1){
 	echo "<center><h1>There is nothing in your basket! want to order?</h1><br><a href=index.php>Menu</a></center>";
@@ -81,6 +131,14 @@ echo "<tr><td colspan='9'><center><form action=new_order.php method=POST>
 echo '</table>';
 }
 ?>
+</li>
+</ul>
+</nav>
+    </body>
+    
+    <footer>
+        <strong>Chick Cafe</strong> is a very <strong>popular</strong> cafeteria in the center of <strong>Islington, London</strong> that offers made to order <strong>food</strong> and <strong>drinks.</strong>
+    </footer>
 
-</body>
+    </body>
 </html>

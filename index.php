@@ -5,6 +5,7 @@
 		<link type="text/css" href="styles.css" rel="stylesheet" media="screen" />
 	</head>
 	<body>
+        <?php require_once("basketNotification.php"); ?>
 	<header>
 		<a href="index.php"><img align="middle" src="images/Logo.png"/></a>
 
