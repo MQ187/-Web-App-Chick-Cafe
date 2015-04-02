@@ -74,7 +74,7 @@ for($i=0;$i<$max;$i++){
 
 echo '<tr><td colspan="6"></td><td><b>Total:</b></td><td> &pound;' . $total . '</td></tr>';
 echo "<tr><td colspan='9'><center><form action=new_order.php method=POST>
-				<input type='checkbox' value='Priority' required= name='priority'/>
+				<input type='checkbox' value='Priority' name='priority'/>Priority (+x% fee)
 			    <input type='hidden' value='order.php' name='returnto'/>
 			    <input type=submit name=order value= 'Confirm Order' />
 			    </form></center></td></tr>";
