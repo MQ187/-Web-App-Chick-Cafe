@@ -17,7 +17,7 @@ if (isset($_SESSION['message'])){
         unset($_SESSION['message']);
 		}
         elseif ($_SESSION['message'] == "5") {
-        print '<script type="text/javascript">alert("UNDEFINED");</script>';
+        print '<script type="text/javascript">alert("No such item exists, please try again.");</script>';
         unset($_SESSION['message']);
 		}
 		elseif ($_SESSION['message'] == "6") {

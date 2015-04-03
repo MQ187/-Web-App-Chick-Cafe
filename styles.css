@@ -281,6 +281,8 @@ form input[type=password] {
 .fade{opacity:0.5;}
 .fade:hover{opacity:1;}
 
+
+/*BASKET*/
 .header-container {
     position: fixed;
     top: 0;
@@ -302,3 +304,4 @@ form input[type=password] {
     color: #000000;
     background-color: #FFCCCC;
 }
+/*Basket end*/

@@ -1,21 +1,7 @@
-<?php session_start(); 
-    include("db_config.php");
-    
-
-/*if (!isset($_SESSION['logedIn'])) { $_SESSION['logedIn'] = false;}
-if (!isset($_SESSION['AccountType'])) {$_SESSION['AccountType'] = "NONE";}
-if ($_SESSION['logedIn'] == false) {header('Location: login.php');}
-*/
-if (isset($_SESSION['message'])){
-        if ($_SESSION['message'] == "3") { 
-        print '<script type="text/javascript">alert("Your passwords did not match, please try again.");</script>';
-        unset($_SESSION['message']);
-        }
-        elseif ($_SESSION['message'] == "4") {
-        print '<script type="text/javascript">alert("A user with such an email already exists. Maybe try logging in?");</script>';
-        unset($_SESSION['message']);
-        }
-}
+<?php 
+session_start(); 
+include("db_config.php");
+require_once("messages.php");
 $userType = $_SESSION['userType'];
 $id = $_SESSION['id'];
 ?>
@@ -65,7 +51,7 @@ $id = $_SESSION['id'];
         <nav>
             <ul>
                 <li><i>Stock</i>
-                        <table id="tfhover" class="tftable" border="1">
+                        <table id="tfhover" class="tftable" border="1" width="100%">
                         <tr><form action="stock.php" method="POST">
                         	<input style="float:right;"type="submit" value="Search" />
                             <input style="float:right;"type="text" name="search_name"/>
@@ -84,6 +70,14 @@ $id = $_SESSION['id'];
 	                             $sth = $db->prepare($question);
 	                             $execute = $sth->execute();
 	                             $fetch = $sth->fetchAll();
+
+                                 $count = count($fetch);
+                                 if ($count == 0){
+                                    $_SESSION['message'] = "5"; //no such item exists
+                                    header("Location: stock.php");
+                                    die();
+                                 }
+                                 //if no item exists, give error and display full list.
 
 	                             $i=1;
 	                             foreach ($fetch as $key) {
@@ -148,7 +142,11 @@ $id = $_SESSION['id'];
                             }
                         ?>
                         </table>
-                        <p style="text-align:center;"><a style="text-decoration:none;color:white; "href="add_stock.php">Add</a></p> 
+                        <?php 
+                        if($userType=='manager'){ 
+                            echo '<p style="text-align:center;"><a style="text-decoration:none;color:white; "href="add_stock.php">Add</a></p> ';
+                        }
+                        ?>
                 </li>  
             </ul>
         </nav>
