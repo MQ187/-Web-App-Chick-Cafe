@@ -65,6 +65,7 @@ CREATE TABLE IF NOT EXISTS `customer` (
   `email` varchar(45) NOT NULL,
   `phone` varchar(12) NOT NULL,
   `password` varchar(45) NOT NULL,
+  `isLoggedIn` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`idCustomer`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 

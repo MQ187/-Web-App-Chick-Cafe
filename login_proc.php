@@ -80,6 +80,11 @@
 	    				$_SESSION['userType'] = $userType;
 	    				$_SESSION['message'] = "0";
 	    				$_SESSION['logedIn'] = true;
+
+	    				$question="UPDATE customer SET isLoggedIn = '1' WHERE idCustomer = '$_SESSION[id]'";  
+	   					$sth = $db->prepare($question);
+	   					$sth->execute();
+
 	    				header('Location: customerDash.php');
 					}
 				break;
