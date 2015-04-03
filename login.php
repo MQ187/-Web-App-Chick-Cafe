@@ -31,16 +31,9 @@ if (!isset($_SESSION['AccountType'])) {$_SESSION['AccountType'] = "NONE";}
 
     <header>
         <a href="index.php"><img align="middle" id="logo" src="images/Logo.png"/></a>
-         <div class="nav">
-            <ul>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="br_menu.php">Breakfast</a></li>
-                <li><a href="lu_menu.php">Lunch</a></li>
-                <li><a href="di_menu.php">Dinner</a></li>
-                <li><a href="dr_menu.php">Drinks</a></li>
-                <li><a href="login.php">Login/Register</a></li>
-            </ul>
-        </div>
+         <?php
+         require_once("nav/menus.php");
+         ?>
     </header>
 
     <body>
