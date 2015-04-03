@@ -75,7 +75,7 @@ else{
 	?>
 <table id="tfhover" class="tftable" border="1">
 <tr>
-<th>Title</th><th>Description</th><th>Price</th><th>Type</th><th>Add</th><th>Quantity</th><th>Remove</th><th>Total</th>
+<th>Title</th><th>Description</th><th>Price</th><th>Type</th><th>Remove</th><th>Quantity</th><th>Add</th><th>Total</th>
 </tr>
 
 <?php
@@ -104,17 +104,19 @@ for($i=0;$i<$max;$i++){
 		echo '<td>'. $des[$x] .'</td>';
 		echo '<td> &pound;'. $price[$x] .'</td>';
 		echo '<td>'. $type[$x] .'</td>';
-		echo "<td><form action=removeBasket.php method=POST>
+		echo "<td><div class='add'><form action=removeBasket.php method=POST>
 		    <input type='hidden' value=". $product_id ." name='product_id' />
 		    <input type='hidden' value='basket.php' name='returnto' />
-		    <input type=submit name=id value= '-1' />
-		    </form></td>";
+            <input type='image' name='submit' src='images/del.png' width=30 />
+		    </form></div></td>";
+            //<input type=submit name=id value= '-1' />
 		echo '<td>' . $quantity . '</td>';
-		echo "<td><form action=addBasket.php method=POST>
+		echo "<td><div class='add'><form action=addBasket.php method=POST>
 		    <input type='hidden' value=".$id[$x]." name='product_id' />
 		    <input type='hidden' value='basket.php' name='returnto' />
-		    <input type=submit name=id value= '+1' />
-		    </form></td>";
+            <input type='image' name='submit' src='images/add.png' width=30 />
+		    </form></div></td>";
+            //<input type=submit name=id value= '+1' />
 		$sum = $quantity * $price[$x];
 		echo '<td> &pound;' . $sum . '</td>';
 		$total = $total + $sum;

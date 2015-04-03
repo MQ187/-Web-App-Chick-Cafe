@@ -305,3 +305,9 @@ form input[type=password] {
     background-color: #FFCCCC;
 }
 /*Basket end*/
+
+.add {
+  text-align:center;
+}.add:hover{
+   -webkit-filter: drop-shadow(3px 3px 1px grey);
+}

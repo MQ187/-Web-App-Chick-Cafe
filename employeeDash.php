@@ -74,7 +74,7 @@ elseif ($_SESSION['logedIn'] == true && $_SESSION['AccountType'] == "manager") {
                 <li><i>Order's you're preparing</i>
                         <table id="tfhover" class="tftable" border="1">
                         <tr>
-                        <th>Order ID</th><th>Order Date</th><th>Order Time</th><th>Order Priority</th><th>Order Status</th><th>Select Order</th>
+                        <th>Order ID</th><th>Details</th><th>Order Date</th><th>Order Time</th><th>Order Priority</th><th>Order Status</th><th>Select Order</th>
                         </tr>
                         <?php
                             $question="SELECT * FROM `order` WHERE idEmployee = :id AND orderStatus = 'Preparing'";
@@ -92,6 +92,24 @@ elseif ($_SESSION['logedIn'] == true && $_SESSION['AccountType'] == "manager") {
                                 $status[$i] = $key['orderStatus'];
                                 echo '<tr>';
                                 echo '<td>'. $idorder[$i] .'</td>';
+
+                                    $question2="SELECT quantity,name FROM `orderItem`,`item` WHERE orderItem.idorder = :id";
+                                    $sth2 = $db->prepare($question2, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+                                    $sth2->execute(array(':id' => $idorder[$i]));
+                                    $fetch2 = $sth->fetchAll();
+
+                                    echo '<td><table><tr><th>Name</th><th>Quantity</th></tr>';
+                                    $x=1;
+                                    foreach ($fetch2 as $key2) {
+                                        $name[$x] = $key2['name'];
+                                        $quantity[$x] = $key2['quantity'];
+                                        
+                                        echo '<tr><td>'.$name[$x].'</td><td>'.$quantity[$x].'</td></tr>';
+                                        echo 
+                                        $x++;
+                                    }
+                                    echo '</table></td>';
+
                                 echo '<td>'. $date[$i] .'</td>';
                                 echo '<td>'. $time[$i] .'</td>';
                                 echo '<td>'. $priority[$i] .'</td>';
