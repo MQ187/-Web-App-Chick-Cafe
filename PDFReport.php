@@ -28,6 +28,10 @@
 		case "order":
 			$html = $reportObj->oReportPDF($_SESSION['startDate'],$_SESSION['endDate']);
 			break;
+
+		case "activeCustomer":
+			$html = $reportObj->acReportPDF();
+			break;
 	}
 
 	$pdf->WriteHTML($html);
@@ -39,6 +43,10 @@
 
 		case "order":
 			$pdf->Output('OrderReport.pdf', 'I');
+			break;
+
+		case "activeCustomer":
+			$pdf->Output('ActiveCustomerReport.pdf', 'I');
 			break;
 	}
 

@@ -99,5 +99,64 @@
             $html=$html.'</table>';
             return ($html);
         }
+
+        function acReportPDF(){
+            require("db_config.php");
+            $html="";
+            $html=$html.'<table id="tfhover" class="tftable" border="1">';
+            $html=$html.'<tr><th>Customer ID</th><th>Customer Name</th><th>Customer Surname</th><th>Order ID</th><th>Order Date/Time</th><th>Order Priority</th><th>Order Status</th></tr>';
+
+            $_SESSION['reportType'] = "activeCustomer";
+
+            $question="SELECT idcustomer,name,surname FROM customer WHERE isLoggedIn='1'";
+            $sth = $db->prepare($question);
+            $execute1 = $sth->execute();
+            $fetch1 = $sth->fetchAll();
+
+            $i=1;
+            foreach ($fetch1 as $key) {
+                
+                $idCustomer[$i] = $key['idcustomer'];
+                $customerName[$i] = $key['name'];
+                $customerSName[$i] = $key['surname'];
+                $d = date('Y-m-d');
+
+                $question="SELECT * FROM `order` WHERE idCustomer = '$idCustomer[$i]' AND orderStatus = 'Pending' AND orderDate = '$d'";
+                $sth = $db->prepare($question);
+                $execute = $sth->execute();
+                $fetch = $sth->fetchAll();
+
+                $html=$html.'<tr>';
+                $html=$html.'<td>'. $idCustomer[$i] .'</td>';
+                $html=$html.'<td>'. $customerName[$i] .'</td>';
+                $html=$html.'<td>'. $customerSName[$i] .'</td>';
+
+                if(count($fetch) <= 0){
+                    $html=$html.'<td>n/a</td>';
+                    $html=$html.'<td>n/a</td>';
+                    $html=$html.'<td>n/a</td>';
+                    $html=$html.'<td>n/a</td>';
+                }else{
+                    $x = 1;
+                    foreach ($fetch as $key) {
+                        $orderID[$i] = $key['idorder'];
+                        $dateTime[$i] = $key['orderDate'];
+                        $priority[$i] = $key['orderPriority'];
+                        $status[$i] = $key['orderStatus'];
+                    
+                        $html=$html.'<td>'. $orderID[$i] .'</td>';
+                        $html=$html.'<td>'. $dateTime[$i] .'</td>';
+                        $html=$html.'<td>'. $priority[$i] .'</td>';
+                        $html=$html.'<td>'. $status[$i] .'</td>';
+                        $x++;
+                    }
+                }
+
+                $html=$html.'</tr>';
+                $i++;
+            }
+            $html=$html.'</table>';
+            return ($html);
+        }
     }
 ?>

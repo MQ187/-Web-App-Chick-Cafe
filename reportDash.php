@@ -31,7 +31,7 @@ elseif ($_SESSION['logedIn'] == true && $_SESSION['AccountType'] == "employee") 
                         <td><li><a href="refundReport.php">Refund</a></li></td>
                         <td><li><a href="#">Staff Performance</a></li></td></tr>
                         <tr><td><li><a href="orderReport.php">Order</a></li></td>
-                        <td><li><a href="#">Active Users</a></li></td> 
+                        <td><li><a href="activeCustomerReport.php">Active Users</a></li></td> 
                         <td><li><a href="#">Generate All</a></li></td></tr>
                     </table>
             </ul>
