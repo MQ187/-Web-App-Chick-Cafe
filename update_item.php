@@ -1,19 +1,7 @@
-<!<?php
+<?php
 session_start();
 require_once("db_config.php");
 // Connect to the Database and Select the ccdb database.
-
-if (!isset($_POST['ingredients'])) {
-	$_POST['ingredients'] = array();
-}//create the basket if it doesnt exist.
-
-$max=count($_POST['ingredients']); //check how many items are in the basket.
-
-?>
-
-<?php 
-    session_start(); 
-    include("db_config.php");
 ?>
 
 <!DOCTYPE html>
@@ -73,49 +61,42 @@ $max=count($_POST['ingredients']); //check how many items are in the basket.
             echo '<tr><td><p>Description:</p></td><td><input type="text" value='.$key['description'].' name="des" required="required"/></td></tr>';
             echo '<tr><td><p>Price:</p></td><td><input type="text" name="price" value='.$key['price'].' required="required"/></td></tr>'; 
             echo '<tr><td><p>Preperation Time:</p></td><td><input type="text" value='.$key['preperationTime'].' name="prepTime" placeholder="HH:MM:SS" required="required"/></td></tr>';
-            echo '<tr><td><p>Daily Special:</p></td><td><input type="checkbox" name="isSpecial" value="Yes" required="required"/></td></tr>';
+            if ($key['dailySpecial'] == true){
+                $checked = "checked";
+            }
+            else{
+                $checked = "";
+            }
+            
+            echo '<tr><td><p>Daily Special:</p></td><td><input type="checkbox" name="isSpecial" value="true" '.$checked.'/></td></tr>';
             echo '<input type=hidden name=itemiden value='.$_POST['itemid'].' />';
             $i++;
         }
+        echo '<tr><td colspan=2 align="center"><p>
+                  <input type="submit" value="Update"></p></td></tr>
+            </table>
+            </div>
+            </form>';
         }	
-    ?>
-        
-    <tr><td colspan=2 align="center"><p>
-          <input type="submit" value="Update"></p></td></tr>
-    </table>
-    </div>
-    </form>
-    <?php
-        $id = $_POST['itemiden'];
-
-        if(isset($_POST['isSpecial']) && $_POST['isSpecial'] == 'Yes'){
-            //$id = $_POST['itemiden'];
+        else{
+            $id = $_POST['itemiden'];
             $menuid = $_POST['menuselect'];
             $type = $_POST['type'];
             $name = $_POST['name'];
             $des = $_POST['des'];
             $price = $_POST['price'];
             $prepTime = $_POST['prepTime'];
-
-            $question="UPDATE `item` SET idMenu='$menuid', type='$type', name='$name', description='$des', price='$price', preperationTime='$prepTime', dailySpecial='1' WHERE iditem = '$id'"; 
-            $sth = $db->prepare($question);
-            $sth->execute();
-            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=items.php">'; 
-        }else{
-            if(isset($_POST['name'])){
-            //$id = $_POST['itemiden'];
-            $menuid = $_POST['menuselect'];
-            $type = $_POST['type'];
-            $name = $_POST['name'];
-            $des = $_POST['des'];
-            $price = $_POST['price'];
-            $prepTime = $_POST['prepTime'];
-
-            $question="UPDATE `item` SET idMenu='$menuid', type='$type', name='$name', description='$des', price='$price', preperationTime='$prepTime', dailySpecial='0' WHERE iditem = '$id'"; 
-            $sth = $db->prepare($question);
-            $sth->execute();
-            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=items.php">'; 
+            if (!isset($_POST['isSpecial'])){
+                $dailySpecial = false;
             }
+            else{
+            $dailySpecial = true;
+            }
+
+            $question="UPDATE `item` SET idMenu='$menuid', type='$type', name='$name', description='$des', price='$price', preperationTime='$prepTime', dailySpecial='$dailySpecial' WHERE iditem = '$id'"; 
+            $sth = $db->prepare($question);
+            $sth->execute();
+            echo '<META HTTP-EQUIV="Refresh" Content="0; URL=items.php">';
         }
     ?>
   
