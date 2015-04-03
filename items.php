@@ -31,36 +31,16 @@ $id = $_SESSION['id'];
     <header>
          <a href="index.php"><img align="middle" id="logo" src="images/Logo.png"/></a>
          <br>
-         <div class="nav">
-            <ul>
          <?php
          Switch($userType){
             case "manager":
-                ?>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="managerDash.php">Current Orders</a></li>
-                <li><a href="#">Reports</a></li>
-                <li><a href="#">Employee Accounts</a></li>
-                <li><a href="refund.php">Refund</a></li>
-                <li><a href="#">VIP</a></li>
-                <li><a href="stock.php">Stock</a></li>
-                <li><a href="myAccount.php">My Account</a></li>
-                <?php
+                require_once('nav/managerDash.php');
                 break;
             case "employee":
-                ?>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="employeeDash.php">Pending Orders</a></li>
-                <li><a href="employeeReport.php">Report</a></li>
-                <li><a href="stock.php">Stock</a></li>
-                <li><a href="myAccount.php">My Account</a></li>
-                <?php
+                require_once('nav/employeeDash.php');
                 break;
         }
         ?>
-                 <li><a href="logoff.php">Logout</a></li>
-            </ul>
-        </div>
     </header>
         <nav>
             <ul>

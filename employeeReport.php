@@ -10,16 +10,9 @@
     <header>
          <a href="index.php"><img align="middle" id="logo" src="images/Logo.png"/></a>
          <br>
-         <div class="nav">
-            <ul>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="employeeDash.php">Pending Orders</a></li>
-                <li><a href="employeeReport.php">Report</a></li>
-                <li><a href="stock.php">Stock</a></li>
-                <li><a href="myAccount.php">My Account</a></li>
-                <li><a href="logoff.php">Logout</a></li>
-            </ul>
-        </div>
+         <?php
+         require_once('nav/employeeDash.php');
+         ?>
     </header>
         <nav>
             <ul>
