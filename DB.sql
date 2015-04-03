@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 30, 2015 at 06:16 PM
+-- Generation Time: Apr 03, 2015 at 03:28 AM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.9
 
@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `customer` (
   `phone` varchar(12) NOT NULL,
   `password` varchar(45) NOT NULL,
   PRIMARY KEY (`idCustomer`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
 --
 -- Dumping data for table `customer`
@@ -78,7 +78,8 @@ INSERT INTO `customer` (`idCustomer`, `name`, `surname`, `email`, `phone`, `pass
 (5, 'naresh', 'chamkani', 'nausnu@hotmail.com', '4455667788', '0f869632dedf073cb0587e8dfa43ec94c872abfc'),
 (8, 'test', 'tester', 'test@gmail.com', '08977654322', 'cc03e747a6afbbcbf8be7668acfebee5'),
 (9, 'jim', 'bob', 'j@gmail.com', '123', 'adcd7048512e64b48da55b027577886ee5a36350'),
-(10, 'Gaetan', 'Mougel', 'gaetan@familymougel.eu', '07837324564', '63982e54a7aeb0d89910475ba6dbd3ca6dd4e5a1');
+(10, 'Gaetan', 'Mougel', 'gaetan@familymougel.eu', '07837324564', '63982e54a7aeb0d89910475ba6dbd3ca6dd4e5a1'),
+(11, 'f', 'f', 'f@a', 'f', 'ec78ddda0cbcc3ba8f0e79ffc29e242cfccae579');
 
 -- --------------------------------------------------------
 
@@ -162,7 +163,16 @@ CREATE TABLE IF NOT EXISTS `ingredients` (
   `availability` int(11) NOT NULL DEFAULT '0',
   `price` decimal(6,2) NOT NULL,
   PRIMARY KEY (`idIngredients`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `ingredients`
+--
+
+INSERT INTO `ingredients` (`idIngredients`, `name`, `availability`, `price`) VALUES
+(1, 'Tomatoes', 150, '0.33'),
+(2, 'letuce', 100, '0.33'),
+(3, 'Cheddar', 20, '0.40');
 
 -- --------------------------------------------------------
 
@@ -172,7 +182,7 @@ CREATE TABLE IF NOT EXISTS `ingredients` (
 
 CREATE TABLE IF NOT EXISTS `item` (
   `iditem` int(11) NOT NULL AUTO_INCREMENT,
-  `idMenu` int(11) NOT NULL,
+  `idMenu` int(11) DEFAULT NULL,
   `type` varchar(15) DEFAULT NULL,
   `name` varchar(45) NOT NULL,
   `description` varchar(200) NOT NULL,
@@ -248,7 +258,16 @@ CREATE TABLE IF NOT EXISTS `itemingredients` (
   PRIMARY KEY (`iditemIngredients`),
   KEY `idItem_idx` (`idItem`),
   KEY `idIngredients_idx` (`idIngredients`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `itemingredients`
+--
+
+INSERT INTO `itemingredients` (`iditemIngredients`, `idItem`, `idIngredients`, `quantity`) VALUES
+(1, 1, 1, 2),
+(2, 1, 2, 1),
+(3, 2, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -286,7 +305,7 @@ CREATE TABLE IF NOT EXISTS `menu` (
   `openTime` time NOT NULL,
   `closeTime` time NOT NULL,
   PRIMARY KEY (`idmenu`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `menu`
@@ -296,7 +315,10 @@ INSERT INTO `menu` (`idmenu`, `menuType`, `openTime`, `closeTime`) VALUES
 (1, 'Breakfast', '07:00:00', '11:00:00'),
 (2, 'Lunch', '12:00:00', '17:00:00'),
 (3, 'Dinner', '18:00:00', '22:00:00'),
-(4, 'Drinks', '00:00:00', '00:00:00');
+(4, 'Drinks', '00:00:00', '00:00:00'),
+(5, 'Breakfast Drinks', '07:00:00', '11:00:00'),
+(6, 'Lunch Drinks', '12:00:00', '17:00:00'),
+(7, 'Dinner Drinks', '18:00:00', '22:00:00');
 
 -- --------------------------------------------------------
 
@@ -325,7 +347,7 @@ CREATE TABLE IF NOT EXISTS `order` (
 
 INSERT INTO `order` (`idorder`, `idCustomer`, `idEmployee`, `orderDate`, `orderTime`, `orderPriority`, `orderStatus`, `etc`, `timeCompleted`) VALUES
 (1, 10, 2, '2015-03-15', '00:15:00', 1, 'Completed', '00:00:00', '00:10:00'),
-(2, 9, 2, '2015-03-17', '12:00:00', 0, 'Pending', '00:00:15', '00:00:12');
+(2, 9, 2, '2015-03-17', '12:00:00', 0, 'Completed', '00:00:15', '00:00:02');
 
 -- --------------------------------------------------------
 
@@ -341,7 +363,14 @@ CREATE TABLE IF NOT EXISTS `orderitem` (
   PRIMARY KEY (`idorderItem`),
   KEY `idOrder_idx` (`idOrder`),
   KEY `idItem_idx` (`idItem`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `orderitem`
+--
+
+INSERT INTO `orderitem` (`idorderItem`, `idOrder`, `idItem`, `quantity`) VALUES
+(1, 1, 1, 2);
 
 -- --------------------------------------------------------
 

@@ -3,6 +3,24 @@ require_once("db_config.php");
 // Connect to the Database and Select the ccdb database.
 require_once("messages.php");
 //adds the check for all possible errors as well as the warnings.
+$day = date("l");
+$time = time();
+if ($day == "Sunday"){
+    $startTime = strtotime("08:00:00");
+    $endTime = strtotime("11:00:00");
+}
+else{
+    $startTime = strtotime("07:00:00");
+    $endTime = strtotime("11:00:00");
+}
+//gets the opening/closing time and current time
+
+$OFB = 0;
+
+if ($time<$endTime && $time>$startTime){
+    $OFB = 1;
+}
+//openforbusiness yes or no? depending on the time.
 ?>
 <!DOCTYPE html>
     <head>
@@ -64,7 +82,7 @@ require_once("messages.php");
                 <li><i>BREAKFAST</i>
                         <table id="tfhover" class="tftable" border="1">
                         <tr>
-                        <th>Title</th><th>Description</th><th>Price</th><th>Type</th><?php if($userType=='customer'){echo"<th>Add to Basket</th>";} ?>
+                        <th>Title</th><th>Description</th><th>Price</th><th>Type</th><?php if($userType=='customer'  && $OFB == true){echo"<th>Add to Basket</th>";} ?>
                         </tr>
                         <?php
                              $question="SELECT * FROM item WHERE idMenu=1";
@@ -86,7 +104,7 @@ require_once("messages.php");
                             echo '<td>'. $des[$i] .'</td>';
                             echo '<td> &pound;'. $price[$i] .'</td>';
                             echo '<td>'. $type[$i] .'</td>';
-                            if($userType=='customer'){echo "<td><form action='addBasket.php' method='POST'>
+                            if($userType=='customer'  && $OFB == true){echo "<td><form action='addBasket.php' method='POST'>
                                                             <input type='hidden' value=" . $id[$i] . " name='product_id' />
                                                             <input type='hidden' value='br_menu.php' name='returnto' />
                                                             <input type=submit name=id value=Add />
@@ -102,7 +120,7 @@ require_once("messages.php");
                 <li><i>TODAYS SPECIAL</i>
                     <table id="tfhover" class="tftable" border="1">
                         <tr>
-                        <th>Title</th><th>Description</th><th>Price</th><th>Type</th><?php if($userType=='customer'){echo"<th>Add to Basket</th>";} ?>
+                        <th>Title</th><th>Description</th><th>Price</th><th>Type</th><?php if($userType=='customer'  && $OFB == true){echo"<th>Add to Basket</th>";} ?>
                         </tr>
                         <?php 
                             $question="SELECT * FROM item WHERE dailySpecial=1";
@@ -124,9 +142,47 @@ require_once("messages.php");
                             echo '<td>'. $des[$i] .'</td>';
                             echo '<td> &pound;'. $price[$i] .'</td>';
                             echo '<td>'. $type[$i] .'</td>';
-                            if($userType=='customer'){echo "<td><form action='addBasket.php' method='POST'>
+                            if($userType=='customer'  && $OFB == true){echo "<td><form action='addBasket.php' method='POST'>
                                                             <input type='hidden' value=".$id[$i]." name='product_id' />
                                                             <input type='hidden' value='br_menu.php' name='returnto' />
+                                                            <input type=submit name=id value=Add />
+                                                            </form></td>";}
+                            echo '</tr>';
+
+                            $i++;
+                            }
+                        ?>
+                        </table>
+                </li>
+
+                <li><i>Breakfast Drinks</i>
+                    <table id="tfhover" class="tftable" border="1">
+                        <tr>
+                        <th>Title</th><th>Description</th><th>Price</th><th>Type</th><?php if($userType=='customer'  && $OFB == true){echo"<th>Add to Basket</th>";} ?>
+                        </tr>
+                        <?php 
+                            $question="SELECT * FROM item WHERE idMenu=5";
+                             $sth = $db->prepare($question);
+                             $execute = $sth->execute();
+                             $fetch = $sth->fetchAll();
+
+                             $i=1;
+                             foreach ($fetch as $key) {
+                                
+                                $id[$i] = $key['iditem'];
+                                $pname[$i] = $key['name'];
+                                $des[$i] = $key['description'];
+                                $price[$i] = $key['price'];
+                                $type[$i] = $key['type'];
+                                
+                            echo '<tr>';
+                            echo '<td>'. $pname[$i] .'</td>';
+                            echo '<td>'. $des[$i] .'</td>';
+                            echo '<td> &pound;'. $price[$i] .'</td>';
+                            echo '<td>'. $type[$i] .'</td>';
+                            if($userType=='customer'  && $OFB == true){echo "<td><form action='addBasket.php' method='POST'>
+                                                            <input type='hidden' value=".$id[$x]." name='product_id' />
+                                                            <input type='hidden' value='lu_menu.php' name='returnto' />
                                                             <input type=submit name=id value=Add />
                                                             </form></td>";}
                             echo '</tr>';
