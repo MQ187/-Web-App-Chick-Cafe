@@ -158,5 +158,59 @@
             $html=$html.'</table>';
             return ($html);
         }
+
+        function csReportPDF($s, $e){
+            require("db_config.php");
+            $html="";
+            $html=$html.'<table id="tfhover" class="tftable" border="1">';
+            $html=$html.'<tr><th>Customer ID</th><th>Customer Name</th><th>Customer Surname</th><th>Amount Spent</th></tr>';
+
+            $_SESSION['reportType'] = "customerSpending";
+            $sd = $s;
+            $se = $e;
+
+            $question="SELECT idcustomer,name,surname FROM `customer`";/*orderDate>='$sd' AND orderDate<='$se'";*/
+            $sth = $db->prepare($question);
+            $execute = $sth->execute();
+            $fetch = $sth->fetchAll();
+
+            $i=1;
+            foreach ($fetch as $key) {
+                
+                $customerID[$i] = $key['idcustomer'];
+                $customerName[$i] = $key['name'];
+                $customerSName[$i] = $key['surname'];
+
+                $html=$html.'<tr>';
+                $html=$html.'<td>'. $customerID[$i] .'</td>';
+                $html=$html.'<td>'. $customerName[$i] .'</td>';
+                $html=$html.'<td>'. $customerSName[$i] .'</td>';
+                
+                $question2="SELECT ammount FROM payment WHERE idCustomer=$key[idcustomer] AND date>='$sd' AND date<='$se'";
+                $sth1 = $db->prepare($question2);
+                $execute1 = $sth1->execute();
+                $fetch1 = $sth1->fetchAll();
+
+                if(count($fetch1)<=0){
+                    $html=$html.'<td>No spendings</td>';
+                }else{
+                    $x = 1;
+                    $total = 0;
+                    foreach ($fetch1 as $key) {
+                        $amount[$x] = $key['ammount'];
+                        $total += $amount[$x];
+                        $x++;
+                    }
+
+                    $html=$html.'<td> &pound;'. $total .'</td>';
+                }
+
+                $html=$html.'</tr>';
+                $i++;
+            }
+
+            $html=$html.'</table>';
+            return ($html);
+        }
     }
 ?>

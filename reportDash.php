@@ -27,7 +27,7 @@ elseif ($_SESSION['logedIn'] == true && $_SESSION['AccountType'] == "employee") 
             <ul id="rDash">
                 <li><i>Report</i></li>
                     <table style="padding-top:50px;">
-                        <tr><td><li><a href="#">Customer Spending</a></li></td>
+                        <tr><td><li><a href="customerSpendingReport.php">Customer Spending</a></li></td>
                         <td><li><a href="refundReport.php">Refund</a></li></td>
                         <td><li><a href="#">Staff Performance</a></li></td></tr>
                         <tr><td><li><a href="orderReport.php">Order</a></li></td>

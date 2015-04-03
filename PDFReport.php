@@ -32,6 +32,10 @@
 		case "activeCustomer":
 			$html = $reportObj->acReportPDF();
 			break;
+
+		case "customerSpending":
+			$html = $reportObj->csReportPDF($_SESSION['startDate'],$_SESSION['endDate']);
+			break;
 	}
 
 	$pdf->WriteHTML($html);
@@ -47,6 +51,10 @@
 
 		case "activeCustomer":
 			$pdf->Output('ActiveCustomerReport.pdf', 'I');
+			break;
+
+		case "customerSpending":
+			$pdf->Output('CustomerSpendingReport.pdf', 'I');
 			break;
 	}
 
