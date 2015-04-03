@@ -19,7 +19,13 @@ else{
     $priority = 0;
 }
 $total = 0;
-//$etc = 0;
+$th = 0;
+$tm = 0;
+$ts = 0;
+$hours = "";
+$minutes = "";
+$seconds = "";
+$etc = 0;
 $missing = 0;
 //set basic parameters.
 
@@ -70,17 +76,63 @@ for($i=0;$i<$max;$i++){
 
     $x=1;
     foreach ($fetch as $key) {
-        $timeItems = $quantity * $key['preperationTime'] ;
-        $etc = $etc + $timeItems;
-        $total = $key['price'];
+        $time = $key['preperationTime'];
+        $t = str_split($time);
+        //get the time
+
+        $h = $t[0] + $t[1];
+        $m = $t[3] + $t[4];
+        $s = $t[6] + $t[7];
+        //split it into h,m,s
+
+        $h = intval($h);
+        $m = intval($m);
+        $s = intval($s);
+        //turn them into integers so calculation can be applied.
+
+        $th = $th + ($quantity * $h);
+        $tm = $tm + ($quantity * $m);
+        $ts = $ts + ($quantity * $s);
+        //add up all the h's, minutes and seconds. multiplied by quantity.
+        $total = $total + ($quantity * $key['price']);
         $x++;
     }
-
-
-
 }
-var_dump($etc);
-echo "<br>";
+
+while ($ts > 60){
+    $tm++;
+    $ts = $ts - 60;
+}
+while ($tm > 60){
+    $th++;
+    $tm = $tm - 60;
+}
+//normalise (no more than 60sec/min)
+
+if ($ts<10) {
+    $seconds = "0" . $ts;
+}
+else{
+    $seconds = strval($ts);
+}
+if ($tm<10) {
+    $minutes = "0" . $tm;
+}
+else{
+    $minutes = strval($tm);
+}
+if ($th > 99){
+    $hours = "99";
+}
+elseif ($th < 10) {
+    $hours = "0" . $th;
+}
+else{
+    $hours = strval($th);
+}
+$etc = $hours . ":" . $minutes . ":" . $seconds;
+
+
 var_dump($total);
 echo "<br>";
 var_dump($missing);
@@ -88,20 +140,20 @@ echo "<br>";
 var_dump($max);
 echo "<br>";
 var_dump($priority);
+echo "<br>";
+var_dump($etc);
 
 //we've checked that the item is available, now we can create the order.
-/*
 
-INSERT INTO order(idCustomer,orderDate,orderTime,orderPriority,orderStatus,etc) VALUES(2,CURDATE(),CURTIME(),0,"PENDING",MAKETIME(00,03,30))
-
-$question="INSERT INTO order(idCustomer,orderDate,orderTime,orderPriority,orderStatus,etc) VALUES(:idCustomer,:orderDate,:orderTime,:orderPriority,:orderStatus,:etc)";
+$question="INSERT INTO `order` (`idCustomer`, `orderPriority`, `etc`) VALUES(:idCustomer,:orderPriority,:etc)";
 $add = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-$add->execute(array(':idCustomer' => $_SESSION['id'], ':orderDate' => CURDATE(), ':orderTime' => CURTIME(), ':orderPriority' => $priority, ':orderStatus' => "Pending", ':etc' => $etc));
+$add->execute(array(':idCustomer' => $_SESSION['id'], ':orderPriority' => $priority, ':etc' => $etc));
 //this will create a new order.
 
 for($i=0;$i<$max;$i++){
     $product_id = $_SESSION['basket'][$i]['product_id'];
     $quantity = $_SESSION['basket'][$i]['quantity'];
+
     $question="INSERT INTO orderItem(idOrder,idItem,quantity) VALUES(:idOrder,:idItem,:quantity)";
     $add = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
     $add->execute(array(':idOrder' => $idOrder, ':idItem' => $product_id, ':quantity' => $quantity));
@@ -110,12 +162,19 @@ for($i=0;$i<$max;$i++){
     $navailability = $availability[$i] - $quantity;
     //get the current stock of each item & change it.
 
-    $question = 'UPDATE availability SET availability=:navailability LEFT JOIN Ingredients WHERE itemIngredients.idItem = :id';
+    /*
+
+
+
+
+    $question = 'UPDATE Ingredients JOIN itemIngredients ON Ingredients.idIngredients = itemIngredients.idIngredients
+                    SET Ingredients.availability = 786 WHERE itemIngredients.idItem = 1';
     $sth = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
     $sth->execute(array(':availability' => $navailability));
     //update the stock
+    */
 }
-*/
+
 //$_SESSION['basket'] = array();
 //header("Location:customerDash.php");
 
