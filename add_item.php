@@ -40,6 +40,9 @@
                         <option value="2">2. Lunch</option>
                         <option value="3">3. Dinner</option>
                         <option value="4">4. Drink</option>
+                        <option value="5">5. Breakfast Drink</option>
+                        <option value="6">6. Lunch Drink</option>
+                        <option value="7">7. Dinner Drink</option>
                     </select></td></td>';
             echo '<tr><td><p>Type:</p></td>
                     <td><select name="type">
