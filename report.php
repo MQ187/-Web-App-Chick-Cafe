@@ -61,7 +61,7 @@
             $sd = $s;
             $se = $e;
 
-            $question="SELECT * FROM `order` WHERE orderDate>='$sd' AND orderDate<='$se'";
+            $question="SELECT * FROM `order` WHERE orderTimeS>='$sd' AND orderTimeS<='$se'";
             $sth = $db->prepare($question);
             $execute = $sth->execute();
             $fetch = $sth->fetchAll();
@@ -79,7 +79,7 @@
 
                 $idCustomer[$i] = $key['idCustomer'];
                 $orderID[$i] = $key['idorder'];
-                $dateTime[$i] = $key['orderDate'];
+                $dateTime[$i] = $key['orderTimeS'];
                 $priority[$i] = $key['orderPriority'];
                 $status[$i] = $key['orderStatus'];
                 $employeeID[$i] = $key['idEmployee'];
@@ -209,6 +209,55 @@
                 $i++;
             }
 
+            $html=$html.'</table>';
+            return ($html);
+        }
+
+        function spReportPDF($s, $e){
+            require("db_config.php");
+            $html="";
+            $html=$html.'<table id="tfhover" class="tftable" border="1">';
+            $html=$html.'<tr><th>Employee ID</th><th>Employee Name</th><th>Breakfast Count</th><th>Lunch Count</th><th>Dinner Count</th><th>Breakfast Min</th><th>Breakfast Max</th><th>Lunch Min</th><th>Lunch Max</th><th>Dinner Min</th><th>Dinner Max</th></tr>';
+
+            $_SESSION['reportType'] = "order";
+            $sd = $s;
+            $se = $e;
+
+            $question="SELECT * FROM `order` WHERE orderTimeS>='$sd' AND orderTimeS<='$se'";
+            $sth = $db->prepare($question);
+            $execute = $sth->execute();
+            $fetch = $sth->fetchAll();
+
+            $i=1;
+            foreach ($fetch as $key) {
+
+                $question2="SELECT name,surname FROM customer WHERE idCustomer=$key[idCustomer]";
+                $sth1 = $db->prepare($question2);
+                $execute1 = $sth1->execute();
+                $fetch1 = $sth1->fetch();
+
+                $customerName = $fetch1[0];
+                $customerSuName = $fetch1[1];
+
+                $idCustomer[$i] = $key['idCustomer'];
+                $orderID[$i] = $key['idorder'];
+                $dateTime[$i] = $key['orderDate'];
+                $priority[$i] = $key['orderPriority'];
+                $status[$i] = $key['orderStatus'];
+                $employeeID[$i] = $key['idEmployee'];
+
+                $html=$html.'<tr>';
+                $html=$html.'<td>'. $idCustomer[$i] .'</td>';
+                $html=$html.'<td>'. $customerName .'</td>';
+                $html=$html.'<td>'. $customerSuName .'</td>';
+                $html=$html.'<td>'. $orderID[$i] .'</td>';
+                $html=$html.'<td>'. $dateTime[$i] .'</td>';
+                $html=$html.'<td>'. $priority[$i] .'</td>';
+                $html=$html.'<td>'. $status[$i] .'</td>';
+                $html=$html.'<td>'. $employeeID[$i] .'</td>';
+                $html=$html.'</tr>';
+                $i++;
+            }
             $html=$html.'</table>';
             return ($html);
         }

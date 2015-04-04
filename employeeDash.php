@@ -27,7 +27,7 @@ elseif ($_SESSION['logedIn'] == true && $_SESSION['AccountType'] == "manager") {
                 <li><i>Order's Pending</i>
                         <table id="tfhover" class="tftable" border="1">
                         <tr>
-                        <th>Order ID</th><th>Order Date</th><th>Order Time</th><th>Order Priority</th><th>Order Status</th><th>Select Order</th>
+                        <th>Order ID</th><th>Order Date/Time</th><th>Order Priority</th><th>Order Status</th><th>Select Order</th>
                         </tr>
                         <?php
                         	require_once("db_config.php");
@@ -42,14 +42,12 @@ elseif ($_SESSION['logedIn'] == true && $_SESSION['AccountType'] == "manager") {
                             $i=1;
                             foreach ($fetch as $key) {
                             	$idorder[$i] = $key['idorder'];
-                                $date[$i] = $key['orderDate'];
-                                $time[$i] = $key['orderTime'];
+                                $dateTime[$i] = $key['orderTimeS'];
                                 $priority[$i] = $key['orderPriority'];
                                 $status[$i] = $key['orderStatus'];
                             	echo '<tr>';
                                 echo '<td>'. $idorder[$i] .'</td>';
-                                echo '<td>'. $date[$i] .'</td>';
-                                echo '<td>'. $time[$i] .'</td>';
+                                echo '<td>'. $dateTime[$i] .'</td>';
                                 echo '<td>'. $priority[$i] .'</td>';
                                 echo '<td>'. $status[$i] .'</td>';
                                 echo "<td><form action=update_status.php method=\"POST\">"
@@ -67,7 +65,7 @@ elseif ($_SESSION['logedIn'] == true && $_SESSION['AccountType'] == "manager") {
                 <li><i>Order's you're preparing</i>
                         <table id="tfhover" class="tftable" border="1">
                         <tr>
-                        <th>Order ID</th><th>Details</th><th>Order Date</th><th>Order Time</th><th>Order Priority</th><th>Order Status</th><th>Select Order</th>
+                        <th>Order ID</th><th>Details</th><th>Order Date/Time</th><th>Order Priority</th><th>Order Status</th><th>Select Order</th>
                         </tr>
                         <?php
                             $question="SELECT * FROM `order` WHERE idEmployee = :id AND orderStatus = 'Preparing'";
@@ -79,8 +77,7 @@ elseif ($_SESSION['logedIn'] == true && $_SESSION['AccountType'] == "manager") {
                             $i=1;
                             foreach ($fetch as $key) {
                                 $idorder[$i] = $key['idorder'];
-                                $date[$i] = $key['orderDate'];
-                                $time[$i] = $key['orderTime'];
+                                $dateTime[$i] = $key['orderTimeS'];
                                 $priority[$i] = $key['orderPriority'];
                                 $status[$i] = $key['orderStatus'];
                                 
@@ -102,8 +99,7 @@ elseif ($_SESSION['logedIn'] == true && $_SESSION['AccountType'] == "manager") {
                                     }
                                     echo '</table></td>';
 
-                                echo '<td>'. $date[$i] .'</td>';
-                                echo '<td>'. $time[$i] .'</td>';
+                                echo '<td>'. $dateTime[$i] .'</td>';
                                 echo '<td>'. $priority[$i] .'</td>';
                                 echo '<td>'. $status[$i] .'</td>';
                                 echo "<td><form action=update_status.php method=\"POST\">"
