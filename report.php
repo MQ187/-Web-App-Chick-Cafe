@@ -223,7 +223,7 @@
             $sd = $s;
             $se = $e;
 
-            $question="SELECT * FROM `order` WHERE orderTimeS>='$sd' AND orderTimeS<='$se'";
+            $question="SELECT idEmployee FROM `order` WHERE orderTimeS>='$sd' AND orderTimeS<='$se'";
             $sth = $db->prepare($question);
             $execute = $sth->execute();
             $fetch = $sth->fetchAll();
@@ -231,30 +231,53 @@
             $i=1;
             foreach ($fetch as $key) {
 
-                $question2="SELECT name,surname FROM customer WHERE idCustomer=$key[idCustomer]";
+                //for the employee name
+                $question2="SELECT name FROM employee WHERE idEmployee=$key[idEmployee]";
                 $sth1 = $db->prepare($question2);
                 $execute1 = $sth1->execute();
                 $fetch1 = $sth1->fetch();
 
-                $customerName = $fetch1[0];
-                $customerSuName = $fetch1[1];
+                $employeeName = $fetch1[0];
 
-                $idCustomer[$i] = $key['idCustomer'];
-                $orderID[$i] = $key['idorder'];
-                $dateTime[$i] = $key['orderDate'];
-                $priority[$i] = $key['orderPriority'];
-                $status[$i] = $key['orderStatus'];
-                $employeeID[$i] = $key['idEmployee'];
+                $question3 = "SELECT idorder FROM order WHERE orderType = 'Breakfast' AND orderTimeS>='$sd' AND orderTimeS<='$se'";
+                $sth2 = $db->prepare($question3);
+                $execute2 = $sth2->execute();
+                $fetch2 = $sth2->fetchAll();
+
+                $breakfastCount = 0;
+                foreach ($fetch2 as $bc) {
+                    $breakfastCount += 1;
+                }
+
+                $question4 = "SELECT idorder FROM order WHERE orderType = 'Lunch' AND orderTimeS>='$sd' AND orderTimeS<='$se'";
+                $sth3 = $db->prepare($question4);
+                $execute3 = $sth3->execute();
+                $fetch3 = $sth3->fetchAll();
+
+                $breakfastCount = 0;
+                foreach ($fetch2 as $bc) {
+                    $breakfastCount += 1;
+                }
+
+                $lunchCount = 0;
+                foreach ($fetch3 as $bc) {
+                    $lunchCount += 1;
+                }
+
+                $idEmployee[$i] = $key['idEmployee'];
 
                 $html=$html.'<tr>';
-                $html=$html.'<td>'. $idCustomer[$i] .'</td>';
-                $html=$html.'<td>'. $customerName .'</td>';
-                $html=$html.'<td>'. $customerSuName .'</td>';
-                $html=$html.'<td>'. $orderID[$i] .'</td>';
-                $html=$html.'<td>'. $dateTime[$i] .'</td>';
-                $html=$html.'<td>'. $priority[$i] .'</td>';
-                $html=$html.'<td>'. $status[$i] .'</td>';
-                $html=$html.'<td>'. $employeeID[$i] .'</td>';
+                $html=$html.'<td>'. $idEmployee[$i] .'</td>';
+                $html=$html.'<td>'. $employeeName .'</td>';
+                $html=$html.'<td>'. $breakfastCount .'</td>';
+                $html=$html.'<td>'. $lunchCount .'</td>';
+                $html=$html.'<td>'. $dinnerCount .'</td>';
+                $html=$html.'<td>'. $breakfastMin .'</td>';
+                $html=$html.'<td>'. $breakfastMax .'</td>';
+                $html=$html.'<td>'. $lunchMin .'</td>';
+                $html=$html.'<td>'. $lunchMax .'</td>';
+                $html=$html.'<td>'. $dinnerMin .'</td>';
+                $html=$html.'<td>'. $dinnerMax .'</td>';
                 $html=$html.'</tr>';
                 $i++;
             }
