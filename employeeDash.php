@@ -93,7 +93,6 @@ elseif ($_SESSION['logedIn'] == true && $_SESSION['AccountType'] == "manager") {
                                     $fetch2 = $sth2->fetchAll();
 
                                     echo '<td><table border="0">';
-                                    //echo '<tr><th>Name</th><th>Quantity</th></tr>';
                                     $x=1;
                                     foreach ($fetch2 as $key2) {
                                         $name[$x] = $key2['name'];

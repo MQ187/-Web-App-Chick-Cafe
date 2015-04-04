@@ -35,7 +35,7 @@ for($i=0;$i<$max;$i++){
 
     //get details of the product to order (one by one)
 
-    $question = 'SELECT availability FROM Ingredients JOIN itemIngredients WHERE itemIngredients.idItem = :id';
+    $question = 'SELECT Ingredients.idIngredients as id, availability, quantity FROM Ingredients JOIN itemIngredients WHERE itemIngredients.idItem = :id';
     $sth = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
     $sth->execute(array(':id' => $product_id));
     $fetch = $sth->fetchAll();
@@ -72,7 +72,7 @@ for($i=0;$i<$max;$i++){
     $question = 'SELECT preperationTime,price FROM Item WHERE iditem = :id';
     $sth = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
     $sth->execute(array(':id' => $product_id));
-    $fetch = $sth->fetchAll();
+    $fetch2 = $sth->fetchAll();
 
     $x=1;
     foreach ($fetch as $key) {
@@ -159,24 +159,25 @@ for($i=0;$i<$max;$i++){
     $add->execute(array(':idOrder' => $idOrder, ':idItem' => $product_id, ':quantity' => $quantity));
     //create an orderitem for each item in the basket one by one
 
-    $navailability = $availability[$i] - $quantity;
+    foreach ($fetch as $key) {
+        $idIngredient = $key['idIngredient'];
+        $availability = $key['availability'];
+        $q = $key['quantity'];
+
+        $availability = $availability - ($quantity * $q);
+
+        $question3 = 'UPDATE Ingredients SET availability = :availability WHERE idIngredients = :id';
+        $sth3 = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+        $sth3->execute(array(':availability' => $availability, ':id' => $idIngredients));
+        //update the stock
+
+        $x++;
+    }
     //get the current stock of each item & change it.
-
-    /*
-
-
-
-
-    $question = 'UPDATE Ingredients JOIN itemIngredients ON Ingredients.idIngredients = itemIngredients.idIngredients
-                    SET Ingredients.availability = 786 WHERE itemIngredients.idItem = 1';
-    $sth = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-    $sth->execute(array(':availability' => $navailability));
-    //update the stock
-    */
 }
 
-//$_SESSION['basket'] = array();
-//header("Location:customerDash.php");
+$_SESSION['basket'] = array();
+header("Location:customerDash.php");
 
 
 

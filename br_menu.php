@@ -115,13 +115,51 @@ if ($time<$endTime && $time>$startTime){
                         </table>
                 </li>
 
-                <li><i>Breakfast Drinks</i>
+                <li><i>Breakfast Hot Drinks</i>
                     <table id="tfhover" class="tftable" border="1">
                         <tr>
                         <th>Title</th><th>Description</th><th>Price</th><th>Type</th><?php if($userType=='customer'  && $OFB == true){echo"<th>Add to Basket</th>";} ?>
                         </tr>
                         <?php 
                             $question="SELECT * FROM item WHERE idMenu=5";
+                             $sth = $db->prepare($question);
+                             $execute = $sth->execute();
+                             $fetch = $sth->fetchAll();
+
+                             $i=1;
+                             foreach ($fetch as $key) {
+                                
+                                $id[$i] = $key['iditem'];
+                                $pname[$i] = $key['name'];
+                                $des[$i] = $key['description'];
+                                $price[$i] = $key['price'];
+                                $type[$i] = $key['type'];
+                                
+                            echo '<tr>';
+                            echo '<td>'. $pname[$i] .'</td>';
+                            echo '<td>'. $des[$i] .'</td>';
+                            echo '<td> &pound;'. $price[$i] .'</td>';
+                            echo '<td>'. $type[$i] .'</td>';
+                            if($userType=='customer'  && $OFB == true){echo "<td><form action='addBasket.php' method='POST'>
+                                                            <input type='hidden' value=".$id[$x]." name='product_id' />
+                                                            <input type='hidden' value='lu_menu.php' name='returnto' />
+                                                            <input type=submit name=id value=Add />
+                                                            </form></td>";}
+                            echo '</tr>';
+
+                            $i++;
+                            }
+                        ?>
+                        </table>
+                </li>
+                <br>
+                <li><i>Lunch Hot Drinks</i>
+                    <table id="tfhover" class="tftable" border="1">
+                        <tr>
+                        <th>Title</th><th>Description</th><th>Price</th><th>Type</th><?php if($userType=='customer'  && $OFB == true){echo"<th>Add to Basket</th>";} ?>
+                        </tr>
+                        <?php 
+                            $question="SELECT * FROM item WHERE idMenu=8";
                              $sth = $db->prepare($question);
                              $execute = $sth->execute();
                              $fetch = $sth->fetchAll();

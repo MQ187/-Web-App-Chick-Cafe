@@ -30,7 +30,8 @@ $max=count($_SESSION['basket']); //check how many items are in the basket.
             <ul><li><i>My basket</i>
 		<?php 
 if ($max < 1){
-	echo "<center><h1>There is nothing in your basket! want to order?</h1><br><a href=index.php>Menu</a></center>";
+	echo "<center><h1>Your basket is empty, please refer to one of the menus above.</h1></center>";
+	die();
 }
 else{
 	?>
