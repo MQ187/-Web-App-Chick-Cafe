@@ -40,6 +40,9 @@
                         <option value="2">2. Lunch</option>
                         <option value="3">3. Dinner</option>
                         <option value="4">4. Drink</option>
+                        <option value="5">5. Breakfast Drink</option>
+                        <option value="6">6. Lunch Drink</option>
+                        <option value="7">7. Dinner Drink</option>
                     </select></td></td>';
             echo '<tr><td><p>Type:</p></td>
                     <td><select name="type">
@@ -51,6 +54,19 @@
                     </select></td></td>';
             echo '<tr><td><p>Name:</p></td><td><input type="text" name="name" required="required"/></td></tr>';
             echo '<tr><td><p>Description:</p></td><td><input type="text" name="des" required="required"/></td></tr>';
+
+            $question = "SELECT idIngredients,name FROM `ingredients`";
+            $sth = $db->prepare($question);
+            $execute = $sth->execute();
+            $fetch1 = $sth->fetchAll();
+
+            echo '<tr><td><p>Ingredients:</p></td>';
+            echo '<td><select name="ing[]" multiple="multiple">';
+                foreach($fetch1 as $key2){
+                    echo '<option value='.$key2['idIngredients'].'>'.$key2['name'].'</option>';
+                }
+            echo '</select></td></tr>';
+
             echo '<tr><td><p>Price:</p></td><td><input type="text" name="price" required="required"/></td></tr>'; 
             echo '<tr><td><p>Preperation Time:</p></td><td><input type="text" name="prepTime" placeholder="HH:MM:SS" required="required"/></td></tr>';
             echo '<tr><td><p>Daily Special:</p></td><td><input type="checkbox" name="isSpecial" value="Yes" required="required"/></td></tr>';
@@ -86,6 +102,17 @@
             $question = "INSERT INTO item(idMenu,type,name,description,price,preperationTime,dailySpecial) VALUES (:idmenu,:type,:name,:des,:price,:prepTime,:special)";
             $add = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
             $add->execute(array(':idmenu'=>$menuid,':type'=>$type,':name'=>$name,':des'=>$des,':price'=>$price,':prepTime'=>$prepTime,':special'=>'0'));
+
+            $id = $db->lastInsertId();
+            
+            if(isset($_POST['ing'])){
+                foreach($_POST['ing'] as $ingred){
+                    $q = "INSERT INTO itemingredients(idItem, idIngredients) VALUES ($id, $ingred)";
+                    $sth = $db->prepare($q);
+                    $sth->execute();
+                }
+            }
+            
             echo '<META HTTP-EQUIV="Refresh" Content="0; URL=items.php">'; 
             }
         }

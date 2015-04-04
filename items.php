@@ -161,6 +161,10 @@ $id = $_SESSION['id'];
 	                               }
                         	}
                             if(isset($_POST['Delete'])){
+                                $q = "DELETE FROM `itemingredients` WHERE iditem = '$_POST[itemid]'";
+                                $st = $db->prepare($q);
+                                $execute = $st->execute();
+
                                 $question = "DELETE FROM `item` WHERE iditem = '$_POST[itemid]'";
                                 $sth = $db->prepare($question);
                                 $execute = $sth->execute();

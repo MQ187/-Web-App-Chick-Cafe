@@ -62,6 +62,7 @@ require_once("db_config.php");
                     </select></td></td>';
             echo '<tr><td><p>Name:</p></td><td><input type="text" value='.$key['name'].' name="name" required="required"/></td></tr>';
             echo '<tr><td><p>Description:</p></td><td><input type="text" value='.$key['description'].' name="des" required="required"/></td></tr>';
+<<<<<<< HEAD
             
             $question = "SELECT idIngredients,name FROM `ingredients`";
             $sth = $db->prepare($question);
@@ -92,6 +93,8 @@ require_once("db_config.php");
             echo '<input type="submit" value="Remove">';
             echo '</td>';*/
 
+=======
+>>>>>>> origin/master
             echo '<tr><td><p>Price:</p></td><td><input type="text" name="price" value='.$key['price'].' required="required"/></td></tr>'; 
             echo '<tr><td><p>Preperation Time:</p></td><td><input type="text" value='.$key['preperationTime'].' name="prepTime" placeholder="HH:MM:SS" required="required"/></td></tr>';
             if ($key['dailySpecial'] == true){
