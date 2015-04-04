@@ -36,7 +36,11 @@
 	        <br>
 
 	        <?php
-        	require_once('nav/managerDash.php');
+        	if($_SESSION['owner']==1){
+                require_once("nav/ownerDash.php");
+            }else{
+                require_once("nav/managerDash.php");
+            }
         	?>
     	</header>
 		<div class="flat-form" style="align:center; margin-left:350px; margin-top:25px;">

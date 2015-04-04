@@ -19,8 +19,12 @@ elseif ($_SESSION['logedIn'] == true && $_SESSION['AccountType'] == "employee") 
         <a href="index.php"><img align="middle" id="logo" src="images/Logo.png"/></a>
         <br>
         <?php
-         require_once("nav/managerDash.php");
-         ?>
+            if($_SESSION['owner']==1){
+                require_once("nav/ownerDash.php");
+            }else{
+                require_once("nav/managerDash.php");
+            }
+        ?>
 
     </header>
     <body>
