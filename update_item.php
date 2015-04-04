@@ -58,43 +58,10 @@ require_once("db_config.php");
                         <option value="Starter">2. Starter</option>
                         <option value="Dessert">3. Dessert</option>
                         <option value="Cold Drink">4. Cold Drink</option>
-                        <option value="Hot Drink">4. Hot Drink</option>
+                        <option value="Hot Drink">5. Hot Drink</option>
                     </select></td></td>';
             echo '<tr><td><p>Name:</p></td><td><input type="text" value='.$key['name'].' name="name" required="required"/></td></tr>';
             echo '<tr><td><p>Description:</p></td><td><input type="text" value='.$key['description'].' name="des" required="required"/></td></tr>';
-<<<<<<< HEAD
-            
-            $question = "SELECT idIngredients,name FROM `ingredients`";
-            $sth = $db->prepare($question);
-            $execute = $sth->execute();
-            $fetch1 = $sth->fetchAll();
-
-            echo '<tr><td><p>Ingredients: </p></td>
-                    <td>
-                       <select name="select2[]" size="10" multiple="multiple" tabindex="4">';
-                            foreach($fetch1 as $key2){
-                                echo '<option value='.$key2['idIngredients'].'>'.$key2['name'].'</option>';
-                            }
-            echo '</select>';
-
-            /* WORKING ON THIS
-            $question2 = "SELECT idIngredients,name FROM ingredients";
-            $sth = $db->prepare($question2);
-            $execute = $sth->execute();
-            $fetch2 = $sth->fetchAll();
-
-            echo '<select name="select2[]" size="10" multiple="multiple" tabindex="4">';
-                    foreach($fetch2 as $key3){
-                        echo '<option value='.$key3['idIngredients'].'>'.$key3['name'].'</option>';
-                    }
-            echo '</select></td></tr>';
-            echo '<td>';
-            echo '<input type="submit" value="Add">';
-            echo '<input type="submit" value="Remove">';
-            echo '</td>';*/
-
-=======
->>>>>>> origin/master
             echo '<tr><td><p>Price:</p></td><td><input type="text" name="price" value='.$key['price'].' required="required"/></td></tr>'; 
             echo '<tr><td><p>Preperation Time:</p></td><td><input type="text" value='.$key['preperationTime'].' name="prepTime" placeholder="HH:MM:SS" required="required"/></td></tr>';
             if ($key['dailySpecial'] == true){

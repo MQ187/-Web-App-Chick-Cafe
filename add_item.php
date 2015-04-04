@@ -50,7 +50,7 @@
                         <option value="Starter">2. Starter</option>
                         <option value="Dessert">3. Dessert</option>
                         <option value="Cold Drink">4. Cold Drink</option>
-                        <option value="Hot Drink">4. Hot Drink</option>
+                        <option value="Hot Drink">5. Hot Drink</option>
                     </select></td></td>';
             echo '<tr><td><p>Name:</p></td><td><input type="text" name="name" required="required"/></td></tr>';
             echo '<tr><td><p>Description:</p></td><td><input type="text" name="des" required="required"/></td></tr>';
