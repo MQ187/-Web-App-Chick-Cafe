@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 04, 2015 at 10:46 PM
+-- Generation Time: Apr 04, 2015 at 11:01 PM
 -- Server version: 5.5.38
 -- PHP Version: 5.6.2
 
@@ -306,6 +306,7 @@ CREATE TABLE `order` (
 `idorder` int(11) NOT NULL,
   `idCustomer` int(11) NOT NULL,
   `idEmployee` int(11) DEFAULT NULL,
+  `orderType` varchar(10) NOT NULL,
   `orderTimeS` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `orderPriority` tinyint(1) NOT NULL DEFAULT '0',
   `orderStatus` varchar(45) NOT NULL DEFAULT 'Pending',
@@ -317,8 +318,8 @@ CREATE TABLE `order` (
 -- Dumping data for table `order`
 --
 
-INSERT INTO `order` (`idorder`, `idCustomer`, `idEmployee`, `orderTimeS`, `orderPriority`, `orderStatus`, `etc`, `timeCompleted`) VALUES
-(22, 12, 2, '2015-04-04 18:50:31', 0, 'Completed', '00:00:00', '0000-00-00 00:00:00');
+INSERT INTO `order` (`idorder`, `idCustomer`, `idEmployee`, `orderType`, `orderTimeS`, `orderPriority`, `orderStatus`, `etc`, `timeCompleted`) VALUES
+(22, 12, 2, 'Breakfast', '2015-04-04 18:50:31', 0, 'Completed', '00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
