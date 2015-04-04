@@ -3,7 +3,10 @@ session_start();
 require_once("db_config.php");
 // Connect to the Database and Select the ccdb database.
 require_once("messages.php");
-//adds the check for all possible errors as well as the warnings.
+//adds the check for all warnings.
+$dir = 'DBbackup/';
+$files = scandir($dir);
+$max = count($files);
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,7 +29,32 @@ require_once("messages.php");
         <table id="tfhover" class="tftable" border="1" width="100%">
             <tr>
                 <td>
-                Database Backup : <form action='db_backup.php' method=POST><input type='submit' name='submit'/></form></div>
+                <h2>Database Backup : </h2><form action='db_backup.php' method=POST><input type='submit' name='submit' value='Backup now'/></form></div>
+                </td>
+            </tr>
+            <tr>
+                <td><table id="tfhover" class="tftable" border="1" width="100%"><tr><th>Name</th><th>Date</th><th>Restore</th></tr>
+                    <?php
+                    
+                        $i = 2;
+                        while ($i<$max){
+                            $file = strval($files[$i]);
+                            $date = explode("-", $files[$i]);
+                            echo '<tr><td>';
+                            echo $file;
+                            echo '</td><td>';
+                            echo date('d.m.Y h:i:s', $date[2]);
+                            echo '</td><td>';
+                            echo "<form action='db_restore.php' method=POST>
+                                <input type='hidden' name='filename' value=" . $file . "/>
+                                <input type='submit' name='submit' value='Restore now'/></form>";
+                            echo '</td></tr>';
+                            $i++;
+                        }
+                        if ($max = 0){
+                            echo '<tr><td></td><td></td><td></td></tr>';
+                        }
+                    ?>
                 </td>
             </tr>
         </table>

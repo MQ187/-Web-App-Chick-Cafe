@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 04, 2015 at 02:09 AM
+-- Generation Time: Apr 03, 2015 at 03:28 AM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.9
 
@@ -65,7 +65,6 @@ CREATE TABLE IF NOT EXISTS `customer` (
   `email` varchar(45) NOT NULL,
   `phone` varchar(12) NOT NULL,
   `password` varchar(45) NOT NULL,
-  `isLoggedIn` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`idCustomer`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
@@ -73,14 +72,14 @@ CREATE TABLE IF NOT EXISTS `customer` (
 -- Dumping data for table `customer`
 --
 
-INSERT INTO `customer` (`idCustomer`, `name`, `surname`, `email`, `phone`, `password`, `isLoggedIn`) VALUES
-(3, 'ajadj', 'jajdaj', 'jajdajaj', 'jg', '63982e54a7aeb0d89910475ba6dbd3ca6dd4e5a1', 0),
-(4, 'Daniel', 'Muller', 'daniel', '7757766', '1f4129b2b73b8ce2b048846c93da6402608f12e6', 0),
-(5, 'naresh', 'chamkani', 'nausnu@hotmail.com', '4455667788', '0f869632dedf073cb0587e8dfa43ec94c872abfc', 0),
-(8, 'test', 'tester', 'test@gmail.com', '08977654322', 'cc03e747a6afbbcbf8be7668acfebee5', 0),
-(9, 'jim', 'bob', 'j@gmail.com', '123', 'adcd7048512e64b48da55b027577886ee5a36350', 0),
-(10, 'Gaetan', 'Mougel', 'gaetan@familymougel.eu', '07837324564', '63982e54a7aeb0d89910475ba6dbd3ca6dd4e5a1', 0),
-(11, 'f', 'f', 'f@a', 'f', 'ec78ddda0cbcc3ba8f0e79ffc29e242cfccae579', 0);
+INSERT INTO `customer` (`idCustomer`, `name`, `surname`, `email`, `phone`, `password`) VALUES
+(3, 'ajadj', 'jajdaj', 'jajdajaj', 'jg', '63982e54a7aeb0d89910475ba6dbd3ca6dd4e5a1'),
+(4, 'Daniel', 'Muller', 'daniel', '7757766', '1f4129b2b73b8ce2b048846c93da6402608f12e6'),
+(5, 'naresh', 'chamkani', 'nausnu@hotmail.com', '4455667788', '0f869632dedf073cb0587e8dfa43ec94c872abfc'),
+(8, 'test', 'tester', 'test@gmail.com', '08977654322', 'cc03e747a6afbbcbf8be7668acfebee5'),
+(9, 'jim', 'bob', 'j@gmail.com', '123', 'adcd7048512e64b48da55b027577886ee5a36350'),
+(10, 'Gaetan', 'Mougel', 'gaetan@familymougel.eu', '07837324564', '63982e54a7aeb0d89910475ba6dbd3ca6dd4e5a1'),
+(11, 'f', 'f', 'f@a', 'f', 'ec78ddda0cbcc3ba8f0e79ffc29e242cfccae579');
 
 -- --------------------------------------------------------
 
@@ -133,7 +132,7 @@ CREATE TABLE IF NOT EXISTS `employee` (
 --
 
 INSERT INTO `employee` (`idemployee`, `name`, `password`, `email`, `active`) VALUES
-(1, 'jack', '63982e54a7aeb0d89910475ba6dbd3ca6dd4e5a1', 'sparrow', 0),
+(1, 'jack', '63982e54a7aeb0d89910475ba6dbd3ca6dd4e5a1', 'sparrow', 1),
 (2, 'Jackson', '63982e54a7aeb0d89910475ba6dbd3ca6dd4e5a1', 'Jack@sparrow.com', 1);
 
 -- --------------------------------------------------------
@@ -171,8 +170,8 @@ CREATE TABLE IF NOT EXISTS `ingredients` (
 --
 
 INSERT INTO `ingredients` (`idIngredients`, `name`, `availability`, `price`) VALUES
-(1, 'Tomatoes', 786, '0.33'),
-(2, 'letuce', 786, '0.33'),
+(1, 'Tomatoes', 150, '0.33'),
+(2, 'letuce', 100, '0.33'),
 (3, 'Cheddar', 20, '0.40');
 
 -- --------------------------------------------------------
@@ -199,7 +198,7 @@ CREATE TABLE IF NOT EXISTS `item` (
 --
 
 INSERT INTO `item` (`iditem`, `idMenu`, `type`, `name`, `description`, `price`, `preperationTime`, `dailySpecial`) VALUES
-(1, 1, 'Meal', 'Full', 'TESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTEST', '22.00', '00:10:00', 1),
+(1, 1, 'Meal', 'Full English Breakfast', 'TESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTEST', '28.00', '00:10:00', 1),
 (2, 1, 'Meal', 'Eggs Benedict', 'English muffins with English Ham', '10.00', '00:05:00', 0),
 (9, 2, 'Meal', 'Lunch Food', 'TESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTEST', '5.00', '00:05:00', 0),
 (10, 1, 'Meal', 'Breakfast Test', 'TESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTEST', '99.00', '00:05:00', 0),
@@ -207,10 +206,10 @@ INSERT INTO `item` (`iditem`, `idMenu`, `type`, `name`, `description`, `price`, 
 (12, 4, 'Drink', 'Drink Test', 'Descrip for drink test', '12.00', '00:05:00', 0),
 (13, 2, 'Meal', 'LUNCHCH Test', 'Descrip foewfr drink test', '12.00', '00:05:00', 0),
 (14, 2, 'Meal', '1 more Test', 'Descrip foewfr drink test', '12.00', '00:05:00', 0),
-(15, 1, 'Meal', 'Breakfast', 'Descrip', '99.00', '00:05:00', 1),
+(15, 1, 'Meal', 'Breakfast Test', 'Descrip for break test', '99.00', '00:05:00', 0),
 (16, 1, 'Meal', 'Full English Breakfast', 'The full package', '28.00', '00:10:00', 0),
-(17, 1, 'Meal', 'Full', 'The', '28.00', '00:10:00', 0),
-(18, 1, 'Meal', 'Full', 'The', '28.00', '00:10:00', 1),
+(17, 1, 'Meal', 'Full English Breakfast', 'The full package', '28.00', '00:10:00', 0),
+(18, 1, 'Meal', 'Full English Breakfast', 'The full package', '28.00', '00:10:00', 0),
 (19, 1, 'Meal', 'Full English Breakfast', 'The full package', '28.00', '00:10:00', 0),
 (20, 2, 'Meal', '1 more Test', 'Descrip foewfr drink test', '12.00', '00:05:00', 0),
 (21, 2, 'Meal', '1 more Test', 'Descrip foewfr drink test', '12.00', '00:05:00', 0),
@@ -331,26 +330,24 @@ CREATE TABLE IF NOT EXISTS `order` (
   `idorder` int(11) NOT NULL AUTO_INCREMENT,
   `idCustomer` int(11) NOT NULL,
   `idEmployee` int(11) DEFAULT NULL,
-  `orderTimeS` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `orderDate` date NOT NULL,
+  `orderTime` time NOT NULL,
   `orderPriority` tinyint(1) NOT NULL DEFAULT '0',
   `orderStatus` varchar(45) NOT NULL DEFAULT 'Pending',
   `etc` time NOT NULL,
-  `timeCompleted` timestamp NULL DEFAULT NULL,
+  `timeCompleted` time NOT NULL,
   PRIMARY KEY (`idorder`),
   KEY `idCustomer_idx` (`idCustomer`),
   KEY `idEmployee_idx` (`idEmployee`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `order`
 --
 
-INSERT INTO `order` (`idorder`, `idCustomer`, `idEmployee`, `orderTimeS`, `orderPriority`, `orderStatus`, `etc`, `timeCompleted`) VALUES
-(1, 10, 2, '2015-03-15 00:00:00', 1, 'Preparing', '00:00:00', '2015-04-02 23:10:00'),
-(2, 9, 2, '2015-03-17 00:00:00', 0, 'Completed', '00:00:15', '2015-04-02 23:00:02'),
-(4, 3, NULL, '2015-03-15 00:00:00', 1, 'Preparing', '00:00:00', NULL),
-(5, 3, NULL, '2015-04-03 17:37:04', 1, 'Pending', '00:00:00', NULL),
-(6, 10, NULL, '2015-04-03 17:43:32', 1, 'Pending', '00:00:00', NULL),
+INSERT INTO `order` (`idorder`, `idCustomer`, `idEmployee`, `orderDate`, `orderTime`, `orderPriority`, `orderStatus`, `etc`, `timeCompleted`) VALUES
+(1, 10, 2, '2015-03-15', '00:15:00', 1, 'Completed', '00:00:00', '00:10:00'),
+(2, 9, 2, '2015-03-17', '12:00:00', 0, 'Completed', '00:00:15', '00:00:02');
 
 -- --------------------------------------------------------
 
@@ -366,15 +363,14 @@ CREATE TABLE IF NOT EXISTS `orderitem` (
   PRIMARY KEY (`idorderItem`),
   KEY `idOrder_idx` (`idOrder`),
   KEY `idItem_idx` (`idItem`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `orderitem`
 --
 
 INSERT INTO `orderitem` (`idorderItem`, `idOrder`, `idItem`, `quantity`) VALUES
-(1, 1, 1, 2),
-(2, 18, 1, 3);
+(1, 1, 1, 2);
 
 -- --------------------------------------------------------
 
