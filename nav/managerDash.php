@@ -8,6 +8,7 @@
         <li><a href="#">VIP</a></li>
         <li><a href="stock.php">Stock</a></li>
         <li><a href="items.php">Items</a></li>
+        <li><a href="db_dash.php">Database Management</a></li>
         <li><a href="myAccount.php">My Account</a></li>
         <li><a href="logoff.php">Logout</a></li>
     </ul>
