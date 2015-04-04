@@ -168,6 +168,7 @@ $id = $_SESSION['id'];
                                 $question = "DELETE FROM `item` WHERE iditem = '$_POST[itemid]'";
                                 $sth = $db->prepare($question);
                                 $execute = $sth->execute();
+                                echo '<META HTTP-EQUIV="Refresh" Content="0; URL=items.php">';
                             }
                         ?>
                         </table>
