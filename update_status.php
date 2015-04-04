@@ -13,11 +13,13 @@
 	}
 
 	if(isset($_POST['ready'])){
-		$endTime = time();
+		date_default_timezone_set('UTC');
+		// set the default timezone to use.
+		$end = time();
 
-        $question2="UPDATE `order` SET orderStatus='Completed', timeCompleted='$end' WHERE idorder='$_POST[ready]'";
-        $sth = $db->prepare($question2);
-        $sth->execute();
+        $question2="UPDATE `order` SET orderStatus='Completed', timeCompleted=FROM_UNIXTIME('$end') WHERE idorder='$_POST[ready]'";
+        $sth2 = $db->prepare($question2);
+        $sth2->execute();
     }
 
 	header('Location: employeeDash.php');
