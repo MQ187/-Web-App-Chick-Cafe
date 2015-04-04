@@ -13,9 +13,7 @@
 	}
 
 	if(isset($_POST['ready'])){
-		$endTime = new DateTime();
-		$i = $_SESSION['startTime']->diff($endTime);
-		$end = $i->format('%h:%i:%s');
+		$endTime = time();
 
         $question2="UPDATE `order` SET orderStatus='Completed', timeCompleted='$end' WHERE idorder='$_POST[ready]'";
         $sth = $db->prepare($question2);
