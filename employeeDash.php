@@ -79,7 +79,7 @@ elseif ($_SESSION['logedIn'] == true && $_SESSION['AccountType'] == "manager") {
                                     echo '</tr>';
                                     $i++;
                                 }
-                            }else if($_POST['isPri']=='2'){
+                            }else{
                                 $question="SELECT * FROM `order` WHERE orderStatus = :status ORDER BY orderStatus ASC";
                                 $sth = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
                                 $sth->execute(array(':status' => "Pending"));
