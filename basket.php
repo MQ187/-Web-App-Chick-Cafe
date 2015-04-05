@@ -87,11 +87,31 @@ for($i=0;$i<$max;$i++){
 	}
 
 echo '<tr><td colspan="6"></td><td><b>Total:</b></td><td> &pound;' . $total . '</td></tr>';
-echo "<tr><td colspan='9'><center><form action=new_order.php method=POST>
-				<input type='checkbox' value='Priority' name='priority'/>Priority (+5% fee)
-			    <input type='hidden' value='order.php' name='returnto'/>
-			    <input type=submit name=order value= 'Confirm Order' />
-			    </form></center></td></tr>";
+if (isset($_POST['orderOK'])){
+    $priority = $_POST['priority'];
+    if ($priority == true) { $total = $total * 1.05; }
+    
+    echo "<tr><td colspan='9'><center><form action=pay.php id='pay' method=POST>
+          <input type='checkbox' value=". $priority ." name='priority'/>
+          <input type='text' value=".$total." name='total' />
+          <input type=hidden name=orderOK value='ok' />
+          <input type=submit name=order value= 'Pay Now' />
+          </form></center></td></tr>";  
+
+          ?>
+          <script type="text/javascript">
+            document.getElementById("pay").submit();
+          </script>
+          <?php
+}
+else{
+  echo "<tr><td colspan='9'><center><form action=order_check.php id='check' method=POST>
+        <input type='checkbox' value='Priority' name='priority'/>Priority (+5% fee)
+
+        <input type=submit name=order value= 'Pay Now' />
+        </form></center></td></tr>";  
+}
+
 echo '</table>';
 }
 ?>
@@ -99,48 +119,7 @@ echo '</table>';
 </ul>
 </nav>
     </body>
-<script src="C:/Server-Xampp/htdocs/jquery.js"></script>
-<script>
-
-	$(document).ready(function()){
-
-
-
-	}
-
-
-function Pay(boolean priority, ) {
-  if (str=="") {
-    document.getElementById("txtHint").innerHTML="";
-    return;
-  } 
-  if (window.XMLHttpRequest) {
-    // code for IE7+, Firefox, Chrome, Opera, Safari
-    xmlhttp=new XMLHttpRequest();
-  } else { // code for IE6, IE5
-    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  xmlhttp.onreadystatechange=function() {
-    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-      document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
-    }
-  }
-  xmlhttp.open("GET","getuser.php?q="+str,true);
-  xmlhttp.send();
-}
-var salary = $("#salary").val();
-    $.post('insert_salary.php', {salary: salary}, function(data) 
-    {
-        $("#current-salary").html(data); 
-    });
-</script>
-
-
-
-
-
-
-    
+   
     <footer>
         <strong>Chick Cafe</strong> is a very <strong>popular</strong> cafeteria in the center of <strong>Islington, London</strong> that offers made to order <strong>food</strong> and <strong>drinks.</strong>
     </footer>

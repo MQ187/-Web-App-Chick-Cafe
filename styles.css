@@ -342,3 +342,8 @@ form input[type=password] {
   margin: 2px;
   width: 60px;
 }
+
+.pay {
+  border-radius: 25px;
+  background-color: #FFFFFF;
+}

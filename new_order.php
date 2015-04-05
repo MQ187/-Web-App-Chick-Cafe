@@ -5,6 +5,7 @@ require_once("db_config.php");
 date_default_timezone_set('UTC');
 // set the default timezone to use.
 
+
 if (!isset($_SESSION['basket'])) {
     $_SESSION['basket'] = array();
     header("Location:basket.php");
@@ -18,7 +19,7 @@ if (isset($_POST['priority'])){
 else{
     $priority = 0;
 }
-$total = 0;
+$idPayment = $_POST['idPayment'];
 $th = 0;
 $tm = 0;
 $ts = 0;
@@ -29,50 +30,11 @@ $etc = 0;
 $missing = 0;
 //set basic parameters.
 
-for($i=0;$i<$max;$i++){
-    $product_id = $_SESSION['basket'][$i]['product_id'];
-    $quantity = $_SESSION['basket'][$i]['quantity'];
-
-    //get details of the product to order (one by one)
-
-    $question = 'SELECT Ingredients.idIngredients as id, availability, quantity FROM Ingredients JOIN itemIngredients WHERE itemIngredients.idItem = :id';
-    $sth = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-    $sth->execute(array(':id' => $product_id));
-    $fetch = $sth->fetchAll();
-
-    $x=1;
-    foreach ($fetch as $key) {
-        $availability[$x] = $key['availability'];
-        if ($availability[$x]<$quantity){
-            $missing++;
-            break(2);
-        }
-        $x++;
-    }
-    //checks if the stock is sufficient to place an order
-
-    if ($missing > 0){
-        $_SESSION['message'] = "6"; //Product Unavailable.
-        echo "<form action=removeBasket.php method=POST id='DELETE'>
-                <input type='hidden' value='". $product_id ."' name='product_id' />
-                <input type='hidden' value='basket.php' name='returnto' />
-                <input type='hidden' value='". $availability[$x] ."' name='quantity'/>
-                <input type=submit name=DELETE '/>
-                </form>";
-        ?>
-        <script type="text/javascript">
-            document.getElementById("DELETE").submit();
-        //document.getElementById("DELETE").submit(); // automatically submits the form above.
-        </script>
-        <?php
-        die();
-    }
-    //if not, go back to the basket, remove and declare one as missing stock.
 
     $question = 'SELECT preperationTime,price FROM Item WHERE iditem = :id';
     $sth = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
     $sth->execute(array(':id' => $product_id));
-    $fetch2 = $sth->fetchAll();
+    $fetch = $sth->fetchAll();
 
     $x=1;
     foreach ($fetch as $key) {
@@ -98,6 +60,8 @@ for($i=0;$i<$max;$i++){
         $x++;
     }
 }
+
+if ($priority == 1) { $total = $total * 1.05; }
 
 while ($ts > 60){
     $tm++;
@@ -143,12 +107,11 @@ var_dump($priority);
 echo "<br>";
 var_dump($etc);
 
-//we've checked that the item is available, now we can create the order.
-
 $question="INSERT INTO `order` (`idCustomer`, `orderPriority`, `etc`) VALUES(:idCustomer,:orderPriority,:etc)";
 $add = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 $add->execute(array(':idCustomer' => $_SESSION['id'], ':orderPriority' => $priority, ':etc' => $etc));
 //this will create a new order.
+$idorder = mysql_insert_id();
 
 for($i=0;$i<$max;$i++){
     $product_id = $_SESSION['basket'][$i]['product_id'];
@@ -175,6 +138,15 @@ for($i=0;$i<$max;$i++){
     }
     //get the current stock of each item & change it.
 }
+
+$question3 = 'UPDATE payment SET idorder = :idorder WHERE idPayment = :idPayment';
+        $sth3 = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+        $sth3->execute(array(':idorder' => $idorder, ':idPayment' => $idPayment));
+        //add the order id to the payment previously created.
+
+
+
+
 
 $_SESSION['basket'] = array();
 header("Location:customerDash.php");
