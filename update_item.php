@@ -14,19 +14,16 @@ require_once("db_config.php");
     <header>
          <a href="index.php"><img align="middle" id="logo" src="images/Logo.png"/></a>
          <br>
-         <div class="nav">
-            <ul>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="managerDash.php">Current Orders</a></li>
-                <li><a href="#">Reports</a></li>
-                <li><a href="#">Employee Accounts</a></li>
-                <li><a href="#">Refund</a></li>
-                <li><a href="#">VIP</a></li>
-                <li><a href="stock.php">Stock</a></li>
-                <li><a href="myAccount.php">My Account</a></li>
-                 <li><a href="logoff.php">Logout</a></li>
-            </ul>
-        </div>
+         <?php
+         Switch($userType){
+            case "manager":
+                require_once('nav/managerDash.php');
+                break;
+            case "employee":
+                require_once('nav/employeeDash.php');
+                break;
+        }
+        ?>
     </header>
     
     <div id='account'>
