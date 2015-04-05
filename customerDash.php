@@ -27,8 +27,10 @@
                         <?php 
                             require_once("db_config.php");
                             session_start();
-                            
-                            $question="SELECT * FROM `order` WHERE idCustomer= :id";
+
+                            $time = $myDate = date("Y-m-d h:i:s", strtotime( date( "Y-m-d", strtotime( date("Y-m-d") ) ) . "-1 month" ) );
+
+                            $question="SELECT * FROM `order` WHERE idCustomer= :id AND orderTimeS BETWEEN '".$time."' AND NOW() ";
                             $sth = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
                             $sth->execute(array(':id' => $_SESSION['id']));
                             $fetch = $sth->fetchAll();
