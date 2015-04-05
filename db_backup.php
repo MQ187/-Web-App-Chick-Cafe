@@ -1,51 +1,27 @@
 <?php
-/* backup the db OR just a table */
-//function backup_tables($host,$user,$pass,$name,$tables = '*')
-//{
-session_start();
+//ENTER THE RELEVANT INFO BELOW
+$mysqlDatabaseName ='ccdb';
+$mysqlUserName ='root';
+$mysqlPassword ='root';
+$mysqlHostName ='localhost';
+$time = time();
+$mysqlExportPath ='C:\Server-Xampp\htdocs\DBbackup\ccdb-backup-' . $time . '.sql';
 
-require_once("db_config.php");
-
-$tables = array();
-$result = mysql_query('SHOW TABLES');
-while($row = mysql_fetch_row($result))
-{
-$tables[] = $row[0];
+//DO NOT EDIT BELOW THIS LINE
+//Export the database and output the status to the page
+$command='mysqldump -u' .$mysqlUserName .' -p' .$mysqlPassword .' ' .$mysqlDatabaseName .' > "' .$mysqlExportPath. '"';
+exec($command,$output=array(),$worked);
+switch($worked){
+case 0:
+echo 'Database <b>' .$mysqlDatabaseName .'</b> successfully exported to <b>~/' .$mysqlExportPath .'</b>';
+break;
+case 1:
+echo 'There was a warning during the export of <b>' .$mysqlDatabaseName .'</b> to <b>~/' .$mysqlExportPath. '</b>';
+break;
+case 2:
+echo 'There was an error during export. Please check your values:<br/><br/><table><tr><td>MySQL Database Name:</td><td><b>' .$mysqlDatabaseName .'</b></td></tr><tr><td>MySQL User Name:</td><td><b>' .$mysqlUserName .'</b></td></tr><tr><td>MySQL Password:</td><td><b>NOTSHOWN</b></td></tr><tr><td>MySQL Host Name:</td><td><b>' .$mysqlHostName .'</b></td></tr></table>';
+break;
 }
-//get the name of each table
+//header("Location: db_dash.php");
 
-
-foreach($tables as $table)
-{
-	$result = mysql_query('SELECT * FROM '.$table);
-	$num_fields = mysql_num_fields($result);
-	
-	$return.= 'DROP TABLE '.$table.';';
-	$row2 = mysql_fetch_row(mysql_query('SHOW CREATE TABLE '.$table));
-	$return.= "\n\n".$row2[1].";\n\n";
-	
-	for ($i = 0; $i < $num_fields; $i++) 
-	{
-		while($row = mysql_fetch_row($result))
-		{
-			$return.= 'INSERT INTO '.$table.' VALUES(';
-			for($j=0; $j<$num_fields; $j++) 
-			{
-				$row[$j] = addslashes($row[$j]);
-				$row[$j] = ereg_replace("\n","\\n",$row[$j]);
-				if (isset($row[$j])) { $return.= '"'.$row[$j].'"' ; } else { $return.= '""'; }
-				if ($j<($num_fields-1)) { $return.= ','; }
-			}
-			$return.= ");\n";
-		}
-	}
-	$return.="\n\n\n";
-}
-//get each table one by one.
-
-
-$handle = fopen('DBbackup/db-backup-'.time().'-.sql','w+');
-fwrite($handle,$return);
-fclose($handle);
-//save file
 ?>

@@ -46,7 +46,7 @@ $max = count($files);
                             echo date('d.m.Y h:i:s', $date[2]);
                             echo '</td><td>';
                             echo "<form action='db_restore.php' method=POST>
-                                <input type='hidden' name='filename' value=" . $file . "/>
+                                <input type='hidden' name='filename' value=" . $date[2] . "/>
                                 <input type='submit' name='submit' value='Restore now'/></form>";
                             echo '</td></tr>';
                             $i++;

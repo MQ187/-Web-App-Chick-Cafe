@@ -2,7 +2,20 @@
 require_once("db_config.php");
 // Connect to the Database and Select the ccdb database.
 
-$filename = $POST_['filename'];
+$time = $POST_['time'];
+$table_name = "employee";
+$backup_file  = "C:/SERVER-Xampp/htdocs/DBbackup/db-backup-" . $time . ".sql";
+$sql = "LOAD DATA INFILE '$backup_file' INTO TABLE INFORMATION_SCHEMA.COLUMNS";
+
+mysql_select_db('test_db');
+$retval = mysql_query( $sql, $db);
+if(! $retval )
+{
+  die('Could not load data : ' . mysql_error());
+}
+echo "Loaded  data successfully\n";
+
+/*
  
 $templine = '';
 $lines = file($filename);
@@ -21,5 +34,6 @@ foreach ($lines as $line)
     }
     // If it has a semicolon at the end, it's the end of the query
 }
+*/
  
 ?>
