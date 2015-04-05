@@ -71,9 +71,6 @@ elseif ($_SESSION['logedIn'] == true && $_SESSION['AccountType'] == "employee") 
                                 echo '</tr>';
                                 $i++;
                             }
-                            if (count($fetch) == 0){
-                                echo '<td>Nothing to display</td><td></td><td></td><td></td><td></td>';
-                            }
 
                         ?>
                         </table>

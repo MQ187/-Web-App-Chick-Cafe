@@ -108,9 +108,6 @@ $id = $_SESSION['id'];
 	                            echo '</tr>';
 	                            $i++;
 	                            }
-                                if (count($fetch) == 0){
-                                  echo '<td>Nothing to display</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>';
-                                }
 
                         	}else{
 	                            // Connect to the Database and Select the ccdb database.
@@ -162,9 +159,6 @@ $id = $_SESSION['id'];
 	                                   echo '</tr>';
 	                                    $i++;
 	                               }
-                                    if (count($fetch) == 0){
-                                        echo '<td>Nothing to display</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>';
-                                    }
                         	}
                             if(isset($_POST['Delete'])){
                                 $q = "DELETE FROM `itemingredients` WHERE iditem = '$_POST[itemid]'";

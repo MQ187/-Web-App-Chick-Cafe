@@ -63,9 +63,6 @@
                                 echo '</tr>';
                                 $i++;
                             }
-                            if (count($fetch) == 0){
-                                echo '<td>No orders to display</td><td></td><td></td><td></td><td></td>';
-                            }
                         ?>
                         </table>
                 </li>  

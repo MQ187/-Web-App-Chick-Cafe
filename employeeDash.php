@@ -24,7 +24,15 @@ elseif ($_SESSION['logedIn'] == true && $_SESSION['AccountType'] == "manager") {
     </header>
         <nav>
             <ul>
-                <li><i>Order's Pending</i>
+                <li><i>Order's Pending</i> 
+                    <form action="employeeDash.php" method="POST">
+                        <select name='isPri' onchange='this.form.submit()'>
+                            <option>Sort By...</option>
+                            <option value="1">Priority</option>
+                            <option value="2">Time</option>
+                        </select>
+                        <noscript><input type="submit" value="Submit"></noscript>
+                    </form>
                         <table id="tfhover" class="tftable" border="1">
                         <tr>
                         <th>Order ID</th><th>Details</th><th>Order Date/Time</th><th>Order Priority</th><th>Order Status</th><th>Select Order</th>
@@ -32,49 +40,85 @@ elseif ($_SESSION['logedIn'] == true && $_SESSION['AccountType'] == "manager") {
                         <?php
                         	require_once("db_config.php");
                             // Connect to the Database and Select the ccdb database.
+                            if($_POST['isPri']=='1'){
+                                $question="SELECT * FROM `order` WHERE orderStatus = :status ORDER BY orderPriority DESC;";
+                                $sth = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+                                $sth->execute(array(':status' => "Pending"));
+                                $fetch = $sth->fetchAll();
 
-                            $question="SELECT * FROM `order` WHERE orderStatus = :status";
-                            $sth = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-                            $sth->execute(array(':status' => "Pending"));
-                            $fetch = $sth->fetchAll();
+
+                                $i=1;
+                                foreach ($fetch as $key) {
+                                    $idorder[$i] = $key['idorder'];
+                                    $dateTime[$i] = $key['orderTimeS'];
+                                    $priority[$i] = $key['orderPriority'];
+                                    $status[$i] = $key['orderStatus'];
+                                    echo '<tr>';
+                                    echo '<td>'. $idorder[$i] .'</td>';
+                                    $question2="SELECT quantity,name FROM orderItem JOIN item WHERE orderItem.idorder = :id AND orderItem.idItem = item.iditem";
+                                        $sth2 = $db->prepare($question2, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+                                        $sth2->execute(array(':id' => $idorder[$i]));
+                                        $fetch2 = $sth2->fetchAll();
+
+                                        echo '<td><table border="0">';
+                                        $x=1;
+                                        foreach ($fetch2 as $key2) {
+                                            $name[$x] = $key2['name'];
+                                            $quantity[$x] = $key2['quantity'];
+                                            echo '<tr><td>'.$name[$x].'</td><td> x </td><td>'.$quantity[$x].'</td></tr>';
+                                            $x++;
+                                        }
+                                        echo '</table></td>';
+                                    echo '<td>'. $dateTime[$i] .'</td>';
+                                    echo '<td>'. $priority[$i] .'</td>';
+                                    echo '<td>'. $status[$i] .'</td>';
+                                    echo "<td><form action=update_status.php method=\"POST\">"
+                                       . "<input type=\"submit\" value=\"Prepare\" />"
+                                       . "<input type=\"hidden\" name=\"prepare\" value=\"$idorder[$i]\" />"
+                                       . "</form></td>";
+                                    echo '</tr>';
+                                    $i++;
+                                }
+                            }else{
+                                $question="SELECT * FROM `order` WHERE orderStatus = :status ORDER BY orderStatus ASC";
+                                $sth = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+                                $sth->execute(array(':status' => "Pending"));
+                                $fetch = $sth->fetchAll();
 
 
-                            $i=1;
-                            foreach ($fetch as $key) {
-                            	$idorder[$i] = $key['idorder'];
-                                $dateTime[$i] = $key['orderTimeS'];
-                                $priority[$i] = $key['orderPriority'];
-                                $status[$i] = $key['orderStatus'];
-                            	echo '<tr>';
-                                echo '<td>'. $idorder[$i] .'</td>';
-                                $question2="SELECT quantity,name FROM orderItem JOIN item WHERE orderItem.idorder = :id AND orderItem.idItem = item.iditem";
-                                    $sth2 = $db->prepare($question2, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-                                    $sth2->execute(array(':id' => $idorder[$i]));
-                                    $fetch2 = $sth2->fetchAll();
+                                $i=1;
+                                foreach ($fetch as $key) {
+                                	$idorder[$i] = $key['idorder'];
+                                    $dateTime[$i] = $key['orderTimeS'];
+                                    $priority[$i] = $key['orderPriority'];
+                                    $status[$i] = $key['orderStatus'];
+                                	echo '<tr>';
+                                    echo '<td>'. $idorder[$i] .'</td>';
+                                    $question2="SELECT quantity,name FROM orderItem JOIN item WHERE orderItem.idorder = :id AND orderItem.idItem = item.iditem";
+                                        $sth2 = $db->prepare($question2, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+                                        $sth2->execute(array(':id' => $idorder[$i]));
+                                        $fetch2 = $sth2->fetchAll();
 
-                                    echo '<td><table border="0">';
-                                    $x=1;
-                                    foreach ($fetch2 as $key2) {
-                                        $name[$x] = $key2['name'];
-                                        $quantity[$x] = $key2['quantity'];
-                                        echo '<tr><td>'.$name[$x].'</td><td> x </td><td>'.$quantity[$x].'</td></tr>';
-                                        $x++;
-                                    }
-                                    echo '</table></td>';
-                                echo '<td>'. $dateTime[$i] .'</td>';
-                                echo '<td>'. $priority[$i] .'</td>';
-                                echo '<td>'. $status[$i] .'</td>';
-                                echo "<td><form action=update_status.php method=\"POST\">"
-                                   . "<input type=\"submit\" value=\"Prepare\" />"
-                                   . "<input type=\"hidden\" name=\"prepare\" value=\"$idorder[$i]\" />"
-                                   . "</form></td>";
-                                echo '</tr>';
-                            	$i++;
+                                        echo '<td><table border="0">';
+                                        $x=1;
+                                        foreach ($fetch2 as $key2) {
+                                            $name[$x] = $key2['name'];
+                                            $quantity[$x] = $key2['quantity'];
+                                            echo '<tr><td>'.$name[$x].'</td><td> x </td><td>'.$quantity[$x].'</td></tr>';
+                                            $x++;
+                                        }
+                                        echo '</table></td>';
+                                    echo '<td>'. $dateTime[$i] .'</td>';
+                                    echo '<td>'. $priority[$i] .'</td>';
+                                    echo '<td>'. $status[$i] .'</td>';
+                                    echo "<td><form action=update_status.php method=\"POST\">"
+                                       . "<input type=\"submit\" value=\"Prepare\" />"
+                                       . "<input type=\"hidden\" name=\"prepare\" value=\"$idorder[$i]\" />"
+                                       . "</form></td>";
+                                    echo '</tr>';
+                                	$i++;
+                                }
                             }
-                            if (count($fetch) == 0){
-                                echo '<td>Nothing to display</td><td></td><td></td><td></td><td></td><td></td>';
-                            }
-
                         ?>
                         </table>
                 </li> 
@@ -125,9 +169,6 @@ elseif ($_SESSION['logedIn'] == true && $_SESSION['AccountType'] == "manager") {
                                    . "</form></td>";
                                 echo '</tr>';
                                 $i++;
-                            }
-                            if (count($fetch) == 0){
-                                echo '<td>Nothing to display</td><td></td><td></td><td></td><td></td><td></td>';
                             }
                         ?>
                         </table>
