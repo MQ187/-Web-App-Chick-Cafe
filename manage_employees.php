@@ -70,6 +70,9 @@
                                 $sth->execute();
                                 echo '<META HTTP-EQUIV="Refresh" Content="0; URL=manage_employees.php">';
                             }
+                            if (count($fetch) == 0){
+                              echo '<td>Nothing to display</td><td></td><td></td><td></td><td></td><td></td>';
+                            }
                         ?>
                     </table>
                         <p style="text-align:center;"><a style="text-decoration:none;color:white; "href="add_employee.php">Add</a></p> 
@@ -107,6 +110,9 @@
                                   </form></td>"; 
                             echo '</tr>';
                             $i++;
+                            }
+                            if (count($fetch) == 0){
+                              echo '<td>Nothing to display</td><td></td><td></td><td></td><td></td><td></td>';
                             }
 
                             if(isset($_POST['Active'])){

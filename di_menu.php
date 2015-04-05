@@ -76,6 +76,10 @@ if ($time < $endTime && $time>$startTime){
                             echo '</tr>';
                             $i++;
                             }
+                            if (count($fetch) == 0){
+                                echo '<td>Nothing on this menu, come back later!</td><td></td><td></td><td></td>';
+                                if($userType=='customer'  && $OFB == true){echo"<tr></td>";} 
+                            }
                         ?>
                         </table>
                 </li>
@@ -111,6 +115,10 @@ if ($time < $endTime && $time>$startTime){
                                                             </form></td>";}
                             echo '</tr>';
                             $i++;
+                        }
+                        if (count($fetch) == 0){
+                            echo '<td>Nothing on this menu, come back later!</td><td></td><td></td><td></td>';
+                            if($userType=='customer'  && $OFB == true){echo"<tr></td>";} 
                         }
                         ?>
                         </table>
@@ -151,6 +159,10 @@ if ($time < $endTime && $time>$startTime){
 
                             $i++;
                             }
+                            if (count($fetch) == 0){
+                                echo '<td>Nothing on this menu, come back later!</td><td></td><td></td><td></td>';
+                                if($userType=='customer'  && $OFB == true){echo"<tr></td>";} 
+                            }
                         ?>
                         </table>
                 </li>
@@ -188,6 +200,10 @@ if ($time < $endTime && $time>$startTime){
                             echo '</tr>';
 
                             $i++;
+                            }
+                            if (count($fetch) == 0){
+                                echo '<td>Nothing on this menu, come back later!</td><td></td><td></td><td></td>';
+                                if($userType=='customer'  && $OFB == true){echo"<tr></td>";} 
                             }
                         ?>
                         </table>
