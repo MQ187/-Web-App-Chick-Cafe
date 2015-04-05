@@ -120,9 +120,10 @@
                             echo'<td>'. $dinnerMax .'</td>';
                             echo'</tr>';
                             
-                           
+                          
                         ?>
                         </table>
+
                 </li>  
             </ul>
         </nav>

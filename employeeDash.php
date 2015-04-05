@@ -79,6 +79,9 @@ elseif ($_SESSION['logedIn'] == true && $_SESSION['AccountType'] == "manager") {
                                     echo '</tr>';
                                     $i++;
                                 }
+                                if (count($fetch) == 0){
+                                    echo '<td>Nothing to display</td><td></td><td></td><td></td><td></td><td></td>';
+                                }
                             }else{
                                 $question="SELECT * FROM `order` WHERE orderStatus = :status ORDER BY orderStatus ASC";
                                 $sth = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
@@ -117,6 +120,9 @@ elseif ($_SESSION['logedIn'] == true && $_SESSION['AccountType'] == "manager") {
                                        . "</form></td>";
                                     echo '</tr>';
                                 	$i++;
+                                }
+                                if (count($fetch) == 0){
+                                  echo '<td>Nothing to display</td><td></td><td></td><td></td><td></td><td></td>';
                                 }
                             }
                         ?>
@@ -169,6 +175,9 @@ elseif ($_SESSION['logedIn'] == true && $_SESSION['AccountType'] == "manager") {
                                    . "</form></td>";
                                 echo '</tr>';
                                 $i++;
+                            }
+                            if (count($fetch) == 0){
+                              echo '<td>Nothing to display</td><td></td><td></td><td></td><td></td><td></td>';
                             }
                         ?>
                         </table>
