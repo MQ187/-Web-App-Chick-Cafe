@@ -8,6 +8,7 @@
         <?php 
         require_once("basketNotification.php");
         require_once("messages.php");
+        //include("notification_pop.php");
         ?>
 	<header>
 		<a href="index.php"><img align="middle" src="images/Logo.png"/></a>
