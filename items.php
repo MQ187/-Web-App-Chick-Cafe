@@ -34,11 +34,7 @@ $id = $_SESSION['id'];
          <?php
          Switch($userType){
             case "manager":
-                if($_SESSION['owner']==1){
-                    require_once("nav/ownerDash.php");
-                }else{
                     require_once("nav/managerDash.php");
-                }
                 break;
             case "employee":
                 require_once('nav/employeeDash.php');
