@@ -219,11 +219,11 @@
             $html=$html.'<table id="tfhover" class="tftable" border="1">';
             $html=$html.'<tr><th>Employee ID</th><th>Employee Name</th><th>Breakfast Count</th><th>Lunch Count</th><th>Dinner Count</th><th>Breakfast Min</th><th>Breakfast Max</th><th>Lunch Min</th><th>Lunch Max</th><th>Dinner Min</th><th>Dinner Max</th></tr>';
 
-            $_SESSION['reportType'] = "order";
+            $_SESSION['reportType'] = "staffPerformance";
             $sd = $s;
             $se = $e;
 
-            $question="SELECT idEmployee FROM `order` WHERE orderTimeS>='$sd' AND orderTimeS<='$se'";
+            $question="SELECT idEmployee,name FROM employee";
             $sth = $db->prepare($question);
             $execute = $sth->execute();
             $fetch = $sth->fetchAll();
@@ -232,43 +232,93 @@
             foreach ($fetch as $key) {
 
                 //for the employee name
-                $question2="SELECT name FROM employee WHERE idEmployee=$key[idEmployee]";
-                $sth1 = $db->prepare($question2);
-                $execute1 = $sth1->execute();
-                $fetch1 = $sth1->fetch();
+                $idEmployee[$i] = $key['idEmployee'];
+                $employeeName[$i] = $key['name'];
 
-                $employeeName = $fetch1[0];
-
-                $question3 = "SELECT idorder FROM order WHERE orderType = 'Breakfast' AND orderTimeS>='$sd' AND orderTimeS<='$se'";
+                //breakfast count
+                $question3 = "SELECT count(*) FROM `order` WHERE idEmployee = '$idEmployee[$i]' AND orderType = 'Breakfast' AND orderTimeS>='$sd' AND orderTimeS<='$se'";
                 $sth2 = $db->prepare($question3);
                 $execute2 = $sth2->execute();
-                $fetch2 = $sth2->fetchAll();
 
-                $breakfastCount = 0;
-                foreach ($fetch2 as $bc) {
-                    $breakfastCount += 1;
-                }
+                $breakfastCount = $sth2->fetchColumn(); 
 
-                $question4 = "SELECT idorder FROM order WHERE orderType = 'Lunch' AND orderTimeS>='$sd' AND orderTimeS<='$se'";
+                //lunch count
+                $question4 = "SELECT count(*) FROM `order` WHERE idEmployee = '$idEmployee[$i]' AND orderType = 'Lunch' AND orderTimeS>='$sd' AND orderTimeS<='$se'";
                 $sth3 = $db->prepare($question4);
                 $execute3 = $sth3->execute();
-                $fetch3 = $sth3->fetchAll();
 
-                $breakfastCount = 0;
-                foreach ($fetch2 as $bc) {
-                    $breakfastCount += 1;
+                $lunchCount = $sth3->fetchColumn(); 
+
+                //dinner count
+                $question5 = "SELECT count(*) FROM `order` WHERE idEmployee = '$idEmployee[$i]' AND orderType = 'Dinner' AND orderTimeS>='$sd' AND orderTimeS<='$se'";
+                $sth4 = $db->prepare($question5);
+                $execute4 = $sth4->execute();
+
+                $dinnerCount = $sth4->fetchColumn(); 
+
+                //breakfast min/max
+                $question6 = "SELECT timeCompleted FROM `order` WHERE idEmployee = '$idEmployee[$i]' AND orderType = 'Breakfast' AND orderTimeS>='$sd' AND orderTimeS<='$se'";
+                $sth5 = $db->prepare($question6);
+                $execute5 = $sth5->execute();
+                $fetch1 = $sth5->fetchAll();
+
+                $breakfastMax = '00:00:00';
+                foreach ($fetch1 as $k1) {
+                    if($k1['timeCompleted'] > $breakfastMax){
+                        $breakfastMax = $k1['timeCompleted'];
+                    }
                 }
 
-                $lunchCount = 0;
-                foreach ($fetch3 as $bc) {
-                    $lunchCount += 1;
+                $breakfastMin = $breakfastMax;
+                foreach ($fetch1 as $k) {
+                    if($k['timeCompleted'] < $breakfastMin){
+                        $breakfastMin = $k['timeCompleted'];
+                    }
                 }
 
-                $idEmployee[$i] = $key['idEmployee'];
+                //lunch min/max
+                $question7 = "SELECT timeCompleted FROM `order` WHERE idEmployee = '$idEmployee[$i]' AND orderType = 'Lunch' AND orderTimeS>='$sd' AND orderTimeS<='$se'";
+                $sth6 = $db->prepare($question7);
+                $execute6 = $sth6->execute();
+                $fetch2 = $sth6->fetchAll();
+
+                $lunchMax = '00:00:00';
+                foreach ($fetch2 as $k1) {
+                    if($k1['timeCompleted'] > $lunchMax){
+                        $lunchMax = $k1['timeCompleted'];
+                    }
+                }
+
+                $lunchMin = $lunchMax;
+                foreach ($fetch2 as $k1) {
+                    if($k1['timeCompleted'] < $lunchMin){
+                        $lunchMin = $k1['timeCompleted'];
+                    }
+                }
+
+                //dinner min/max
+                $question8 = "SELECT timeCompleted FROM `order` WHERE idEmployee = '$idEmployee[$i]' AND orderType = 'Dinner' AND orderTimeS>='$sd' AND orderTimeS<='$se'";
+                $sth7 = $db->prepare($question8);
+                $execute7 = $sth7->execute();
+                $fetch3 = $sth7->fetchAll();
+
+                $dinnerMax = '00:00:00';
+                foreach ($fetch3 as $k2) {
+                    if($k2['timeCompleted'] > $dinnerMax){
+                        $dinnerMax = $k2['timeCompleted'];
+                    }
+                }
+
+                $dinnerMin = $dinnerMax;
+                foreach ($fetch3 as $k2) {
+                    if($k2['timeCompleted'] < $dinnerMin){
+                        $dinnerMin = $k2['timeCompleted'];
+                    }
+                }
 
                 $html=$html.'<tr>';
                 $html=$html.'<td>'. $idEmployee[$i] .'</td>';
-                $html=$html.'<td>'. $employeeName .'</td>';
+                $html=$html.'<td>'. $employeeName[$i] .'</td>';
                 $html=$html.'<td>'. $breakfastCount .'</td>';
                 $html=$html.'<td>'. $lunchCount .'</td>';
                 $html=$html.'<td>'. $dinnerCount .'</td>';

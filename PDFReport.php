@@ -36,6 +36,10 @@
 		case "customerSpending":
 			$html = $reportObj->csReportPDF($_SESSION['startDate'],$_SESSION['endDate']);
 			break;
+
+		case "staffPerformance":
+			$html = $reportObj->spReportPDF($_SESSION['startDate'],$_SESSION['endDate']);
+			break;
 	}
 
 	$pdf->WriteHTML($html);
@@ -55,6 +59,10 @@
 
 		case "customerSpending":
 			$pdf->Output('CustomerSpendingReport.pdf', 'I');
+			break;
+
+		case "staffPerformance":
+			$pdf->Output('StaffPerformanceReport.pdf', 'I');
 			break;
 	}
 
