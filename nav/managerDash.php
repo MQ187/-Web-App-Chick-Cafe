@@ -11,7 +11,7 @@
         }
         ?>
         <li><a href="refund.php">Refund</a></li>
-        <li><a href="#">VIP</a></li>
+        <li><a href="vip.php">VIP</a></li>
         <li><a href="stock.php">Stock</a></li>
         <li><a href="items.php">Items</a></li>
         <?php
