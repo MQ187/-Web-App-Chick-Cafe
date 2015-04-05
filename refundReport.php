@@ -49,6 +49,11 @@ session_start();
                 $dis = $r->rReportPDF($_POST['startDate'],$_POST['endDate']);
                 $_SESSION['report'] = $dis;
                 echo $_SESSION['report'];
+
+                    $date = date('Y-m-d H:i:s');
+                    $q = "INSERT INTO `reports`(`idmanager`, `date`, `type`) VALUES ('$_SESSION[id]','$date','Refund')";
+                    $sth = $db->prepare($q);
+                    $execute = $sth->execute();
             }
                 ?>
                       

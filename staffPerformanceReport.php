@@ -48,6 +48,11 @@ session_start();
                 $dis = $r->spReportPDF($_POST['startDate'],$_POST['endDate']);
                 $_SESSION['report'] = $dis;
                 echo $_SESSION['report'];
+
+                    $date = date('Y-m-d H:i:s');
+                    $q = "INSERT INTO `reports`(`idmanager`, `date`, `type`) VALUES ('$_SESSION[id]','$date','Staff Performance')";
+                    $sth = $db->prepare($q);
+                    $execute = $sth->execute();
              }
                 ?>
                 <p style="text-align:center;"><a style="text-decoration:none;color:white; "href="PDFReport.php" target="_blank">Export Report</a></p> 

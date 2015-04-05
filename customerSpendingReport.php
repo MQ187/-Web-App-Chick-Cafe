@@ -40,16 +40,21 @@ session_start();
     
 
                 <?php 
-                require_once('report.php');
-                if(isset($_POST['startDate'])){
-                $_SESSION['startDate'] = $_POST['startDate'];
-                $_SESSION['endDate'] = $_POST['endDate'];
+                    require_once('report.php');
+                    if(isset($_POST['startDate'])){
+                        $_SESSION['startDate'] = $_POST['startDate'];
+                        $_SESSION['endDate'] = $_POST['endDate'];
 
-                $r = new report();
-                $dis = $r->csReportPDF($_POST['startDate'],$_POST['endDate']);
-                $_SESSION['report'] = $dis;
-                echo $_SESSION['report'];
-            }
+                        $r = new report();
+                        $dis = $r->csReportPDF($_POST['startDate'],$_POST['endDate']);
+                        $_SESSION['report'] = $dis;
+                        echo $_SESSION['report'];
+
+                        $date = date('Y-m-d H:i:s');
+                        $q = "INSERT INTO `reports`(`idmanager`, `date`, `type`) VALUES ('$_SESSION[id]','$date','Customer Spending')";
+                        $sth = $db->prepare($q);
+                        $execute = $sth->execute();
+                    }
                 ?>
                       
             <p style="text-align:center;"><a style="text-decoration:none;color:white; "href="PDFReport.php" target="_blank">Export Report</a></p> 
