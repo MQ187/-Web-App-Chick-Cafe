@@ -119,6 +119,10 @@
             
             if(isset($_POST['ing'])){
                 foreach($_POST['ing'] as $cusID){
+                    $q2 = "DELETE FROM customerdiscount WHERE idcustomer = '$cusID'";
+                    $sth2 = $db->prepare($q2);
+                    $execute = $sth2->execute();
+
                     $q = "INSERT INTO customerdiscount(idcustomer, idDiscounts) VALUES ($cusID, $id)";
                     $sth = $db->prepare($q);
                     $sth->execute();
