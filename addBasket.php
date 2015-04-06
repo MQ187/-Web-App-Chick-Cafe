@@ -2,6 +2,10 @@
 	require_once("db_config.php");
     // Connect to the Database and Select the tts database.
 
+    if (!isset($_SESSION['basket'])){
+        $_SESSION['basket'] = array();
+      }
+
 	$product_id = $_POST['product_id'];
     $quantity = 1;
 	$missing = 0;
@@ -42,8 +46,8 @@
     }
     //checks if the product already exists in the basket array.
     if ($flag==0){ 
-        $_SESSION['basket'][$max]['product_id']=$product_id;
-        $_SESSION['basket'][$max]['quantity']=$quantity;
+        $_SESSION['basket'][$max]['product_id'] = $product_id;
+        $_SESSION['basket'][$max]['quantity'] = $quantity;
     }   
     //checks if the basket exists at all, if not it creates one. populate with the new data in either case.
     elseif ($flag==1){

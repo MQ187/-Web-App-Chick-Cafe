@@ -9,7 +9,7 @@ if (!isset($_SESSION['basket'])) {
 	$_SESSION['basket'] = array();
 }//create the basket if it doesnt exist.
 
-$max=count($_SESSION['basket']); //check how many items are in the basket.
+$max = count($_SESSION['basket']); //check how many items are in the basket.
 ?>
 <!DOCTYPE html>
     <head>
@@ -41,14 +41,16 @@ else{
 </tr>
 
 <?php
+
 $total = 0;
-for($i=0;$i<$max;$i++){
+for($i=0 ; $i < $max ; $i++){
 
 	$product_id = $_SESSION['basket'][$i]['product_id'];
 	$quantity = $_SESSION['basket'][$i]['quantity'];
 
+
 	$question="SELECT * FROM item WHERE iditem=:id";
-    $sth = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+  $sth = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 	$sth->execute(array(':id' => $product_id));
 	$fetch = $sth->fetchAll();
 

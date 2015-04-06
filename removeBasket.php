@@ -4,21 +4,28 @@ session_start();
 
 $product_id = $_POST['product_id'];
 $max=count($_SESSION['basket']);
+$id = array();
+$q = array();
+$gone = -1;
 
 
 if (isset($_POST['quantity'])){
-    $q = $_POST['quantity'];
+    $qm = $_POST['quantity'];
 }
 else {
-    $q = 1;
+    $qm = 1;
 }
 //this allows for the removal of more than one item (mainly used if a customer tries to order something where the stock is insuficient.)
 
 $flag=0;
 for($i=0;$i<$max;$i++){
+    
+    $id[$i] = $_SESSION['basket'][$i]['product_id'];
+    $q[$i] = $_SESSION['basket'][$i]['quantity'];
+    
     if($product_id == $_SESSION['basket'][$i]['product_id']){
         $flag=1;
-        break;
+        $x = $i;
     }
 }
 //checks that the product exists in the basket (must return one!)
@@ -30,16 +37,29 @@ if ($flag == 0){
 }
 //return an error if the product doesnt exist in the basket
 else{
-    if ($_SESSION['basket'][$i]['quantity'] > 1){
-    	$old_quantity = $_SESSION['basket'][$i]['quantity'];
-        $new_quantity = $old_quantity - $q;
-        $_SESSION['basket'][$i]['quantity'] = $new_quantity;
+
+    $_SESSION['basket'] = array();
+
+    if ($q[$x] > 1){
+        $q[$x] = $q[$x] - $qm;
     }
+    //if multiple, remove one
     else {
-    	unset($_SESSION['basket'][$i]);
+        $gone = $x;
+    }
+    //if the only one, save it as gone.
+    $absent = 0;
+    for($y=0;$y<$max;$y++){
+        if ($gone == $y){
+            $absent++;
+        }
+        else{
+            $j = $y - $absent;
+            $_SESSION['basket'][$j]['product_id'] = $id[$y];
+            $_SESSION['basket'][$j]['quantity'] = $q[$y];
+        }//re-insert all items in the SESSION unless they are gone.
     }
 }
-//otherwise reduce quantity or remove (whichever is appropriate)
 
 header('Location: '. $_POST['returnto']);
 
