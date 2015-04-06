@@ -108,7 +108,7 @@ if (isset($_POST['orderOK'])){
 }
 else{
   echo "<tr><td colspan='9'><center><form action=order_check.php id='check' method=POST>
-        <input type='checkbox' value='Priority' name='priority'/>Priority (+5% fee)
+        <input type='checkbox' value='Priority' name='priority' />Priority (+5% fee)
 
         <input type=submit name=order value= 'Pay Now' />
         </form></center></td></tr>";  
