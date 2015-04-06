@@ -80,7 +80,7 @@
                 <li><i>Inactive Employees</i>
                     <table id="tfhover" class="tftable" border="1">
                         <tr>
-                        <th>Employee Name</th><th>Password</th><th>Email</th><th>Active</th><th>Update</th>
+                        <th>Employee Name</th><th>Email</th><th>Active</th><th>Update</th>
                         </tr>
                         <?php 
                             require_once("db_config.php");
@@ -101,7 +101,6 @@
 
                             echo '<tr>';
                             echo '<td>'. $name[$i] .'</td>';
-                            echo '<td><input value='. $pword[$i] .' type="password" readonly></td>';
                             echo '<td>'. $email[$i] .'</td>';
                             echo '<td>'. $active[$i] .'</td>';
                             echo "<td><form action=manage_employees.php method=POST>

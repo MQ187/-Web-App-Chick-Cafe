@@ -117,7 +117,7 @@ if ($time < $endTime && $time>$startTime){
                             $i++;
                         }
                         if (count($fetch) == 0){
-                            echo '<td>Nothing on this menu, come back later!</td><td></td><td></td><td></td>';
+                            echo '<td>Nothing on this menu, come back later!</td><td></td><td></td><td></td><td></td>';
                             if($userType=='customer'  && $OFB == true){echo"<tr></td>";} 
                         }
                         ?>
@@ -160,14 +160,14 @@ if ($time < $endTime && $time>$startTime){
                             $i++;
                             }
                             if (count($fetch) == 0){
-                                echo '<td>Nothing on this menu, come back later!</td><td></td><td></td><td></td>';
+                                echo '<td>Nothing on this menu, come back later!</td><td></td><td></td><td></td><td></td>';
                                 if($userType=='customer'  && $OFB == true){echo"<tr></td>";} 
                             }
                         ?>
                         </table>
                 </li>
                 <br>
-                <li><i>Lunch Hot Drinks</i>
+                <li><i>Cold Drinks Drinks</i>
                     <table id="tfhover" class="tftable" border="1">
                         <tr>
                         <th>Title</th><th>Description</th><th>Price</th><th>Type</th><?php if($userType=='customer'  && $OFB == true){echo"<th>Add to Basket</th>";} ?>
@@ -202,7 +202,7 @@ if ($time < $endTime && $time>$startTime){
                             $i++;
                             }
                             if (count($fetch) == 0){
-                                echo '<td>Nothing on this menu, come back later!</td><td></td><td></td><td></td>';
+                                echo '<td>Nothing on this menu, come back later!</td><td></td><td></td><td></td><td></td>';
                                 if($userType=='customer'  && $OFB == true){echo"<tr></td>";} 
                             }
                         ?>
