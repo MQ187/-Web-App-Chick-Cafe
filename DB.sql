@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 06, 2015 at 03:01 PM
+-- Generation Time: Apr 06, 2015 at 03:26 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `card` (
   `card4` varchar(4) NOT NULL,
   `cardExp` varchar(6) NOT NULL,
   `cardName` varchar(45) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `card`
@@ -60,7 +60,12 @@ INSERT INTO `card` (`idcard`, `idPayment`, `card4`, `cardExp`, `cardName`) VALUE
 (7, NULL, '1234', '-23-11', 'Jack O''neill'),
 (8, NULL, '1234', '-23-11', 'Jack O''neill'),
 (9, NULL, '1234', '-23-12', 'Jack O''neill'),
-(10, NULL, '1234', '-23-12', 'Jack O''neill');
+(10, NULL, '1234', '-23-12', 'Jack O''neill'),
+(11, NULL, '1234', '-12-12', 'Jack O''neill'),
+(12, NULL, '1234', '-12-12', 'Jack O''neill'),
+(14, NULL, '1234', '-12-12', 'Jack O''neill'),
+(18, NULL, '1234', '-12-12', 'Jack O''neill'),
+(19, NULL, '1234', '-12-12', 'Jack O''neill');
 
 -- --------------------------------------------------------
 
@@ -154,10 +159,10 @@ INSERT INTO `employee` (`idemployee`, `name`, `password`, `email`, `active`) VAL
 --
 
 CREATE TABLE IF NOT EXISTS `flexdiscount` (
-  `idflexDiscount` int(11) NOT NULL,
+`idflexDiscount` int(11) NOT NULL,
   `idDiscount` int(11) DEFAULT NULL,
-  `upper` decimal(6,2) NOT NULL,
-  `lower` decimal(6,2) NOT NULL,
+  `uppr` decimal(6,2) NOT NULL,
+  `lowr` decimal(6,2) NOT NULL,
   `value` decimal(6,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -384,14 +389,28 @@ CREATE TABLE IF NOT EXISTS `payment` (
   `ammount` decimal(6,2) NOT NULL,
   `ammountDiscounted` decimal(6,2) NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `payment`
 --
 
 INSERT INTO `payment` (`idPayment`, `idCustomer`, `idOrder`, `idDiscounts`, `paymentType`, `sucessful`, `ammount`, `ammountDiscounted`, `date`) VALUES
-(15, 10, NULL, 1, 1, 1, '23.00', '0.00', '2015-04-06 14:01:05');
+(15, 10, NULL, 1, 1, 1, '23.00', '0.00', '2015-04-06 14:01:05'),
+(16, 10, NULL, 1, 0, 1, '36.00', '0.00', '2015-04-06 14:02:31'),
+(17, 10, NULL, 1, 0, 1, '36.00', '0.00', '2015-04-06 14:05:15'),
+(18, 10, NULL, 1, 0, 1, '36.00', '0.00', '2015-04-06 14:06:51'),
+(19, 10, NULL, 1, 0, 1, '36.00', '0.00', '2015-04-06 14:07:07'),
+(20, 10, NULL, 1, 0, 1, '36.00', '0.00', '2015-04-06 14:07:17'),
+(21, 10, NULL, 1, 0, 1, '36.00', '0.00', '2015-04-06 14:08:03'),
+(22, 10, NULL, 1, 0, 1, '36.00', '0.00', '2015-04-06 14:09:13'),
+(23, 10, NULL, 1, 0, 1, '36.00', '0.00', '2015-04-06 14:10:13'),
+(24, 10, NULL, 1, 0, 1, '36.00', '0.00', '2015-04-06 14:10:28'),
+(25, 10, NULL, 1, 0, 1, '36.00', '0.00', '2015-04-06 14:11:51'),
+(26, 10, NULL, 1, 0, 1, '36.00', '0.00', '2015-04-06 14:12:44'),
+(27, 10, NULL, 1, 0, 1, '36.00', '0.00', '2015-04-06 14:14:40'),
+(28, 10, NULL, 1, 0, 1, '36.00', '0.00', '2015-04-06 14:15:51'),
+(29, 10, NULL, 1, 0, 1, '36.00', '0.00', '2015-04-06 14:22:03');
 
 -- --------------------------------------------------------
 
@@ -542,7 +561,7 @@ MODIFY `idbank` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT for table `card`
 --
 ALTER TABLE `card`
-MODIFY `idcard` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+MODIFY `idcard` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT for table `customer`
 --
@@ -563,6 +582,11 @@ MODIFY `idDiscounts` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 ALTER TABLE `employee`
 MODIFY `idemployee` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `flexdiscount`
+--
+ALTER TABLE `flexdiscount`
+MODIFY `idflexDiscount` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `ingredients`
 --
@@ -602,7 +626,7 @@ MODIFY `idorderItem` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-MODIFY `idPayment` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
+MODIFY `idPayment` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=30;
 --
 -- AUTO_INCREMENT for table `refund`
 --
