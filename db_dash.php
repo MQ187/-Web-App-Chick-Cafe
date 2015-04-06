@@ -33,7 +33,7 @@ $max = count($files);
                 </td>
             </tr>
             <tr>
-                <td><table id="tfhover" class="tftable" border="1" width="100%"><tr><th>Name</th><th>Date</th><th>Restore</th></tr>
+                <td><table id="tfhover" class="tftable" border="1" width="100%"><tr><th>Name</th><th>Date</th><th>Restore</th><th>Delete Backup</th></tr>
                     <?php
                     
                         $i = 2;
@@ -46,9 +46,13 @@ $max = count($files);
                             echo date('d.m.Y h:i:s', $date[2]);
                             echo '</td><td>';
                             echo "<form action='db_restore.php' method=POST>
-                                <input type='hidden' name='filename' value=" . $date[2] . "/>
+                                <input type='hidden' name='filename' value=" . $file . " />
                                 <input type='submit' name='submit' value='Restore now'/></form>";
-                            echo '</td></tr>';
+                            echo '</td><td><center>';
+                            echo "<form action='db_delete.php' method=POST>
+                                <input type='hidden' name='filename' value=" . $file . " />
+                                <input type='image' name='submit' src='images/delete.png' width=30 />";
+                            echo '</center></td></tr>';
                             $i++;
                         }
                         if ($max = 0){

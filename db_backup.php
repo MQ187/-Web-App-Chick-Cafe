@@ -10,7 +10,7 @@ $mysqlExportPath ='C:\Server-Xampp\htdocs\DBbackup\ccdb-backup-' . $time . '.sql
 
 $command='mysqldump -u' .$mysqlUserName .' -p' .$mysqlPassword .' ' .$mysqlDatabaseName .' > "' .$mysqlExportPath. '"';
 exec($command,$output=array(),$worked);
-var_dump($worked);
-//header("Location: db_dash.php");
+header("Location: db_dash.php");
 
+//Back's up DB into server's internal memory @location C:\Server-Xampp\htdocs\DBbackup\. 
 ?>
