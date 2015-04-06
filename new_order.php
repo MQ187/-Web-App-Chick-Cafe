@@ -5,7 +5,6 @@ require_once("db_config.php");
 date_default_timezone_set('UTC');
 // set the default timezone to use.
 
-
 if (!isset($_SESSION['basket'])) {
     $_SESSION['basket'] = array();
     header("Location:basket.php");
@@ -28,7 +27,11 @@ $minutes = "";
 $seconds = "";
 $etc = 0;
 $missing = 0;
+$total = 0;
 //set basic parameters.
+for($i=0;$i<$max;$i++){
+    $product_id = $_SESSION['basket'][$i]['product_id'];
+    $quantity = $_SESSION['basket'][$i]['quantity'];
 
 
     $question = 'SELECT preperationTime,price FROM Item WHERE iditem = :id';
@@ -111,7 +114,7 @@ $question="INSERT INTO `order` (`idCustomer`, `orderPriority`, `etc`) VALUES(:id
 $add = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 $add->execute(array(':idCustomer' => $_SESSION['id'], ':orderPriority' => $priority, ':etc' => $etc));
 //this will create a new order.
-$idorder = mysql_insert_id();
+$idorder = intval($db->lastInsertId());
 
 for($i=0;$i<$max;$i++){
     $product_id = $_SESSION['basket'][$i]['product_id'];
@@ -119,8 +122,12 @@ for($i=0;$i<$max;$i++){
 
     $question="INSERT INTO orderItem(idOrder,idItem,quantity) VALUES(:idOrder,:idItem,:quantity)";
     $add = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-    $add->execute(array(':idOrder' => $idOrder, ':idItem' => $product_id, ':quantity' => $quantity));
+    $add->execute(array(':idOrder' => $idorder, ':idItem' => $product_id, ':quantity' => $quantity));
     //create an orderitem for each item in the basket one by one
+
+
+
+
 
     foreach ($fetch as $key) {
         $idIngredient = $key['idIngredient'];
@@ -139,7 +146,7 @@ for($i=0;$i<$max;$i++){
     //get the current stock of each item & change it.
 }
 
-$question3 = 'UPDATE payment SET idorder = :idorder WHERE idPayment = :idPayment';
+$question3 = 'UPDATE `payment` SET `idOrder` = :idorder WHERE `idPayment` = :idPayment';
         $sth3 = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
         $sth3->execute(array(':idorder' => $idorder, ':idPayment' => $idPayment));
         //add the order id to the payment previously created.
@@ -149,7 +156,7 @@ $question3 = 'UPDATE payment SET idorder = :idorder WHERE idPayment = :idPayment
 
 
 $_SESSION['basket'] = array();
-header("Location:customerDash.php");
+//header("Location:customerDash.php");
 
 
 

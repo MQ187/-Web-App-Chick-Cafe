@@ -11,28 +11,24 @@ $priority = $_POST['priority'];
 if ($priority == 1)
 {$checked = 'checked';}
 else{$checked = "";}
-$discount = $_POST['discount'];
-$discouted = 0;
+$iddiscount = $_POST['iddiscount'];
+$discounted = $_POST['discounted'];
 $total = $_POST['total'];
 
 if (isset($_POST['card'])){
 	$pType = "card";
+}
 else{
 	$pType = "bank";
 }
+$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, 1);
 
-$question="INSERT INTO `payment` (`idCustomer`, `idOrder`, `idDiscounts`, `paymentType`, `sucessful`, `ammount`, `ammountDiscounted`) VALUES(:idCustomer,:orderPriority,:etc)";
+$question="INSERT INTO `payment` (`idCustomer`, `idDiscounts`, `paymentType`, `sucessful`, `ammount`, `ammountDiscounted`) VALUES(:idCustomer,:idDiscounts, :paymentType, :sucessful, :ammount, :ammountDiscounted)";
 $add = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-$add->execute(array(':idCustomer' => $_SESSION['id'], ':idOrder' => 0, ':idDiscounts' => $idDiscounts, ':paymentType' => $pType, ':sucessful' => 1, ':ammount' => $total, ':ammountDiscounted' => $discouted));
-//this will create a new payment.
+$add->execute(array(':idCustomer' => $_SESSION['id'], ':idDiscounts' => $iddiscount, ':paymentType' => $pType, ':sucessful' => 1, ':ammount' => $total, ':ammountDiscounted' => $discounted));
 
-$question2="SELECT `idPayment` FROM `payment` WHERE idCustomer = :idCustomer AND idOrder = 0";
-$sth->execute(array(':idCustomer' => $_SESSION['id']);
-$fetch2 = $sth->fetchAll();
-if (is_array($fetch2)) {var_dump($fetch2); echo "error, several payments match!"}
-else{$idPayment = $fetch2;}
-
-
+$idPayment = intval($db->lastInsertId());
+//this will create a new payment and get it's ID.
 
 if (isset($_POST['card'])){
 	
@@ -40,7 +36,7 @@ if (isset($_POST['card'])){
 	$number = $_POST['cardnumber'];
 	$card4 = substr($number, -4, 4);
 	$ccv = $_POST['ccv'];
-	$expirydate = substr($POST['yyyy'],2,2) . "-" . $POST['mm'] . "-" .  $POST['dd'];
+	$expirydate = substr($_POST['yyyy'],2,2) . "-" . $_POST['mm'] . "-" .  $_POST['dd'];
 
 	$question3="INSERT INTO `card` (`idPayment`, `card4`, `cardExp`, `cardName`) VALUES(:idPayment,:card4, :exp ,:cardName)";
 	$add3 = $db->prepare($question3, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));

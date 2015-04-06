@@ -14,7 +14,8 @@ else{
 }
 
 $total = $_POST['total'];
-$discount = 0;
+$iddiscount = 1;
+$discounted = 0;
 
 if (!isset($_POST['orderOK'])){
 	header("Location: basket.php");
@@ -54,7 +55,8 @@ if (!isset($_POST['orderOK'])){
             echo "<center><form action='pay_me.php' method=POST id='card'>";
             echo "<input type='hidden' value=".$priority." name='priority' />";
             echo "<input type='hidden' value=".$total." name='total' />";
-            echo "<input type='hidden' value=".$discount." name='discount' /><li>";
+            echo "<input type='hidden' value=".$iddiscount." name='iddiscount' /><li>";
+            echo "<input type='hidden' value=".$discounted." name='discounted' /><li>";
             echo "Name : <input type='text' name='cardname' required='required'/></li>";
             echo '<br>';
             echo "<li>Card Number: <input type='text' name='cardnumber' maxlength='16' size='16' required='required'/></li>";
@@ -75,7 +77,8 @@ if (!isset($_POST['orderOK'])){
             echo "<center><form action='pay_me.php' method=POST id='bank'>";
             echo "<input type='hidden' value=".$priority." name='priority' />";
             echo "<input type='hidden' value=".$total." name='total' />";
-            echo "<input type='hidden' value=".$discount." name='discount' /><li>";
+            echo "<input type='hidden' value=".$iddiscount." name='iddiscount' /><li>";
+            echo "<input type='hidden' value=".$discounted." name='discounted' /><li>";
             echo "Name : <input type='text' name='bankname' required='required'/></li>";
             echo '<br>';
             echo "<li>Bank Account: <input type='text' name='banknumber' maxlength='8' size='8' required='required'/></li>";
