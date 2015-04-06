@@ -347,3 +347,25 @@ form input[type=password] {
   border-radius: 25px;
   background-color: #FFFFFF;
 }
+
+.vip_button {
+    border: none;
+    display: block;
+    background: rgba(0,0,0,0.7);
+    height: 240px;
+    width: 275px;
+    color: #fff;
+    font-size: 12px;
+    /*text-align: center;*/
+    border-radius: 5px;
+    -webkit-transition: all 0.15s linear;
+    -moz-transition: all 0.15s linear;
+    transition: all 0.15s linear;
+    float: right;
+    margin-right: 15px;
+    margin-top: 3px;
+}
+
+.vip_button:hover {
+  background: rgba(250,64,90,0.7);
+}
