@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 06, 2015 at 02:55 PM
+-- Generation Time: Apr 06, 2015 at 03:01 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `card` (
   `card4` varchar(4) NOT NULL,
   `cardExp` varchar(6) NOT NULL,
   `cardName` varchar(45) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `card`
@@ -58,7 +58,9 @@ INSERT INTO `card` (`idcard`, `idPayment`, `card4`, `cardExp`, `cardName`) VALUE
 (5, NULL, '1234', '-23-11', 'Jack O''neill'),
 (6, NULL, '1234', '-23-11', 'Jack O''neill'),
 (7, NULL, '1234', '-23-11', 'Jack O''neill'),
-(8, NULL, '1234', '-23-11', 'Jack O''neill');
+(8, NULL, '1234', '-23-11', 'Jack O''neill'),
+(9, NULL, '1234', '-23-12', 'Jack O''neill'),
+(10, NULL, '1234', '-23-12', 'Jack O''neill');
 
 -- --------------------------------------------------------
 
@@ -114,7 +116,14 @@ CREATE TABLE IF NOT EXISTS `discounts` (
   `discountValue` decimal(6,2) NOT NULL,
   `startTime` date NOT NULL,
   `endTime` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `discounts`
+--
+
+INSERT INTO `discounts` (`idDiscounts`, `vipMembership`, `discountType`, `discountValue`, `startTime`, `endTime`) VALUES
+(1, 3, 0, '0.00', '2015-04-01', NULL);
 
 -- --------------------------------------------------------
 
@@ -375,7 +384,14 @@ CREATE TABLE IF NOT EXISTS `payment` (
   `ammount` decimal(6,2) NOT NULL,
   `ammountDiscounted` decimal(6,2) NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `payment`
+--
+
+INSERT INTO `payment` (`idPayment`, `idCustomer`, `idOrder`, `idDiscounts`, `paymentType`, `sucessful`, `ammount`, `ammountDiscounted`, `date`) VALUES
+(15, 10, NULL, 1, 1, 1, '23.00', '0.00', '2015-04-06 14:01:05');
 
 -- --------------------------------------------------------
 
@@ -526,7 +542,7 @@ MODIFY `idbank` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT for table `card`
 --
 ALTER TABLE `card`
-MODIFY `idcard` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+MODIFY `idcard` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `customer`
 --
@@ -541,7 +557,7 @@ MODIFY `idcustomerDiscount` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT for table `discounts`
 --
 ALTER TABLE `discounts`
-MODIFY `idDiscounts` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `idDiscounts` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `employee`
 --
@@ -586,7 +602,7 @@ MODIFY `idorderItem` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-MODIFY `idPayment` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+MODIFY `idPayment` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `refund`
 --
