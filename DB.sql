@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 05, 2015 at 05:39 PM
+-- Generation Time: Apr 06, 2015 at 02:55 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -46,7 +46,19 @@ CREATE TABLE IF NOT EXISTS `card` (
   `card4` varchar(4) NOT NULL,
   `cardExp` varchar(6) NOT NULL,
   `cardName` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `card`
+--
+
+INSERT INTO `card` (`idcard`, `idPayment`, `card4`, `cardExp`, `cardName`) VALUES
+(1, NULL, '1234', '--', 'Jack O''neill'),
+(2, NULL, '1234', '-23-11', 'Jack O''neill'),
+(5, NULL, '1234', '-23-11', 'Jack O''neill'),
+(6, NULL, '1234', '-23-11', 'Jack O''neill'),
+(7, NULL, '1234', '-23-11', 'Jack O''neill'),
+(8, NULL, '1234', '-23-11', 'Jack O''neill');
 
 -- --------------------------------------------------------
 
@@ -62,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `customer` (
   `phone` varchar(12) NOT NULL,
   `password` varchar(45) NOT NULL,
   `isLoggedIn` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `customer`
@@ -356,14 +368,14 @@ INSERT INTO `orderitem` (`idorderItem`, `idOrder`, `idItem`, `quantity`) VALUES
 CREATE TABLE IF NOT EXISTS `payment` (
 `idPayment` int(11) NOT NULL,
   `idCustomer` int(11) NOT NULL,
-  `idOrder` int(11) NOT NULL,
+  `idOrder` int(11) DEFAULT NULL,
   `idDiscounts` int(11) NOT NULL,
   `paymentType` int(11) NOT NULL,
   `sucessful` tinyint(1) NOT NULL,
   `ammount` decimal(6,2) NOT NULL,
   `ammountDiscounted` decimal(6,2) NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -514,12 +526,12 @@ MODIFY `idbank` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT for table `card`
 --
 ALTER TABLE `card`
-MODIFY `idcard` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `idcard` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-MODIFY `idCustomer` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+MODIFY `idCustomer` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT for table `customerdiscount`
 --
@@ -574,7 +586,7 @@ MODIFY `idorderItem` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-MODIFY `idPayment` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `idPayment` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `refund`
 --
