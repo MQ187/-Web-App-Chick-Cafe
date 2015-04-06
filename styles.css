@@ -366,6 +366,28 @@ form input[type=password] {
     margin-top: 3px;
 }
 
+.report_button:hover,
 .vip_button:hover {
   background: rgba(250,64,90,0.7);
+  color: rgba(0,0,0,0.7);
+}
+
+.report_button {
+    border: none;
+    display: block;
+    background: rgba(0,0,0,0.7);
+    height: 70px;
+    width: 275px;
+    color: #fff;
+    font-size: 22px;
+    border-radius: 5px;
+    padding-top: 50px;
+    -webkit-transition: all 0.15s linear;
+    -moz-transition: all 0.15s linear;
+    transition: all 0.15s linear;
+    float: right;
+    margin-right: 15px;
+    margin-top: 3px;
+    text-align: center;
+    text-decoration: none;
 }

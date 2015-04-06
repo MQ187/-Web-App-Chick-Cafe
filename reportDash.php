@@ -26,13 +26,13 @@ elseif ($_SESSION['logedIn'] == true && $_SESSION['AccountType'] == "employee") 
         <nav>
             <ul id="rDash">
                 <li><i>Report</i></li>
-                    <table style="padding-top:50px;">
-                        <tr><td><li><a href="customerSpendingReport.php">Customer Spending</a></li></td>
-                        <td><li><a href="refundReport.php">Refund</a></li></td>
-                        <td><li><a href="staffPerformanceReport.php">Staff Performance</a></li></td></tr>
-                        <tr><td><li><a href="orderReport.php">Order</a></li></td>
-                        <td><li><a href="activeCustomerReport.php">Active Users</a></li></td> 
-                        <td><li><a href="#">Generate All</a></li></td></tr>
+                    <table>
+                        <tr><td><li><a class="report_button" href="customerSpendingReport.php">Customer Spending</a></li></td>
+                        <td><li><a class="report_button" href="refundReport.php">Refund</a></li></td>
+                        <td><li><a class="report_button" href="staffPerformanceReport.php">Staff Performance</a></li></td></tr>
+                        <tr><td><li><a class="report_button" href="orderReport.php">Order</a></li></td>
+                        <td><li><a class="report_button" href="activeCustomerReport.php">Active Users</a></li></td> 
+                        <td><li><a class="report_button" href="#">Generate All</a></li></td></tr>
                     </table>
             </ul>
         </nav>
