@@ -32,7 +32,7 @@ elseif ($_SESSION['logedIn'] == true && $_SESSION['AccountType'] == "employee") 
                         <td><li><a class="report_button" href="staffPerformanceReport.php">Staff Performance</a></li></td></tr>
                         <tr><td><li><a class="report_button" href="orderReport.php">Order</a></li></td>
                         <td><li><a class="report_button" href="activeCustomerReport.php">Active Users</a></li></td> 
-                        <td><li><a class="report_button" href="#">Generate All</a></li></td></tr>
+                        <td><li><a class="report_button" href="AutoPDFReport.php">Generate All</a></li></td></tr>
                     </table>
             </ul>
         </nav>

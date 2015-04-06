@@ -42,7 +42,7 @@
 			break;
 	}
 
-	$pdf->WriteHTML($html);
+	$pdf->WriteHTML('Period: <b>'.$_SESSION['startDate'].'</b> to <b>'.$_SESSION['endDate'].'</b>'.$html);
 
 	Switch($type){
 		case "refund":
