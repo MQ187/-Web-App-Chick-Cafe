@@ -57,8 +57,10 @@ require_once("messages.php");
                 }
                 switch ($type) {
                   case 'fixed':
-                    echo '</td><td><h3>(Fixed Discount Rate - </h3></td>';
-                    echo '</td><td><h3>' . $value . '% )</h3></td>';
+                    if ($_SESSION['vip'] != 0){
+                      echo '</td><td><h3>(Fixed Discount Rate - </h3></td>';
+                      echo '</td><td><h3>' . $value . '% )</h3></td>';
+                    } 
                     break;
                   case 'flex':
                     echo '</td><td><h3>Flexible Discount Rate</h3></td>';

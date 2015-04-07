@@ -153,7 +153,7 @@ else{
 
         if ($cmeal < $INTmeal){
           echo "onClick='return confirm(\'You are about to order ahead for ".$meal.", this order will not be available 
-                until ".$aTime.". Are you sure you wish to order? '.esc_attr($this->event_name).'?\')'" 
+                until ".$aTime.". Are you sure you wish to order? '.esc_attr($this->event_name).'?\')'"; 
         }
 
   echo "/>

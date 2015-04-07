@@ -1,21 +1,6 @@
 <?php session_start(); 
 	include("db_config.php");
-    
 
-/*if (!isset($_SESSION['logedIn'])) { $_SESSION['logedIn'] = false;}
-if (!isset($_SESSION['AccountType'])) {$_SESSION['AccountType'] = "NONE";}
-if ($_SESSION['logedIn'] == false) {header('Location: login.php');}
-*/
-if (isset($_SESSION['message'])){
-        if ($_SESSION['message'] == "3") { 
-        print '<script type="text/javascript">alert("Your passwords did not match, please try again.");</script>';
-        unset($_SESSION['message']);
-        }
-        elseif ($_SESSION['message'] == "4") {
-        print '<script type="text/javascript">alert("A user with such an email already exists. Maybe try logging in?");</script>';
-        unset($_SESSION['message']);
-        }
-}
 $userType = $_SESSION['userType'];
 $id = $_SESSION['id'];
 ?>

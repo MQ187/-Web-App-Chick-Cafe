@@ -160,7 +160,7 @@ if ($time < $endTime && $time>$startTime){
                             $i++;
                             }
                             if (count($fetch) == 0){
-                                echo '<td>Nothing on this menu, come back later!</td><td></td><td></td><td></td><td></td>';
+                                echo '<td>Nothing on this menu, come back later!</td><td></td><td></td><td></td>';
                                 if($userType=='customer'  && $OFB == true){echo"<tr></td>";} 
                             }
                         ?>
@@ -202,7 +202,7 @@ if ($time < $endTime && $time>$startTime){
                             $i++;
                             }
                             if (count($fetch) == 0){
-                                echo '<td>Nothing on this menu, come back later!</td><td></td><td></td><td></td><td></td>';
+                                echo '<td>Nothing on this menu, come back later!</td><td></td><td></td><td></td>';
                                 if($userType=='customer'  && $OFB == true){echo"<tr></td>";} 
                             }
                         ?>

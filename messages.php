@@ -34,8 +34,9 @@ if (isset($_SESSION['message'])){
             unset($_SESSION['filename']);
         }
         elseif ($_SESSION['message'] == "9") {
-        print '<script type="text/javascript">alert("Error! The item you are trying to add cannot 
-                be order along with the items already in your basket. Please remove items or only order from one meal.");</script>';
+        print '<script type="text/javascript">alert("Error! The item you are trying to add cannot be order along with the items already in 
+                your basket. Please remove all items from the basket if you wish to order for a new meal or only order from 
+                the current one.");</script>';
         unset($_SESSION['message']);
         }
 }

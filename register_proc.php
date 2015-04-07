@@ -41,20 +41,13 @@
 
 		$question="INSERT INTO customer(name,surname,email,phone,password) VALUES(:name,
 			:surname, :email, :phone, :password)";
-	
 		$add = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-
 		$add->execute(array(':name' => $name, ':surname' => $surname, ':email' => $email, 
 			':password' => $encrypt_password, ':phone' => $phone));
 
-		$question="SELECT idCustomer FROM customer WHERE email = :email";
-  
-	   	$sth = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-	   	$sth->execute();
-
-	    $fetch = $sth->fetch(PDO::FETCH_ASSOC);
+		$id = intval($db->lastInsertId());
 	    
-	    $_SESSION['id'] = $fetch['idCustomer'];
+	    $_SESSION['id'] = $id;
 	    $_SESSION['email'] = $email;
 		$_SESSION['logedIn'] = true;
 		$_SESSION['message'] = "0";
