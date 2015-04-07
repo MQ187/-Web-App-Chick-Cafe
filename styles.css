@@ -4,6 +4,9 @@ html{
     margin: 0 auto; 
     /*background: url(images/bbackground.jpg);*/
     background: url(images/bg6.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
     transition:all 0.3s ease;
     font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;
 }
