@@ -371,7 +371,7 @@ CREATE TABLE `order` (
   `orderPriority` tinyint(1) NOT NULL DEFAULT '0',
   `orderStatus` varchar(45) NOT NULL DEFAULT 'Pending',
   `etc` time NOT NULL,
-  `timeCompleted` timestamp NULL DEFAULT NULL,
+  `timeCompleted` time NOT NULL,
   PRIMARY KEY (`idorder`),
   KEY `idCustomer_idx` (`idCustomer`),
   KEY `idEmployee_idx` (`idEmployee`),
