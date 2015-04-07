@@ -50,7 +50,7 @@ else{
     //if the only one, save it as gone.
 
     if ($gone > -1 && $max == 1){
-        unset($_SESSION['menu'];
+        unset($_SESSION['menu']);
     }
     else{
         $absent = 0;
