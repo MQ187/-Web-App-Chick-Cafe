@@ -109,10 +109,54 @@ if (isset($_POST['orderOK'])){
           <?php
 }
 else{
+
+  $t = intval(date( "H" ,time()));
+  
+  if ($t < 12){
+    //breakfast
+    $cmeal = 1;
+  }
+  elseif ($t < 18){
+    //Lunch
+    $cmeal = 2;
+  }
+  else{
+    //Dinner
+    $cmeal = 3;
+  }
+
+  switch ($_SESSION['menu']) {
+    case '2':
+    case '6':
+    case '9':
+      //Lunch
+      $meal = "Lunch";
+      $INTmean = 2;
+      $aTime = '12:00';
+      break;
+
+    case '3':
+    case '7':
+    case '10':
+      //Dinner
+      $meal = "Dinner";
+      $INTmean = 3;
+      $aTime = '18:00';
+      break;
+  }
+
+
   echo "<tr><td colspan='9'><center><form action=order_check.php id='check' method=POST>
         <input type='checkbox' value='Priority' name='priority' />Priority (+5% fee)
 
-        <input type=submit name=order value= 'Pay Now' />
+        <input type=submit name=order value= 'Pay Now' ";
+
+        if ($cmeal < $INTmeal){
+          echo "onClick='return confirm(\'You are about to order ahead for ".$meal.", this order will not be available 
+                until ".$aTime.". Are you sure you wish to order? '.esc_attr($this->event_name).'?\')'" 
+        }
+
+  echo "/>
         </form></center></td></tr>";  
 }
 
