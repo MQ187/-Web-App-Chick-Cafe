@@ -3,8 +3,8 @@
 	require('mpdf/mpdf.php');
 	require('report.php');
 
-	$sd = "2015-02-01";
-	$ed = "2015-05-01";
+	$sd = $_POST['startDate'];
+	$ed = $_POST['endDate'];
 	
 	$reportObj= new report();
 	

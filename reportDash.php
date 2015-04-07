@@ -10,7 +10,7 @@ elseif ($_SESSION['logedIn'] == true && $_SESSION['AccountType'] == "employee") 
 
 <!DOCTYPE html>
     <head>
-        <title>Customer Dash | Chick Cafe</title>
+        <title>Report Dash | Chick Cafe</title>
         <link type="text/css" href="styles.css" rel="stylesheet" media="screen" />
     </head>
 
@@ -32,7 +32,13 @@ elseif ($_SESSION['logedIn'] == true && $_SESSION['AccountType'] == "employee") 
                         <td><li><a class="report_button" href="staffPerformanceReport.php">Staff Performance</a></li></td></tr>
                         <tr><td><li><a class="report_button" href="orderReport.php">Order</a></li></td>
                         <td><li><a class="report_button" href="activeCustomerReport.php">Active Users</a></li></td> 
-                        <td><li><a class="report_button" href="AutoPDFReport.php">Generate All</a></li></td></tr>
+                        <td><li>
+                            <form action=AutoPDFReport.php method=POST>
+                                <input type='submit' class="report_button" value='Generate All' />
+                     <?php echo'<input type="hidden" name="startDate" value='.date("Y-m-d", strtotime("-1 month")).'/>
+                                <input type="hidden" name="endDate" value='.date('Y-m-d').' />'; ?>
+                            </form>
+                        </td></tr>
                     </table>
             </ul>
         </nav>
