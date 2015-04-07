@@ -137,7 +137,7 @@
 	   							break;							
 	   						}
 						}
-
+						ini_set('session.cookie_lifetime', 28800);
 	    				header('Location: customerDash.php');
 					}
 				break;

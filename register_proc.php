@@ -74,7 +74,7 @@
 		$_SESSION['vip'] = 0;
 		$_SESSION['vipD'] = 0;
 
-
+		ini_set('session.cookie_lifetime', 28800);
 		header('Location: customerDash.php');
 
 	}
