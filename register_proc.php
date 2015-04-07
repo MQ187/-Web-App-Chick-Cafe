@@ -64,6 +64,17 @@
 		$sth = $db->prepare($question);
 		$sth->execute();
 
+		$date =  date( 'Y-m-d' , time());
+
+		$question="INSERT INTO Discounts(vipMembership,discountType,discountValue,startTime) VALUES(:vip,
+			:discountT, :discountV, :startTime)";
+		$get = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+		$get->execute(array(':vip' => 0,':discountT' => 0, ':discountV' => 1, ':startTime' => $date));
+
+		$_SESSION['vip'] = 0;
+		$_SESSION['vipD'] = 0;
+
+
 		header('Location: customerDash.php');
 
 	}

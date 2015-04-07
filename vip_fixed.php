@@ -67,6 +67,10 @@
             $perc = $_POST['fixedPerc'];
             $strt = date('Y-m-d');
 
+            if ($perc == "0"){
+                unset($_POST['endDate']);
+            }
+
             if (isset($_POST['endDate'])){
 
                 $end = $_POST['endDate'];
