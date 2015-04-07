@@ -22,11 +22,10 @@
 
 	$htmlRefund = $reportObj->rReportPDF($sd,$ed);
 	$htmlOrder = $reportObj->oReportPDF($sd,$ed);
-	$htmlAC = $reportObj->acReportPDF();
 	$htmlCS = $reportObj->csReportPDF($sd,$ed);
 	$htmlSP = $reportObj->spReportPDF($sd,$ed);
 
-	$test = 'Period: <b>'.$sd.'</b> to <b>'.$ed.'</b> <br><br>Refund Report' . $htmlRefund . '<br><br>Order Report' . $htmlOrder . '<br><br>Active Customer Report' . $htmlAC .
+	$test = 'Period: <b>'.$sd.'</b> to <b>'.$ed.'</b> <br><br>Refund Report' . $htmlRefund . '<br><br>Order Report' . $htmlOrder .
 	'<br><br>Customer Spending Report' . $htmlCS . '<br><br>Staff Performance Report' . $htmlSP;
 	
 	$pdfAll->WriteHTML($test);
