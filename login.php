@@ -1,24 +1,5 @@
-<?php session_start(); 
-if (!isset($_SESSION['logedIn'])) { $_SESSION['logedIn'] = false;}
-if (!isset($_SESSION['AccountType'])) {$_SESSION['AccountType'] = "NONE";}
-
-  if(($_SESSION['logedIn'] == true && $_SESSION['AccountType'] == "customer")) {header('Location: myAccount.php');}
-  elseif ($_SESSION['logedIn'] == true && $_SESSION['AccountType'] == "manager") {header('Location: managerAccount.php');}
-  elseif ($_SESSION['logedIn'] == true && $_SESSION['AccountType'] == "employee") {header('Location: employeeAccount.php');}
-  if (isset($_SESSION['message'])){
-    if ($_SESSION['message'] == "1") { 
-      print '<script type="text/javascript">alert("No such user was found, try again or register.");</script>';
-      $_SESSION['message'] = "0";
-    }
-    elseif ($_SESSION['message'] == "2"){
-      print '<script type="text/javascript">alert("You have entered the wrong password. Please try again.");</script>';
-      $_SESSION['message'] = "0";
-    }
-    elseif ($_SESSION['message'] == "3"){
-      print '<script type="text/javascript">alert("Error. Please try again.");</script>';
-      $_SESSION['message'] = "0";
-    }
-  }
+<?php 
+session_start(); 
 ?>
 <!DOCTYPE html>
 <html lang="en-US">

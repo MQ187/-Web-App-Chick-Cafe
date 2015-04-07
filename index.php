@@ -19,7 +19,7 @@
 
     </header>
 
-		<a href="#"><img align="middle" width="100%" heigth="350px" src="images/large_main.jpg"/></a>
+		<a href="index.php"><img align="middle" width="100%" heigth="350px" src="images/large_main.jpg"/></a>
 
 	
 	<footer>

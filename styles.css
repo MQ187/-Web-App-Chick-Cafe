@@ -305,6 +305,20 @@ form input[type=password] {
     color: #000000;
     background-color: #FFCCCC;
 }
+.right-container {
+    position: fixed;
+    top: 0;
+    overflow: hidden;
+    right: -20%;
+}
+
+.right:hover {
+    border-bottom-width: thick;
+    border-bottom-style: solid;
+    border-bottom-color: #FFCCCC;
+    color: #000000;
+    background-color: #FFCCCC;
+}
 /*Basket end*/
 
 .add {

@@ -50,7 +50,7 @@
             </tr>
 
             <tr><td><p>End Date:</p></td>
-                <td><input type="text" name="endDate" placeholder="YYYY-MM-DD" required="required"></td>
+                <td><input type="text" name="endDate" placeholder="YYYY-MM-DD" ></td>
                 <?php echo '<input type="hidden" name="type" value='.$_POST['type'].'></td>'; ?>
             </tr>
       
@@ -61,30 +61,54 @@
    </body>
 
    <?php
-    if(isset($_POST['endDate']) && $_POST['type']==0){
+    if(isset($_POST['fixedPerc']) && $_POST['type']==0){
             $membership = $_POST['memebershipselect'];
             $discountType = $_POST['type'];
             $perc = $_POST['fixedPerc'];
             $strt = date('Y-m-d');
-            $end = $_POST['endDate'];
 
-            $question = "INSERT INTO discounts(vipMembership,discountType,discountValue,startTime,endTime) VALUES (:vipMembership,:discountType,:discountValue,:startTime,:endTime)";
-            $add = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-            $add->execute(array(':vipMembership'=>$membership,':discountType'=>$discountType,':discountValue'=>$perc,':startTime'=>$strt, ':endTime'=>$end));
+            if (isset($_POST['endDate'])){
 
-            $id = $db->lastInsertId();
+                $end = $_POST['endDate'];
+
+                $question = "INSERT INTO discounts(vipMembership,discountType,discountValue,startTime,endTime) VALUES (:vipMembership,:discountType,:discountValue,:startTime,:endTime)";
+                $add = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+                $add->execute(array(':vipMembership'=>$membership,':discountType'=>$discountType,':discountValue'=>$perc,':startTime'=>$strt, ':endTime'=>$end));
+
+                $id = $db->lastInsertId();
             
-            if(isset($_POST['ing'])){
-                foreach($_POST['ing'] as $cusID){
-                    $q2 = "DELETE FROM customerdiscount WHERE idcustomer = '$cusID'";
-                    $sth2 = $db->prepare($q2);
-                    $execute = $sth2->execute();
+                if(isset($_POST['ing'])){
+                    foreach($_POST['ing'] as $cusID){
+                        $q2 = "DELETE FROM customerdiscount WHERE idcustomer = '$cusID'";
+                        $sth2 = $db->prepare($q2);
+                        $execute = $sth2->execute();
 
-                    $q = "INSERT INTO customerdiscount(idcustomer, idDiscounts) VALUES ($cusID, $id)";
-                    $sth = $db->prepare($q);
-                    $sth->execute();
+                        $q = "INSERT INTO customerdiscount(idcustomer, idDiscounts) VALUES ($cusID, $id)";
+                        $sth = $db->prepare($q);
+                        $sth->execute();
+                    }
                 }
             }
+            else {
+                $question = "INSERT INTO discounts(vipMembership,discountType,discountValue,startTime) VALUES (:vipMembership,:discountType,:discountValue,:startTime)";
+                $add = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+                $add->execute(array(':vipMembership'=>$membership,':discountType'=>$discountType,':discountValue'=>$perc,':startTime'=>$strt));
+
+                $id = $db->lastInsertId();
+            
+                if(isset($_POST['ing'])){
+                    foreach($_POST['ing'] as $cusID){
+                        $q2 = "DELETE FROM customerdiscount WHERE idcustomer = '$cusID'";
+                        $sth2 = $db->prepare($q2);
+                        $execute = $sth2->execute();
+
+                        $q = "INSERT INTO customerdiscount(idcustomer, idDiscounts) VALUES ($cusID, $id)";
+                        $sth = $db->prepare($q);
+                        $sth->execute();
+                    }
+                }
+            }
+            
             
             echo '<META HTTP-EQUIV="Refresh" Content="0; URL=vip.php">'; 
         }

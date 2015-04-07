@@ -4,6 +4,8 @@ require_once("db_config.php");
 // Connect to the Database and Select the ccdb database.
 require_once("messages.php");
 //adds the check for all possible errors as well as the warnings.
+require_once("basketNotification.php");
+//adds the notification for a basket and shows the user's vip status.
 
 if (!isset($_SESSION['basket'])) {
 	$_SESSION['basket'] = array();

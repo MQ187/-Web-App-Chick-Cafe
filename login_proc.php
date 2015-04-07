@@ -85,6 +85,59 @@
 	   					$sth = $db->prepare($question);
 	   					$sth->execute();
 
+	   					$question="SELECT * FROM customerDiscount WHERE idcustomer = '$_SESSION[id]'";  
+	   					$sth = $db->prepare($question);
+	   					$sth->execute();
+	   					$fetch = $sth->fetchAll();
+
+						foreach ($fetch as $key) {
+							$idDiscounts = $key['idDiscounts'];
+            				$date =  date( 'Y-m-d' , time());
+
+							$question="SELECT * FROM Discounts WHERE idDiscounts = :id";  
+	   						$sth = $db->prepare($question);
+	   						$sth->execute(array(':id' => $idDiscounts));
+	   						$fetch2 = $sth->fetchAll();
+
+	   						foreach ($fetch2 as $key2) {
+	   							if ($key2['startTime'] > $date) {
+	   								echo 'too early';
+	   								break;
+	   							}
+	   							if ($key2['endTime'] == null || $key2['endTime'] > $date || $key2['endTime'] == "0000-00-00"){ //date OK?
+
+	   								$_SESSION['vip'] = $key2['vipMembership'];
+
+	   								if ($key2['discountType'] == 0){ // fixed
+
+	   									$_SESSION['vipD'] = $key2['discountValue'];
+
+	   								}
+	   								else{ // flex
+
+	   									$_SESSION['vipFlex'] = array();
+
+	   									$question="SELECT * FROM flexDiscounts WHERE idDiscounts = :id";  
+	   									$sth = $db->prepare($question);
+	   									$sth->execute();
+	   									$fetch3 = $sth->fetchAll(array(':id' => $idDiscounts));
+
+	   									$x=0;
+	   									foreach ($fetch3 as $key3) {
+
+	   										$_SESSION['vipFlex'][$x]['up'] = $key3['upper'];
+	   										$_SESSION['vipFlex'][$x]['lo'] = $key3['lower'];
+	   										$_SESSION['vipFlex'][$x]['v'] = $key3['value'];
+	   										
+	   										$x++;
+	   									}
+	   								}
+	   								break;
+	   							}	   
+	   							break;							
+	   						}
+						}
+
 	    				header('Location: customerDash.php');
 					}
 				break;
