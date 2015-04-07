@@ -48,16 +48,22 @@ else{
         $gone = $x;
     }
     //if the only one, save it as gone.
-    $absent = 0;
-    for($y=0;$y<$max;$y++){
-        if ($gone == $y){
-            $absent++;
+
+    if ($gone > -1 && $max == 1){
+        unset($_SESSION['menu'];
+    }
+    else{
+        $absent = 0;
+        for($y=0;$y<$max;$y++){
+            if ($gone == $y){
+                $absent++;
+            }
+            else{
+                $j = $y - $absent;
+                $_SESSION['basket'][$j]['product_id'] = $id[$y];
+                $_SESSION['basket'][$j]['quantity'] = $q[$y];
+            }//re-insert all items in the SESSION unless they are gone.
         }
-        else{
-            $j = $y - $absent;
-            $_SESSION['basket'][$j]['product_id'] = $id[$y];
-            $_SESSION['basket'][$j]['quantity'] = $q[$y];
-        }//re-insert all items in the SESSION unless they are gone.
     }
 }
 

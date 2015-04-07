@@ -15,7 +15,7 @@
 	$sth->execute(array(':id' => $product_id));
 	$fetch = $sth->fetchAll();
 
-    $i=1;
+    $i=0;
     foreach ($fetch as $key) {
     	$availability[$i] = $key['availability'];
     	if ($availability[$i]<1){
@@ -34,6 +34,7 @@
     if(!is_array($_SESSION['basket'])){
         $_SESSION['basket']=array();
     }
+    //checks if the basket exists at all, if not it creates one. populate with the new data in either case.
 
     $max=count($_SESSION['basket']);
     $flag=0;
@@ -45,12 +46,33 @@
         }
     }
     //checks if the product already exists in the basket array.
+
+    $question = 'SELECT idMenu FROM item WHERE idItem = :id';
+    $sth = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+    $sth->execute(array(':id' => $product_id));
+    $fetch1 = $sth->fetchAll();
+
+    foreach ($fetch1 as $key1) {
+        
+        $idMenu = $key1['idMenu'];
+        if (!isset($_SESSION['menu']) && $idMenu != 4){
+            $_SESSION['menu'] = $idMenu;
+        }
+        elseif ($idMenu != $_SESSION['menu'] && $idMenu != 4){
+            $_SESSION['message'] = "9"; //Product Unavailable.
+            header('Location: '. $_POST['returnto']);
+            die();
+        }
+    }
+
+
     if ($flag==0){ 
         $_SESSION['basket'][$max]['product_id'] = $product_id;
         $_SESSION['basket'][$max]['quantity'] = $quantity;
     }   
-    //checks if the basket exists at all, if not it creates one. populate with the new data in either case.
+    
     elseif ($flag==1){
+
         $old_quantity = $_SESSION['basket'][$x]['quantity'];
         $new_quantity = $old_quantity + 1;
         $_SESSION['basket'][$x]['quantity'] = $new_quantity;
