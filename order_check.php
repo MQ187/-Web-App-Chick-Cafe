@@ -64,7 +64,7 @@ for($i=0;$i<$max;$i++){
     //if not, go back to the basket, remove and declare one as missing stock.
 }
 
-echo "<tr><td colspan='9'><center><form action=basket.php id='pay' method=POST>
+echo "<tr><td colspan='9'><center><form action=basket.php id='pay' method=POST hidden >
   <input type='hidden' value=" . $priority . " name='priority' />
     <input type=hidden name=orderOK value='ok' />
     <input type=submit name=order value= 'Pay Now' />

@@ -55,14 +55,20 @@
     foreach ($fetch1 as $key1) {
         
         $idMenu = $key1['idMenu'];
-        if (!isset($_SESSION['menu']) && $idMenu != 4){
+        if (!isset($_SESSION['menu']) && $idMenu == 4){} 
+        //if no menu assigned and menu = drinks, dont give a value to the menu variable in session.
+        
+        elseif (!isset($_SESSION['menu'])){
             $_SESSION['menu'] = $idMenu;
         }
+        //if no menu assigned and menu not equal to drinks, give it  value.
         elseif ($idMenu != $_SESSION['menu'] && $idMenu != 4){
             $_SESSION['message'] = "9"; //Product Unavailable.
             header('Location: '. $_POST['returnto']);
             die();
         }
+        //if menu assigned != to session variable & current menu not drinks, then return an error 
+
     }
 
 

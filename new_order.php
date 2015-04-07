@@ -18,7 +18,7 @@ if (isset($_POST['priority'])){
 else{
     $priority = 0;
 }
-$idPayment = $_POST['idPayment'];
+$idPayment = intval($_POST['idPayment']);
 $th = 0;
 $tm = 0;
 $ts = 0;
@@ -99,17 +99,6 @@ else{
 }
 $etc = $hours . ":" . $minutes . ":" . $seconds;
 
-
-var_dump($total);
-echo "<br>";
-var_dump($missing);
-echo "<br>";
-var_dump($max);
-echo "<br>";
-var_dump($priority);
-echo "<br>";
-var_dump($etc);
-
 $question="INSERT INTO `order` (`idCustomer`, `orderPriority`, `etc`) VALUES(:idCustomer,:orderPriority,:etc)";
 $add = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 $add->execute(array(':idCustomer' => $_SESSION['id'], ':orderPriority' => $priority, ':etc' => $etc));
@@ -125,11 +114,14 @@ for($i=0;$i<$max;$i++){
     $add->execute(array(':idOrder' => $idorder, ':idItem' => $product_id, ':quantity' => $quantity));
     //create an orderitem for each item in the basket one by one
 
-
-
-
+    $question = 'SELECT Ingredients.idIngredients as id, availability, quantity FROM Ingredients JOIN itemIngredients WHERE itemIngredients.idItem = :id';
+    $sth = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+    $sth->execute(array(':id' => $product_id));
+    $fetch = $sth->fetchAll();
 
     foreach ($fetch as $key) {
+        echo "<br>";
+        var_dump($key);
         $idIngredient = $key['idIngredient'];
         $availability = $key['availability'];
         $q = $key['quantity'];
@@ -137,7 +129,7 @@ for($i=0;$i<$max;$i++){
         $availability = $availability - ($quantity * $q);
 
         $question3 = 'UPDATE Ingredients SET availability = :availability WHERE idIngredients = :id';
-        $sth3 = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+        $sth3 = $db->prepare($question3, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
         $sth3->execute(array(':availability' => $availability, ':id' => $idIngredients));
         //update the stock
 
@@ -146,19 +138,16 @@ for($i=0;$i<$max;$i++){
     //get the current stock of each item & change it.
 }
 
-$question3 = 'UPDATE `payment` SET `idOrder` = :idorder WHERE `idPayment` = :idPayment';
-        $sth3 = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-        $sth3->execute(array(':idorder' => $idorder, ':idPayment' => $idPayment));
-        //add the order id to the payment previously created.
+var_dump($idorder);
+var_dump($idPayment);
 
-
-
-
+$question4 = 'UPDATE payment SET idOrder = :idOrder WHERE idPayment = :idPayment';
+$sth4 = $db->prepare($question4, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+$sth4->execute(array(':idOrder' => $idorder, ':idPayment' => $idPayment));
+//add the order id to the payment previously created.
 
 $_SESSION['basket'] = array();
-//header("Location:customerDash.php");
-
-
+header("Location:customerDash.php");
 
 ?>
 

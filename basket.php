@@ -95,7 +95,7 @@ if (isset($_POST['orderOK'])){
     $priority = $_POST['priority'];
     if ($priority == true) { $total = $total * 1.05; }
     
-    echo "<tr><td colspan='9'><center><form action=pay.php id='pay' method=POST>
+    echo "<tr><td colspan='9'><center><form action=pay.php id='pay' method=POST hidden>
           <input type='checkbox' value=". $priority ." name='priority'/>
           <input type='text' value=".$total." name='total' />
           <input type=hidden name=orderOK value='ok' />

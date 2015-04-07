@@ -5,8 +5,6 @@ require_once("db_config.php");
 date_default_timezone_set('UTC');
 // set the default timezone to use.
 
-var_dump($_POST);
-
 $priority = $_POST['priority'];
 if ($priority == 1)
 {$checked = 'checked';}
@@ -55,8 +53,8 @@ else{
 
 }
 
-echo "<form action=new_order.php method=POST id='ORDER'>
-                <input type='hidden' value='".$idPayment."' name='idPayment' />
+echo "<form action=new_order.php method=POST id='ORDER' hidden >
+                <input type='hidden' value= ".$idPayment." name='idPayment' />
                 <input type='checkbox' ".$checked." name='priority' />
                 <input type=submit name=ORDER '/>
                 </form>";
