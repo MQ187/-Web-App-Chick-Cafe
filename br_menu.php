@@ -165,7 +165,7 @@ if ($time<$endTime && $time>$startTime){
                         </table>
                 </li>
                 <br>
-                <li><i>Lunch Hot Drinks</i>
+                <li><i>Breakfast Hot Drinks</i>
                     <table id="tfhover" class="tftable" border="1">
                         <tr>
                         <th>Title</th><th>Description</th><th>Price</th><th>Type</th><?php if($userType=='customer'  && $OFB == true){echo"<th>Add to Basket</th>";} ?>
