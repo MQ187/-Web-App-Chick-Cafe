@@ -13,6 +13,11 @@ include('security.php');
     <head>
         <title>Main | Chick Cafe</title>
         <link type="text/css" href="styles.css" rel="stylesheet" media="screen" />
+        <style>
+          h2, h3 {
+            color:white;
+          }
+        </style>
     </head>
 
     <body>

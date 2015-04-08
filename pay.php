@@ -46,11 +46,11 @@ if (!isset($_POST['orderOK'])){
     	<table border=0 ><tr><td width = 200px></td>
     		<td>
     	<div id="cardbutton">
-            <input type='image'  name='submit' src='/images/card.png' width="200px" />
+            <input type='image'  name='submit' src='images/card.png' width="200px" />
 		</div>
 		</td><td width = 100px></td><td>
 		<div id="bankbutton">
-            <input type='image'  name='submit' src='/images/bank.png' width="200px" />
+            <input type='image'  name='submit' src='images/bank.png' width="200px" />
 		</div>
 		</td><td width = 200px></td></tr><tr><td colspan=5>
 		<div id="card" class="pay">
