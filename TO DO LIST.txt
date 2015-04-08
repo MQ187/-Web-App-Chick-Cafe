@@ -1,6 +1,5 @@
 3. Employee Dash -  only see orders that are for the current "menu" don't move to the next until all are satisfied
 6. VIP - No way to see current VIP status (managers).
-7. Notification - Order Ready
 8. Notification - Late Order
 9. Monthly - DB / Reports production.
 
