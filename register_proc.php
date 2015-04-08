@@ -63,8 +63,11 @@
 			:discountT, :discountV, :startTime)";
 		$get = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 		$get->execute(array(':vip' => 0,':discountT' => 0, ':discountV' => 1, ':startTime' => $date));
+		$vipid = intval($db->lastInsertId());
 
 		$_SESSION['vip'] = 0;
+		$_SESSION['vipid'] = $vipid;
+	   	$_SESSION['vipT'] = 0;
 		$_SESSION['vipD'] = 0;
 
 		ini_set('session.cookie_lifetime', 28800);

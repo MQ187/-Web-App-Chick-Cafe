@@ -106,7 +106,9 @@
 	   							}
 	   							if ($key2['endTime'] == null || $key2['endTime'] > $date || $key2['endTime'] == "0000-00-00"){ //date OK?
 
+	   								$_SESSION['vipid'] = $key2['idDiscounts'];
 	   								$_SESSION['vip'] = $key2['vipMembership'];
+	   								$_SESSION['vipT'] = $key2['discountType'];
 
 	   								if ($key2['discountType'] == 0){ // fixed
 

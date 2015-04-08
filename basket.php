@@ -75,22 +75,46 @@ for($i=0 ; $i < $max ; $i++){
 		    <input type='hidden' value='basket.php' name='returnto' />
             <input type='image' name='submit' src='images/del.png' width=30 />
 		    </form></div></td>";
-            //<input type=submit name=id value= '-1' />
 		echo '<td>' . $quantity . '</td>';
 		echo "<td><div class='add'><form action=addBasket.php method=POST>
 		    <input type='hidden' value=".$id[$x]." name='product_id' />
 		    <input type='hidden' value='basket.php' name='returnto' />
             <input type='image' name='submit' src='images/add.png' width=30 />
 		    </form></div></td>";
-            //<input type=submit name=id value= '+1' />
 		$sum = $quantity * $price[$x];
 		echo '<td> &pound;' . $sum . '</td>';
 		$total = $total + $sum;
 		$x++;
 	}
-	}
+}
+//Gets each item from the basket, gets the relevant details for each and displays them along with a + and - button to edit quantities.
 
-echo '<tr><td colspan="6"></td><td><b>Total:</b></td><td> &pound;' . $total . '</td></tr>';
+
+if ($_SESSION['vipT'] == "0"){
+  $type = 'Fixed';
+  $discountRate = intval($_SESSION['vipD']);
+}
+//get fixed discount value
+elseif ($_SESSION['vipT'] == "1"){
+  $type = "Flex";
+
+  $y=0;
+  foreach ($_SESSION['vipFlex'] as $key) {
+    if( $total > intval($_SESSION['vipFlex'][$y]['lo']) && $total < intval($_SESSION['vipFlex'][$y]['up'])){
+      $discountRate = intval($_SESSION['vipFlex'][$y]['v']);
+      break;
+    }
+    else{
+      $y++;
+    }
+  }
+}
+//get flex Discount value.
+$d = $total * ($discountRate / 100);
+$total = $total - $d;
+//Discount the price.
+
+echo '<tr><td colspan="4"></td><td colspan="2">Discount = '.$discountRate.'%</td><td><b>Total:</b></td><td> &pound;' . $total . '</td></tr>';
 if (isset($_POST['orderOK'])){
     $priority = $_POST['priority'];
     if ($priority == true) { $total = $total * 1.05; }
@@ -99,6 +123,7 @@ if (isset($_POST['orderOK'])){
           <input type='checkbox' value=". $priority ." name='priority'/>
           <input type='text' value=".$total." name='total' />
           <input type=hidden name=orderOK value='ok' />
+          <input type=hidden name='discounted' value=" .$d. " />
           <input type=submit name=order value= 'Pay Now' />
           </form></center></td></tr>";  
 
@@ -125,13 +150,14 @@ else{
     $cmeal = 3;
   }
 
+if (isset($_SESSION['menu'])){
   switch ($_SESSION['menu']) {
     case '2':
     case '6':
     case '9':
       //Lunch
       $meal = "Lunch";
-      $INTmean = 2;
+      $INTmeal = 2;
       $aTime = '12:00';
       break;
 
@@ -140,10 +166,12 @@ else{
     case '10':
       //Dinner
       $meal = "Dinner";
-      $INTmean = 3;
+      $INTmeal = 3;
       $aTime = '18:00';
       break;
   }
+}
+
 
 
   echo "<tr><td colspan='9'><center><form action=order_check.php id='check' method=POST>
@@ -151,12 +179,18 @@ else{
 
         <input type=submit name=order value= 'Pay Now' ";
 
-        if ($cmeal < $INTmeal){
-          echo "onClick='return confirm(\'You are about to order ahead for ".$meal.", this order will not be available 
-                until ".$aTime.". Are you sure you wish to order? '.esc_attr($this->event_name).'?\')'"; 
+        if (isset($_SESSION['menu'])){
+          if ($cmeal < $INTmeal){
+            echo "onclick=\"javascript:return confirm('You are about to order ahead for ";
+            echo $meal;
+            echo ", this order will not be available until ";
+            echo $aTime;
+            echo ". Are you sure you wish to order?')\""; 
+          }
         }
+        //asks for confirmation to create an "advance order" from user.
 
-  echo "/>
+  echo " />
         </form></center></td></tr>";  
 }
 

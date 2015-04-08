@@ -1,5 +1,3 @@
-1. Order - Add VIP Discounts 
-2. Basket - Add current Discount to basket (visual)
 3. Employee Dash -  only see orders that are for the current "menu" don't move to the next until all are satisfied
 4. Update User - Add checks to make sure the email doesnt already exist in DB.
 5. Refund - No way to check refunds other than report (?)

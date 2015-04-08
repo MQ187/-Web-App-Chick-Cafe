@@ -14,8 +14,8 @@ else{
 }
 
 $total = $_POST['total'];
-$iddiscount = 1;
-$discounted = 0;
+$iddiscount = $_SESSION['vipid'];
+$discounted = $_POST['discounted'];
 
 if (!isset($_POST['orderOK'])){
 	header("Location: basket.php");

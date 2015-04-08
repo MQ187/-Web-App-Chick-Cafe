@@ -15,6 +15,8 @@
 
 		 <?php
             require_once('nav/menus.php');
+            session_start();
+            //var_dump($_SESSION);
          ?>
 
     </header>
