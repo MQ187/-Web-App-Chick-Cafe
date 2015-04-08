@@ -16,7 +16,7 @@ else{
 }
 //gets the opening/closing time and current time
 
-$OFB = 0;
+$OFB = 1;
 
 if ($time<$endTime && $time>$startTime){
     $OFB = 1;
@@ -68,7 +68,7 @@ if ($time<$endTime && $time>$startTime){
                             echo '<td>'. $des[$i] .'</td>';
                             echo '<td> &pound;'. $price[$i] .'</td>';
                             echo '<td>'. $type[$i] .'</td>';
-                            if($userType=='customer' && $OFB == true){echo "<td><form action='addBasket.php method=POST>
+                            if($userType=='customer' && $OFB == true){echo "<td><form action='addBasket.php' method=POST>
                                                             <input type='hidden' value=".$id[$i]." name='product_id' />
                                                             <input type='hidden' value='dr_menu.php' name='returnto' />
                                                             <input type=submit name=id value=Add />

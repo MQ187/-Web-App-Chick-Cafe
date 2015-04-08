@@ -21,9 +21,7 @@
 
 		<a href="index.php"><img align="middle" width="100%" heigth="350px" src="images/large_main.jpg"/></a>
 
-	
-	<footer>
-		<strong>Chick Cafe</strong> is a very <strong>popular</strong> cafeteria in the center of <strong>Islington, London</strong> that offers made to order <strong>food</strong> and <strong>drinks.</strong>
-	</footer>
+<footer>
+</footer>
 	</body>
 </html>
