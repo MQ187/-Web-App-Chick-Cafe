@@ -111,7 +111,7 @@
                             $i++;
                             }
                             if (count($fetch) == 0){
-                              echo '<td>Nothing to display</td><td></td><td></td><td></td><td></td><td></td>';
+                              echo '<td>Nothing to display</td><td></td><td></td><td></td>';
                             }
 
                             if(isset($_POST['Active'])){
