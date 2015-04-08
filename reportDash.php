@@ -1,11 +1,4 @@
-<?php/*
-session_start(); 
-if (!isset($_SESSION['logedIn'])) { $_SESSION['logedIn'] = false;}
-if (!isset($_SESSION['AccountType'])) {$_SESSION['AccountType'] = "NONE";}
-if ($_SESSION['loggedIn'] == false) {header('Location: login.php');}
-if ($_SESSION['logedIn'] == true && $_SESSION['AccountType'] == "customer") {header('Location: customerDash.php');}
-elseif ($_SESSION['logedIn'] == true && $_SESSION['AccountType'] == "employee") {header('Location: employeeDash.php');}
-*/
+<?php
 ?>
 
 <!DOCTYPE html>
@@ -43,10 +36,5 @@ elseif ($_SESSION['logedIn'] == true && $_SESSION['AccountType'] == "employee") 
             </ul>
         </nav>
     </body>
-    
-    <footer>
-        <strong>Chick Cafe</strong> is a very <strong>popular</strong> cafeteria in the center of <strong>Islington, London</strong> that offers made to order <strong>food</strong> and <strong>drinks.</strong>
-    </footer>
 
-    </body>
 </html>

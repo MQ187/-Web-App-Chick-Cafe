@@ -68,11 +68,5 @@
         echo '<META HTTP-EQUIV="Refresh" Content="0; URL=stock.php">'; 
         }
     ?>
-  
-    
-    <footer>
-        <strong>Chick Cafe</strong> is a very <strong>popular</strong> cafeteria in the center of <strong>Islington, London</strong> that offers made to order <strong>food</strong> and <strong>drinks.</strong>
-    </footer>
-
     </body>
 </html>

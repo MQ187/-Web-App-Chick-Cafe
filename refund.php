@@ -54,9 +54,6 @@
 	            </form>
 	        </div>
 	    </div>
-	<footer style="padding-top:450px;">
-        <strong>Chick Cafe</strong> is a very <strong>popular</strong> cafeteria in the center of <strong>Islington, London</strong> that offers made to order <strong>food</strong> and <strong>drinks.</strong>
-    </footer>
 	</body>
 </html>
 
