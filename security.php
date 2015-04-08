@@ -23,26 +23,55 @@
 			}
 			//if he isnt a manager just assign the usertype
 
-			if ($usertype == $access){
-				//we're good! :) access granted!
+			if (is_array($access)){
+				foreach ($access as $key) {
+					if ($usertype == $key){
+					//we're good! :) access granted!
+						$authorised = 1;
+						break;
+					}
+				}
+				if !isset($authorised){
+					unset($_SESSION['access']);
+					$_SESSION['message'] = "10";
+					switch ($usertype) {
+						case 'Customer':
+							header("Location: customerDash.php");
+							break;
+						case 'Employee':
+							header("Location: employeeDash.php");
+							break;
+						case 'Manager':
+							header("Location: managerDash.php");
+							break;
+						default:
+							header("Location: login.php");
+							break;
+					}//access denied, redirect to relevant dash!
+				}
 			}
 			else{
-				unset($_SESSION['access']);
-				$_SESSION['message'] = "10";
-				switch ($usertype) {
-					case 'Customer':
-						header("Location: customerDash.php");
-						break;
-					case 'Employee':
-						header("Location: employeeDash.php");
-						break;
-					case 'Manager':
-						header("Location: managerDash.php");
-						break;
-					default:
-						header("Location: login.php");
-						break;
-				}//access denied, redirect to relevant dash!
+				if ($usertype == $access){
+					//we're good! :) access granted!
+				}
+				else{
+					unset($_SESSION['access']);
+					$_SESSION['message'] = "10";
+					switch ($usertype) {
+						case 'Customer':
+							header("Location: customerDash.php");
+							break;
+						case 'Employee':
+							header("Location: employeeDash.php");
+							break;
+						case 'Manager':
+							header("Location: managerDash.php");
+							break;
+						default:
+							header("Location: login.php");
+							break;
+					}//access denied, redirect to relevant dash!
+				}
 			}
 		}
 		else{
@@ -70,6 +99,7 @@ $UsertypeNeeded can be: "owner"
 						"manager"
 						"employee"
 						"customer"
+						or array("owner","manager")     - Any Combination
 
 */
 ?>
