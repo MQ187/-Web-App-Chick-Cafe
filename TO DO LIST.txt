@@ -3,8 +3,6 @@
 7. Notification - Order Ready
 8. Notification - Late Order
 9. Monthly - DB / Reports production.
-11. Security - Implement!
-13. Customer Dash - order date error
 
 
 EXTRA: 
