@@ -1,6 +1,8 @@
 <?php 
     session_start(); 
     include("db_config.php");
+    $_SESSION['access'] = array("manager","owner");
+    include('security.php');
 ?>
 
 <!DOCTYPE html>

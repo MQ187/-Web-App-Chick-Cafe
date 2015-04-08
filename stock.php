@@ -4,6 +4,9 @@ include("db_config.php");
 require_once("messages.php");
 $userType = $_SESSION['userType'];
 $id = $_SESSION['id'];
+
+$_SESSION['access'] = array("owner","manager", "employee");
+include('security.php');
 ?>
 <!DOCTYPE html>
     <head>

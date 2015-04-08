@@ -1,3 +1,9 @@
+<?php
+session_start();
+$_SESSION['access'] = "customer";
+include('security.php');
+?>
+
 <!DOCTYPE html>
     <head>
         <title>Customer Dash | Chick Cafe</title>

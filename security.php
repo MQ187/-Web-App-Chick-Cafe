@@ -1,10 +1,10 @@
 <?php
 	session_start();
 
-	if (isset($_SESSION['usertype']) && isset($_SESSION['logedin'])){
+	if (isset($_SESSION['userType']) && isset($_SESSION['logedIn'])){
 		//is a session even set?
 
-		if ($_SESSION['logedin'] == true){
+		if ($_SESSION['logedIn'] == true){
 			//is the user logged in?
 			
 			$access = $_SESSION['access'];
@@ -14,12 +14,12 @@
 					$usertype = "owner";
 				}
 				else{
-					$usertype = $_SESSION['usertype'];
+					$usertype = $_SESSION['userType'];
 				}
 			//checks if the manager logged in is an owner. If he is, set the usertype to owner, otherwise to manager.
 			}
 			else{
-				$usertype = $_SESSION['usertype'];
+				$usertype = $_SESSION['userType'];
 			}
 			//if he isnt a manager just assign the usertype
 
@@ -31,17 +31,17 @@
 						break;
 					}
 				}
-				if !isset($authorised){
+				if (!isset($authorised)){
 					unset($_SESSION['access']);
 					$_SESSION['message'] = "10";
 					switch ($usertype) {
-						case 'Customer':
+						case 'customer':
 							header("Location: customerDash.php");
 							break;
-						case 'Employee':
+						case 'employee':
 							header("Location: employeeDash.php");
 							break;
-						case 'Manager':
+						case 'manager':
 							header("Location: managerDash.php");
 							break;
 						default:
@@ -51,20 +51,20 @@
 				}
 			}
 			else{
-				if ($usertype == $access){
+				if ($access == $usertype){
 					//we're good! :) access granted!
 				}
 				else{
 					unset($_SESSION['access']);
-					$_SESSION['message'] = "10";
+					$_SESSION['message'] = "I'm stupid";
 					switch ($usertype) {
-						case 'Customer':
+						case 'customer':
 							header("Location: customerDash.php");
 							break;
-						case 'Employee':
+						case 'employee':
 							header("Location: employeeDash.php");
 							break;
-						case 'Manager':
+						case 'manager':
 							header("Location: managerDash.php");
 							break;
 						default:

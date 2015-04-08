@@ -1,4 +1,8 @@
 <?php
+
+	$_SESSION['access'] = array("owner","manager");
+	include('security.php');
+
 	if(isset($_POST['customerID'])){
 		session_start();
 		//Initialises the session.

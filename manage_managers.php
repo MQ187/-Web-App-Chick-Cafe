@@ -1,3 +1,7 @@
+<?php
+    $_SESSION['access'] = "owner";
+    include('security.php');
+?>
 <!DOCTYPE html>
 	<head>
 		<title>Main | Chick Cafe</title>

@@ -1,5 +1,9 @@
 <?php session_start(); 
 	include("db_config.php");
+    
+    $_SESSION['access'] = array("owner","manager","employee","customer");
+    include('security.php');
+
 
 $userType = $_SESSION['userType'];
 $id = $_SESSION['id'];

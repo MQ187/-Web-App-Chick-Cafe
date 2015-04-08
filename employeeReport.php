@@ -1,6 +1,9 @@
 <?php 
     require_once("db_config.php");
     session_start();
+
+    $_SESSION['access'] = "employee";
+    include('security.php');
 ?>
 <!DOCTYPE html>
     <head>

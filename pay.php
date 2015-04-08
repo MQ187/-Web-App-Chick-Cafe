@@ -4,6 +4,10 @@ require_once("db_config.php");
 // Connect to the Database and Select the ccdb database.
 require_once("messages.php");
 //adds the check for all possible errors as well as the warnings.
+
+$_SESSION['access'] = "customer";
+include('security.php');
+
 if (isset($_POST['priority'])){
     $priority = 1;
     $checked = "checked";    

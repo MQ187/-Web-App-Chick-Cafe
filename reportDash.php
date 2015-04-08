@@ -1,4 +1,7 @@
 <?php
+$_SESSION['access'] = array("owner","manager");
+include('security.php');
+
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +29,7 @@
                         <tr><td><li><a class="report_button" href="orderReport.php">Order</a></li></td>
                         <td><li><a class="report_button" href="activeCustomerReport.php">Active Users</a></li></td> 
                         <td><li>
-                            <form action=AutoPDFReport.php method=POST>
+                            <form action=AutoPDFReport.php method=POST target="_blank">
                                 <input type='submit' class="report_button" value='Generate All' />
                      <?php echo'<input type="hidden" name="startDate" value='.date("Y-m-d", strtotime("-1 month")).'/>
                                 <input type="hidden" name="endDate" value='.date('Y-m-d').' />'; ?>

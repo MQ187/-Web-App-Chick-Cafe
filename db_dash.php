@@ -4,6 +4,8 @@ require_once("db_config.php");
 // Connect to the Database and Select the ccdb database.
 require_once("messages.php");
 //adds the check for all warnings.
+$_SESSION['access'] = "owner";
+include('security.php');
 $dir = 'DBbackup/';
 $files = scandir($dir);
 $max = count($files);

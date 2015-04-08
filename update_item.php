@@ -2,6 +2,9 @@
 session_start();
 require_once("db_config.php");
 // Connect to the Database and Select the ccdb database.
+$_SESSION['access'] = array("owner","manager");
+include('security.php');
+
 ?>
 
 <!DOCTYPE html>

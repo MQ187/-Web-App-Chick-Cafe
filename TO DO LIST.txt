@@ -4,7 +4,17 @@
 8. Notification - Late Order
 9. Monthly - DB / Reports production.
 11. Security - Implement!
+12. Basket - wont let new products from lunch menu (?)
+13. Customer Dash - order date error
 
 
 EXTRA: 
 DB - Finish the "clean sheet" to use during Presentation & submit
+
+Useless pages:
+
+notification_pop.php
+monthly.js
+login_test.php
+jquery.js
+DB.sql

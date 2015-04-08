@@ -1,3 +1,7 @@
+<?php
+$_SESSION['access'] = "customer";
+include('security.php');
+?>
 <!DOCTYPE html>
     <head>
         <title>Customer Records | Chick Cafe</title>

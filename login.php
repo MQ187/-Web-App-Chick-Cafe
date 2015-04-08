@@ -1,5 +1,20 @@
 <?php 
 session_start(); 
+
+if ($_SESSION['logedIn'] == true){
+    switch ($_SESSION['userType']) {
+        case 'customer':
+            header("Location: customerDash.php");
+            break;
+        case 'employee':
+            header("Location: employeeDash.php");
+            break;
+        case 'manager':
+            header("Location: managerDash.php");
+            break;
+    }//access denied, redirect to relevant dash!
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en-US">

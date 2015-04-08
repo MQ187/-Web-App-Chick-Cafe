@@ -6,6 +6,8 @@ require_once("messages.php");
 //adds the check for all possible errors as well as the warnings.
 require_once("basketNotification.php");
 //adds the notification for a basket and shows the user's vip status.
+$_SESSION['access'] = "customer";
+include('security.php');
 
 if (!isset($_SESSION['basket'])) {
 	$_SESSION['basket'] = array();
