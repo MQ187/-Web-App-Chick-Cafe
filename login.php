@@ -13,6 +13,8 @@ if ($_SESSION['logedIn'] == true){
             header("Location: managerDash.php");
             break;
     }//access denied, redirect to relevant dash!
+    require_once("messages.php");
+//adds the check for all possible errors as well as the warnings.
 }
 
 ?>

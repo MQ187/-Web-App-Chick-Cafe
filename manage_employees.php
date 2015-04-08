@@ -1,6 +1,9 @@
 <?php
     $_SESSION['access'] = array("owner","manager");
     include('security.php');
+
+    require_once("messages.php");
+//adds the check for all possible errors as well as the warnings.
 ?>
 <!DOCTYPE html>
 	<head>
