@@ -72,7 +72,7 @@ if ($time<$endTime && $time>$startTime){
                             echo '<td> &pound;'. $price[$i] .'</td>';
                             echo '<td>'. $type[$i] .'</td>';
                             if($userType=='customer'  && $OFB == true){echo "<td><form action='addBasket.php' method='POST'>
-                                                            <input type='hidden' value=".$id[$x]." name='product_id' />
+                                                            <input type='hidden' value=".$id[$i]." name='product_id' />
                                                             <input type='hidden' value='lu_menu.php' name='returnto' />
                                                             <input type=submit name=id value=Add />
                                                             </form></td>";}
@@ -113,7 +113,7 @@ if ($time<$endTime && $time>$startTime){
                             echo '<td> &pound;'. $price[$i] .'</td>';
                             echo '<td>'. $type[$i] .'</td>';
                             if($userType=='customer'  && $OFB == true){echo "<td><form action='addBasket.php' method='POST'>
-                                                            <input type='hidden' value=".$id[$x]." name='product_id' />
+                                                            <input type='hidden' value=".$id[$i]." name='product_id' />
                                                             <input type='hidden' value='lu_menu.php' name='returnto' />
                                                             <input type=submit name=id value=Add />
                                                             </form></td>";}
@@ -155,7 +155,7 @@ if ($time<$endTime && $time>$startTime){
                             echo '<td> &pound;'. $price[$i] .'</td>';
                             echo '<td>'. $type[$i] .'</td>';
                             if($userType=='customer'  && $OFB == true){echo "<td><form action='addBasket.php' method='POST'>
-                                                            <input type='hidden' value=".$id[$x]." name='product_id' />
+                                                            <input type='hidden' value=".$id[$i]." name='product_id' />
                                                             <input type='hidden' value='lu_menu.php' name='returnto' />
                                                             <input type=submit name=id value=Add />
                                                             </form></td>";}
@@ -197,7 +197,7 @@ if ($time<$endTime && $time>$startTime){
                             echo '<td> &pound;'. $price[$i] .'</td>';
                             echo '<td>'. $type[$i] .'</td>';
                             if($userType=='customer'  && $OFB == true){echo "<td><form action='addBasket.php' method='POST'>
-                                                            <input type='hidden' value=".$id[$x]." name='product_id' />
+                                                            <input type='hidden' value=".$id[$i]." name='product_id' />
                                                             <input type='hidden' value='lu_menu.php' name='returnto' />
                                                             <input type=submit name=id value=Add />
                                                             </form></td>";}

@@ -4,7 +4,6 @@
 8. Notification - Late Order
 9. Monthly - DB / Reports production.
 11. Security - Implement!
-12. Basket - wont let new products from lunch menu (?)
 13. Customer Dash - order date error
 
 
