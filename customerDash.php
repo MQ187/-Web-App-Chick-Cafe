@@ -47,7 +47,7 @@ require_once("messages.php");
                             $i=1;
                             foreach($fetch as $key){
                                 $idorder[$i] = $key['idorder'];
-                                $time[$i] = $key['orderTimeS'];
+                                $times[$i] = $key['orderTimeS'];
                                 $priority[$i] = $key['orderPriority'];
                                 $status[$i] = $key['orderStatus'];
                                 echo '<tr>';
@@ -68,7 +68,7 @@ require_once("messages.php");
                                     }
                                     echo '</table></td>';
 
-                                echo '<td>'. $time[$i] .'</td>';
+                                echo '<td>'. $times[$i] .'</td>';
                                 echo '<td>'. $priority[$i] .'</td>';
                                 echo '<td>'. $status[$i] .'</td>';
                                 echo '</tr>';
