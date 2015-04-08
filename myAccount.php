@@ -44,6 +44,7 @@ $id = $_SESSION['id'];
                 $i=1;
                 foreach($fetch as $key){
                     echo '<form action="update_user.php" method="POST">';
+                    echo '<input type="hidden" name="returnto" value="myAccount.php" />';
                     echo '<tr><td><p>First Name:</p></td><td><input type="text" name="name" size="20" maxlength="45" value=' . $key['name'].'></td></tr>';
                     echo '<tr><td><p>Surname:</p></td><td><input type="text" name="surname" size="20" maxlength="45" value=' . $key['surname'].'></td></tr>';
                     echo '<tr><td><p>E-mail:</p></td><td><input type="email" name="email" size="20" maxlength="45" value=' . $key['email'].'></td></tr>'; 
@@ -62,6 +63,7 @@ $id = $_SESSION['id'];
                 $i=1;
                 foreach($fetch as $key){
                     echo '<form action="update_user.php" method="POST">';
+                    echo '<input type="hidden" name="returnto" value="myAccount.php" />';
                     echo '<tr><td><p>Name:</p></td><td><input type="text" name="name" size="20" maxlength="45" value=' . $key['name'].'></td></tr>';
                     echo '<tr><td><p>E-mail:</p></td><td><input type="email" name="email" size="20" maxlength="45" value=' . $key['email'].'></td></tr>'; 
                     echo '<tr><td><p>Password:</p></td><td><input type="password" size="20" maxlength="8" name="password" value=' . $key['password'].'></td></tr>';
@@ -78,6 +80,7 @@ $id = $_SESSION['id'];
                 $i=1;
                 foreach($fetch as $key){
                     echo '<form action="update_user.php" method="POST">';
+                    echo '<input type="hidden" name="returnto" value="myAccount.php" />';
                     echo '<tr><td><p>Name:</p></td><td><input type="text" name="name" size="20" maxlength="45" value=' . $key['name'].'></td></tr>';
                     echo '<tr><td><p>E-mail:</p></td><td><input type="email" name="email" size="20" maxlength="45" value=' . $key['email'].'></td></tr>'; 
                     echo '<tr><td><p>Password:</p></td><td><input type="password" size="20" maxlength="8" name="password" value=' . $key['password'].'></td></tr>';

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
     <head>
-        <title>Customer Dash | Chick Cafe</title>
+        <title>Customer Records | Chick Cafe</title>
         <link type="text/css" href="styles.css" rel="stylesheet" media="screen" />
         <link rel="icon" type="image/x-ico" href="favicon.ico" />
         <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
@@ -19,8 +19,8 @@
     </header>
         <nav>
             <ul>
-                <li><i>Order History</i>
-                        <table id="tfhover" class="tftable" border="1">
+                <li><i>Order Records - 2 years</i>
+                    <table id="tfhover" class="tftable" border="1">
                         <tr>
                         <th>Order ID</th><th>Order Details</th><th>Order Date</th><th>Order Priority</th><th>Order Status</th>
                         </tr>
@@ -28,9 +28,11 @@
                             require_once("db_config.php");
                             session_start();
 
-                            $time = $myDate = date("Y-m-d h:i:s", strtotime( date( "Y-m-d", strtotime( date("Y-m-d") ) ) . "-1 month" ) );
+                            $timee = $myDate = date("Y-m-d h:i:s", strtotime( date( "Y-m-d", strtotime( date("Y-m-d") ) ) . "-1 month" ) );
+                            $times = $myDate = date("Y-m-d h:i:s", strtotime( date( "Y-m-d", strtotime( date("Y-m-d") ) ) . "-2 years" ) );
 
-                            $question="SELECT * FROM `order` WHERE idCustomer= :id AND orderTimeS BETWEEN '".$time."' AND NOW() ORDER BY idOrder DESC;";
+
+                            $question="SELECT * FROM `order` WHERE idCustomer= :id AND orderTimeS BETWEEN '".$times."' AND '".$timee."' ORDER BY idOrder DESC;";
                             $sth = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
                             $sth->execute(array(':id' => $_SESSION['id']));
                             $fetch = $sth->fetchAll();
@@ -70,7 +72,8 @@
                             }
                         ?>
                         </table>
-                        <a href="customerRecords.php" style="text-decoration:none;color:white;"><center><h4>View Older</h4></center></a>
+                           <a href="customerDash.php" style="text-decoration:none;color:white;"><center><h4>Back to current orders</h4></center></a>
+
                 </li>  
             </ul>
         </nav>
