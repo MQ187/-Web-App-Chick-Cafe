@@ -8,10 +8,9 @@
 8. Notification - Late Order
 9. Monthly - DB / Reports production.
 10. Reports - Pending Orders
-11. Security - Access checks
+11. Security - Implement!
 
 
 EXTRA: 
-ALL - Remove footer
 Customer Dash - Customer Records (view orders older than 1month + search in them)
 DB - Finish the "clean sheet" to use during Presentation & submit
