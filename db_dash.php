@@ -46,14 +46,12 @@ $max2 = count($files);
                             echo '</td><td>';
                             echo date('d.m.Y h:i:s', $date[2]);
                             echo '</td><td>';
-                            echo "<form action='db_restore.php' method=POST>
-                                <input type='hidden' name='filename' value=" . $file . " />
-                                <input type='submit' name='submit' value='Restore now'/></form>";
+                            echo "<form action='db_restore.php' method=POST ><input type='hidden' name='filename' value=" . $file . " /><input type='submit' name='submit' value='Restore now' /></form>";
                             echo '</td><td><center>';
-                            echo "<form action='db_delete.php' method=POST>
+                            echo "<form action='db_delete.php' method=POST >
                                 <input type='hidden' name='filename' value=" . $file . " />
                                 <input type='image' name='submit' src='images/delete.png' width=30 />";
-                            echo '</center></td></tr>';
+                            echo '</form></center></td></tr>';
                             $l++;
                         }
                         if ($max = 0){
