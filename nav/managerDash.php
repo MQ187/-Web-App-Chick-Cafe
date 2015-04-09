@@ -1,7 +1,69 @@
+<?php 
+    require_once("db_config.php");
+    $d = date('Y-m-d');
+    $notifi = 0;
+    if (!isset($_SESSION['ignored'])){
+        $_SESSION['ignored'] = array();
+    }
+    $max = count($_SESSION['ignored']);
+
+    $question = "SELECT * FROM `order` WHERE DATE(orderTimeS) = '$d' AND orderStatus = 'Preparing'";
+    $sth = $db->prepare($question);
+    $sth->execute();
+    $fetch = $sth->fetchAll();
+
+    $x = 0;
+    foreach ($fetch as $key) {
+        $id[$x] = $key['idorder'];
+
+        for ($i=0; $i < $max; $i++) { 
+            if ($id == $_SESSION['ignore'][$i]['id']){
+                break(3);
+            }
+        }
+    
+        $etc = date('H-i-s', $key['etc']);
+        $Ordertime = date('H-i-s', $key['orderTimeS']);
+        $now = date('H-i-s');
+
+        $etch = intval(date('H', $etc));
+        $etci = intval(date('i', $etc));
+        $etcs = intval(date('s', $etc));
+        $Ordertimeh = intval(date('H', $Ordertime));
+        $Ordertimei = intval(date('i', $Ordertime));
+        $Ordertimes = intval(date('s', $Ordertime));
+        $th = $etch + $Ordertimeh;
+        $ti = $etci + $Ordertimei;
+        $ts = $etcs + $Ordertimes;
+
+        while ($ts > 60){
+            $ti++;
+            $ts = $ts - 60;
+        }
+        while ($ti > 60) {
+            $th++;
+            $ti = $ti - 60;
+        } 
+        if ($th > 24) {$th = 24;}
+
+        $t = $th . "-" . $ts . "-" . $ts;
+        //echo $t;
+
+        if ($t > $now){
+            $notifi++;
+        }
+        $x++;
+    }
+?>
+
 <div class="nav" >
     <ul>
         <li><a href="index.php">Home</a></li>
         <li><a href="managerDash.php">Current Orders</a></li>
+        <?php
+        echo '<li><a onclick="notifyme('.$notifi.')" id="notiBtn">Notifications <span style="margin-bottom:5px; border-radius: 25px 25px 25px; color: black; border: 
+            0px solid black; background:#e6c8a6; font-size:15px; padding:5px;" >'. $notifi .'</span></a></li>';
+        ?>
         <li><a href="reportDash.php">Reports</a></li>
         <li><a href="manage_employees.php">Employee Accounts</a></li>
         <?php
@@ -37,6 +99,18 @@
 
 <form id="backup" action='/db_backup.php' method=POST target="_blank" hidden >
         <input type='submit' value='Backup now'/>
+</form>
+
+<form id="ignore" action='/ignore_all.php' method=POST target="_blank" hidden >
+    <?php
+        $j = 0;
+        foreach ($id as $key) {
+            echo '<input id="'.$j.'" type="hidden" value="'. $key .'" />';
+            $j++;
+        }
+            echo '<input id="j" type="hidden" value="'. $j .'" />';
+    ?>
+    <input type='submit' value='Ignore'/>
 </form>
 
 <script type="text/javascript">
@@ -84,6 +158,35 @@
         if (owner == 1){
         document.getElementById("backup").submit();
         }
+    }
+
+    //All above JS is for automatic DB restore & automated reports.
+
+    function notifyme(counter){
+
+        if (counter > 1){    
+            j = document.getElementById("j").value;
+            list = "";
+            for (i = 0; i < j; i++) {
+                id[i] = document.getElementById(i).value;
+                list = list + "Order" + id[i] + ", ";
+            }
+            alert("There are several late orders" + list);
+            document.getElementById("ignore").submit();
+        }
+        else if(counter == 1){
+            idone = document.getElementById("j0").value;
+            orders = "Order" + idone;
+            alert("There is a late order: " + orders);
+            document.getElementById("ignore").submit();
+        }
+        else{
+            alert ("No notifications to display.");
+        }
+        setTimeout(function(){
+            location.reload();
+        },2000); 
+
     }
 
 </script>
