@@ -68,16 +68,16 @@ $id = $_SESSION['id'];
                                 echo '<td>'. $iditem[$i] .'</td>';
                                 switch($idMenu[$i]){
                                         case 1:
-                                            echo '<td>Breakfast Menu</td>';
+                                            echo '<td bgcolor="#2ecc71">Breakfast Menu</td>';
                                             break;
                                         case 2:
-                                            echo '<td>Lunch Menu</td>';
+                                            echo '<td bgcolor="#e67e22">Lunch Menu</td>';
                                             break;
                                         case 3:
-                                            echo '<td>Dinner Menu</td>';
+                                            echo '<td bgcolor="#3498db">Dinner Menu</td>';
                                             break;
                                         case 4:
-                                            echo '<td>Drinks Menu</td>';
+                                            echo '<td bgcolor="#f1c40f">Drinks Menu</td>';
                                             break;
                                 }
                                 echo '<td>'. $name[$i] .'</td>';
@@ -122,16 +122,16 @@ $id = $_SESSION['id'];
                                     echo '<td>'. $iditem[$i] .'</td>';
                                     switch($idMenu[$i]){
                                         case 1:
-                                            echo '<td>Breakfast Menu</td>';
+                                            echo '<td bgcolor="#2ecc71">Breakfast Menu</td>';
                                             break;
                                         case 2:
-                                            echo '<td>Lunch Menu</td>';
+                                            echo '<td bgcolor="#e67e22">Lunch Menu</td>';
                                             break;
                                         case 3:
-                                            echo '<td>Dinner Menu</td>';
+                                            echo '<td bgcolor="#3498db">Dinner Menu</td>';
                                             break;
                                         case 4:
-                                            echo '<td>Drinks Menu</td>';
+                                            echo '<td bgcolor="#f1c40f">Drinks Menu</td>';
                                             break;
                                     }
                                     echo '<td>'. $name[$i] .'</td>';
