@@ -74,7 +74,11 @@ require_once("messages.php");
 
 	                            echo '<tr>';
 	                            echo '<td>'. $pname[$i] .'</td>';
-	                            echo '<td>'. $des[$i] .'</td>';
+                              if($des[$i]<10){
+                                echo '<td bgcolor="#e74c3c">'. $des[$i] .'</td>';
+                              }else{
+	                              echo '<td>'. $des[$i] .'</td>';
+                              }
 	                            echo '<td> &pound;'. $price[$i] .'</td>';
 	                            if($userType=='manager'){    echo "<td><form action=update_stock.php method=POST>
                                                                   <input type=submit name=visID value=Update />
@@ -108,7 +112,11 @@ require_once("messages.php");
 
 	                            echo '<tr>';
 	                            echo '<td>'. $pname[$i] .'</td>';
-	                            echo '<td>'. $des[$i] .'</td>';
+	                            if($des[$i]<10){
+                                echo '<td bgcolor="#e74c3c">'. $des[$i] .'</td>';
+                              }else{
+                                echo '<td>'. $des[$i] .'</td>';
+                              }
 	                            echo '<td> &pound;'. $price[$i] .'</td>';
 	                            if($userType=='manager'){   echo "<td><form action=update_stock.php method=POST>
 	                                                              <input type=submit name=visID value=Update />
