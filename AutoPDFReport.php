@@ -39,6 +39,11 @@
 
 	//output the tables in a new pdf
 	$pdfAll->Output('AllReport.pdf', 'I');
+
+	$date = date('Y-m-d H:i:s');
+    $q = "INSERT INTO `reports`(`idmanager`, `date`, `type`) VALUES ('$_SESSION[id]','$date','All')";
+    $sth = $db->prepare($q);
+    $execute = $sth->execute();
 	
 	exit;
 ?>
