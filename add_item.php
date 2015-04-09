@@ -72,7 +72,7 @@
 
         echo '<tr><td><p>Price:</p></td><td><input type="text" name="price" required="required"/></td></tr>'; 
         echo '<tr><td><p>Preperation Time:</p></td><td><input type="text" name="prepTime" placeholder="HH:MM:SS" required="required"/></td></tr>';
-        echo '<tr><td><p>Daily Special:</p></td><td><input type="checkbox" name="isSpecial" value="Yes" required="required"/></td></tr>';
+        echo '<tr><td><p>Daily Special:</p></td><td><input type="checkbox" name="isSpecial" value="Yes" /></td></tr>';
     ?>  
     <tr><td colspan=2 align="center"><p><input type="submit" value="Add"></p></td></tr>
     </table>
