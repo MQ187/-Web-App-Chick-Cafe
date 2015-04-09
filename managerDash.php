@@ -10,7 +10,7 @@ require_once("messages.php");
 
 <!DOCTYPE html>
     <head>
-        <title>Customer Dash | Chick Cafe</title>
+        <title>Manager Dash | Chick Cafe</title>
         <link type="text/css" href="styles.css" rel="stylesheet" media="screen" />
     </head>
 
@@ -35,6 +35,7 @@ require_once("messages.php");
                             require_once("db_config.php");
                             // Connect to the Database and Select the ccdb database.
 
+                            //display all orders that are currently being processed
                             $question="SELECT * FROM `order` WHERE orderStatus = :status OR orderStatus = :status2";
                             $sth = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
                             $sth->execute(array(':status' => "Pending", ':status2' => "Preparing"));
@@ -50,6 +51,7 @@ require_once("messages.php");
                                 echo '<tr>';
                                 echo '<td>'. $idorder[$i] .'</td>';
 
+                                    //display an item list for each order
                                     $question2="SELECT quantity,name FROM orderItem JOIN item WHERE orderItem.idorder = :id AND orderItem.idItem = item.iditem";
                                     $sth2 = $db->prepare($question2, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
                                     $sth2->execute(array(':id' => $idorder[$i]));

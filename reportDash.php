@@ -25,6 +25,7 @@ require_once("messages.php");
             <ul id="rDash">
                 <li><i>Report</i></li>
                     <table>
+                        <!--Grid layout of all different report types as buttons-->
                         <tr><td><li><a class="report_button" href="customerSpendingReport.php">Customer Spending</a></li></td>
                         <td><li><a class="report_button" href="refundReport.php">Refund</a></li></td>
                         <td><li><a class="report_button" href="staffPerformanceReport.php">Staff Performance</a></li></td></tr>
@@ -32,8 +33,9 @@ require_once("messages.php");
                         <td><li><a class="report_button" href="activeCustomerReport.php">Active Users</a></li></td> 
                         <td><li>
                             <form action=AutoPDFReport.php method=POST target="_blank">
+                                <!--Generate all will generate a report for each type in the time period (a month ago - today)-->
                                 <input type='submit' class="report_button" value='Generate All' />
-                     <?php echo'<input type="hidden" name="startDate" value='.date("Y-m-d", strtotime("-1 month")).'/>
+                     <?php echo'<input type="hidden" name="startDate" value='.date("Y-m-d", strtotime("-1 month")).'/> 
                                 <input type="hidden" name="endDate" value='.date('Y-m-d').' />'; ?>
                             </form>
                         </td></tr>

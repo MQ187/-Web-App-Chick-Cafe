@@ -2,6 +2,8 @@
     //session_start();
     class report{
 
+
+        //refund report - select everyorder in the time period specified by the user and display all refund records between those dates 
         function rReportPDF($s, $e){
             require("db_config.php");
             $html="";
@@ -51,6 +53,7 @@
             return ($html);
         }
 
+        //get all orders made between the two dates inputted by customer
         function oReportPDF($s, $e){
             require("db_config.php");
             $html="";
@@ -100,6 +103,7 @@
             return ($html);
         }
 
+        //displays the name,surname,id of currently logged in customer and pending orders made on that date
         function acReportPDF(){
             require("db_config.php");
             $html="";
@@ -159,6 +163,7 @@
             return ($html);
         }
 
+        //calculate total amount spent by customer in the time period specified by user
         function csReportPDF($s, $e){
             require("db_config.php");
             $html="";
@@ -213,6 +218,7 @@
             return ($html);
         }
 
+        //calculate and displat various employee stats
         function spReportPDF($s, $e){
             require("db_config.php");
             $html="";

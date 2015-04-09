@@ -10,7 +10,7 @@
 		include("db_config.php");
 		// Connect to the Database and Select the tts database.
 		$encrypt_accNumber = sha1(md5($_POST['accountNumber']));
-
+		//insert posted fields from below into the refund table
 		$question="INSERT INTO refund(idCustomer,idManager,idOrder,accountNumber,date,ammount,details) VALUES(:idCustomer,
 				:idManager, :idOrder, :accountNumber, :date, :ammount, :details)";
 		
@@ -47,7 +47,7 @@
 	      <div class="title"><a>Refund</a></div>
 	        <div class="form-action">
 	            <form action="refund.php" method="POST">
-	                <ul>
+	                <ul><!--refund form values used to record refund-->
 	                    <li><input type="text" name="customerID" placeholder="Customer ID" class="text" required="required"/></li>
 	                    <li><input type="text" name="orderID" placeholder="Order ID" class="text" required="required"/></li>
 	                    <li><input type="password" name="accountNumber" placeholder="Account Number" class="text" required="required"/></li>

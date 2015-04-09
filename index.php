@@ -3,7 +3,7 @@
 	<head>
 		<title>Main | Chick Cafe</title>
 		<link type="text/css" href="styles.css" rel="stylesheet" media="screen" />
-		<script src="banner.js"></script>
+		<script src="banner.js"></script> 
             <script>
                 startTime();
             </script>
@@ -24,9 +24,7 @@
          ?>
 
     </header>
-
+        <!--banner uses javascript to transistion through 3 images-->
 		<a href="index.php"><img id="img1" align="middle" width="100%" heigth="350px" src="images/banner3.png"/></a>
 	</body>
-	<footer>
-</footer>
 </html>
