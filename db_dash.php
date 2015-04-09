@@ -6,9 +6,9 @@ require_once("messages.php");
 //adds the check for all warnings.
 $_SESSION['access'] = "owner";
 include('security.php');
-$dir = 'DBbackup/';
+$dir = './DBbackup/';
 $files = scandir($dir);
-$max = count($files);
+$max2 = count($files);
 ?>
 <!DOCTYPE html>
 <html>
@@ -37,11 +37,10 @@ $max = count($files);
             <tr>
                 <td><table id="tfhover" class="tftable" border="1" width="100%"><tr><th>Name</th><th>Date</th><th>Restore</th><th>Delete Backup</th></tr>
                     <?php
-                    
-                        $i = 2;
-                        while ($i<$max){
-                            $file = strval($files[$i]);
-                            $date = explode("-", $files[$i]);
+                        $l = 2;
+                        while ($l < $max2){
+                            $file = strval($files[$l]);
+                            $date = explode("-", $files[$l]);
                             echo '<tr><td>';
                             echo $file;
                             echo '</td><td>';
@@ -55,7 +54,7 @@ $max = count($files);
                                 <input type='hidden' name='filename' value=" . $file . " />
                                 <input type='image' name='submit' src='images/delete.png' width=30 />";
                             echo '</center></td></tr>';
-                            $i++;
+                            $l++;
                         }
                         if ($max = 0){
                             echo '<tr><td></td><td></td><td></td></tr>';

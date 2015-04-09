@@ -9,7 +9,7 @@
 
 
 $userType = $_SESSION['userType'];
-$id = $_SESSION['id'];
+$userid = $_SESSION['id'];
 ?>
 
 <!DOCTYPE html>
@@ -45,10 +45,9 @@ $id = $_SESSION['id'];
             case 'customer':
                 $question="SELECT * FROM `customer` WHERE idCustomer= :id";
                 $sth = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-                $sth->execute(array(':id' => $id));
+                $sth->execute(array(':id' => $userid));
                 $fetch = $sth->fetchAll();
 
-                $i=1;
                 foreach($fetch as $key){
                     echo '<form action="update_user.php" method="POST">';
                     echo '<input type="hidden" name="returnto" value="myAccount.php" />';
@@ -58,16 +57,14 @@ $id = $_SESSION['id'];
                     echo '<tr><td><p>Password:</p></td><td><input type="password" size="20" maxlength="8" name="password" value=' . $key['password'].'></td></tr>';
                     echo '<tr><td><p>Password:</p></td><td><input type="password" size="20" maxlength="8" name="password2" value=' . $key['password'].'></td></tr>';
                     echo '<tr><td><p>Phone:</p></td><td><input type="text" name="phone" size="20" maxlength="12" value=' . $key['phone'].'></td></tr>';
-                    $i++;
                             }
                 break;
             case 'manager':
                 $question="SELECT * FROM `manager` WHERE idManager= :id";
                 $sth = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-                $sth->execute(array(':id' => $id));
+                $sth->execute(array(':id' => $userid));
                 $fetch = $sth->fetchAll();
 
-                $i=1;
                 foreach($fetch as $key){
                     echo '<form action="update_user.php" method="POST">';
                     echo '<input type="hidden" name="returnto" value="myAccount.php" />';
@@ -75,16 +72,14 @@ $id = $_SESSION['id'];
                     echo '<tr><td><p>E-mail:</p></td><td><input type="email" name="email" size="20" maxlength="45" value=' . $key['email'].'></td></tr>'; 
                     echo '<tr><td><p>Password:</p></td><td><input type="password" size="20" maxlength="8" name="password" value=' . $key['password'].'></td></tr>';
                     echo '<tr><td><p>Password:</p></td><td><input type="password" size="20" maxlength="8" name="password2" value=' . $key['password'].'></td></tr>';
-                    $i++;
                 }
                 break;
             case 'employee':
                 $question="SELECT * FROM `employee` WHERE idEmployee= :id";
                 $sth = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-                $sth->execute(array(':id' => $id));
+                $sth->execute(array(':id' => $userid));
                 $fetch = $sth->fetchAll();
 
-                $i=1;
                 foreach($fetch as $key){
                     echo '<form action="update_user.php" method="POST">';
                     echo '<input type="hidden" name="returnto" value="myAccount.php" />';
@@ -92,7 +87,6 @@ $id = $_SESSION['id'];
                     echo '<tr><td><p>E-mail:</p></td><td><input type="email" name="email" size="20" maxlength="45" value=' . $key['email'].'></td></tr>'; 
                     echo '<tr><td><p>Password:</p></td><td><input type="password" size="20" maxlength="8" name="password" value=' . $key['password'].'></td></tr>';
                     echo '<tr><td><p>Password:</p></td><td><input type="password" size="20" maxlength="8" name="password2" value=' . $key['password'].'></td></tr>';
-                    $i++;
                 }
                 break;
             }

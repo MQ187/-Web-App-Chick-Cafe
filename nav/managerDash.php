@@ -7,6 +7,7 @@
     }
     $max = count($_SESSION['ignored']);
 
+    /*
     $question = "SELECT * FROM `order` WHERE DATE(orderTimeS) = '$d' AND orderStatus = 'Preparing'";
     $sth = $db->prepare($question);
     $sth->execute();
@@ -21,20 +22,35 @@
                 break(3);
             }
         }
+
+        $timestamp = strtotime($key['etc']);
+        $timestamp2 = strtotime($key['orderTimeS']);
+
+        var_dump($timestamp);
+        var_dump($timestamp2);
     
-        $etc = date('H-i-s', $key['etc']);
-        $Ordertime = date('H-i-s', $key['orderTimeS']);
+        $etch = date('H', $timestamp);
+        $etci = date('i', $timestamp);
+        $etcs = date('s', $timestamp);
+        $Ordertimeh = date('H', $timestamp2);
+        $Ordertimei = date('i', $timestamp2);
+        $Ordertimes = date('s', $timestamp2);
+
         $now = date('H-i-s');
 
-        $etch = intval(date('H', $etc));
-        $etci = intval(date('i', $etc));
-        $etcs = intval(date('s', $etc));
-        $Ordertimeh = intval(date('H', $Ordertime));
-        $Ordertimei = intval(date('i', $Ordertime));
-        $Ordertimes = intval(date('s', $Ordertime));
-        $th = $etch + $Ordertimeh;
-        $ti = $etci + $Ordertimei;
-        $ts = $etcs + $Ordertimes;
+        var_dump($etci);
+        var_dump($Ordertimei);
+        var_dump($etcs);
+        var_dump($Ordertimes);
+    
+        $th = intval($etch) + intval($Ordertimeh);
+        $ti = intval($etci) + intval($Ordertimei);
+        $ts = intval($etcs) + intval($Ordertimes);
+
+        var_dump($th);
+        var_dump($ti);
+        var_dump($ts);
+
 
         while ($ts > 60){
             $ti++;
@@ -47,13 +63,14 @@
         if ($th > 24) {$th = 24;}
 
         $t = $th . "-" . $ts . "-" . $ts;
-        //echo $t;
+        echo $t;
 
         if ($t > $now){
             $notifi++;
         }
         $x++;
     }
+    */
 ?>
 
 <div class="nav" >
@@ -103,6 +120,7 @@
 
 <form id="ignore" action='/ignore_all.php' method=POST target="_blank" hidden >
     <?php
+        $id[1] = 1;
         $j = 0;
         foreach ($id as $key) {
             echo '<input id="'.$j.'" type="hidden" value="'. $key .'" />';
