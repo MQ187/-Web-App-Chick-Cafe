@@ -8,3 +8,10 @@
         <li><a href="logoff.php">Logout</a></li>
     </ul>
 </div>
+
+<script type="text/javascript">
+setTimeout(function(){
+    location.reload();
+},180000); 
+//auto-refresh every minute.
+</script>

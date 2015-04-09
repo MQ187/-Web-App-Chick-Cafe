@@ -31,7 +31,7 @@
     </ul>
 </div>
 
-<form  name="jack" action='orderCompleted.php' id='update' method=POST hidden>
+<form action='orderCompleted.php' id='update' method=POST hidden>
     <input type="hidden" name="id" value=<?php echo "'". $id ."'" ?> />
     <input type="submit" name="update" />
 </form>
@@ -46,7 +46,9 @@
         }
         else{
             alert ("No notifications to display.");
-            location.reload();
         }
     }
+    setTimeout(function(){
+        location.reload();
+    },180000); 
 </script>
