@@ -7,7 +7,7 @@ require_once("messages.php");
 
 $_SESSION['access'] = "customer";
 include('security.php');
-
+//only allow customer to access this page
 ?>
 <!DOCTYPE html>
     <head>
@@ -15,7 +15,7 @@ include('security.php');
         <link type="text/css" href="styles.css" rel="stylesheet" media="screen" />
         <style>
           h2, h3 {
-            color:white;
+            color:white; /*set the colour of the headers to white*/
           }
         </style>
     </head>
@@ -34,12 +34,12 @@ include('security.php');
               
                 <table width="800px">
                 <?php
-
+                //check type of vip discount
                 if (isset($_SESSION['vipD'])){
                   $type = "fixed";
                   $value = $_SESSION['vipD'];
                 }
-
+                //display image based on the customers status
                 if (isset($_SESSION['vip'])){
                   switch ($_SESSION['vip']) {
                     case '0':
@@ -62,6 +62,7 @@ include('security.php');
                 else{
                   echo '<tr><td><h2> You have no VIP membership status, come more often to benefit from our great offers!</h2>';
                 }
+                //display the discount percentage for the specific customer
                 switch ($type) {
                   case 'fixed':
                     if ($_SESSION['vip'] != 0){

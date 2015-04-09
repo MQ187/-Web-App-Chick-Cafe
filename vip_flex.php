@@ -65,7 +65,7 @@
             <input type="button" value="Add Threshold" onclick="addRow('dataTable')"> 
             <input type="button" value="Remove Threshold" onclick="deleteRow('dataTable')"> 
           </p>
-
+          <!--display the threshold inputs and allow user to add and remove threshold-->
           <table id="dataTable" style="margin: 0px auto;">
             <tr>
               
@@ -91,6 +91,7 @@
    </body>
 
    <?php
+   //check if discount type is flex
     if(isset($_POST['endDate']) && $_POST['type']==1){
         $membership = $_POST['memebershipselect'];
         $discountType = $_POST['type'];
@@ -101,17 +102,18 @@
         $LOWER=$_POST['lower'];     
         $PERC=$_POST['perc']; 
 
+        //insert the posted values into the discount table
         $question = "INSERT INTO discounts(vipMembership,discountType,startTime,endTime) VALUES (:vipMembership,:discountType,:startTime,:endTime)";
         $add = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
         $add->execute(array(':vipMembership'=>$membership,':discountType'=>$discountType,':startTime'=>$strt, ':endTime'=>$end));
 
-        $id = $db->lastInsertId();
+        $id = $db->lastInsertId(); //get the id of last added column in the db
 
         foreach($LOWER as $a=>$b){
             $up = $UPPER[$a];
             $low = $LOWER[$a];
             $percen = $PERC[$a];
-
+            //add the different thresholds for the disocunt to the flex discount table
             $q2 = "INSERT INTO flexdiscount(idDiscount, uppr, lowr, value) VALUES ($id, $up, $low, $percen)";
             $add2 = $db->prepare($q2);
             $add2->execute();
@@ -119,10 +121,12 @@
 
         if(isset($_POST['ing'])){
             foreach($_POST['ing'] as $cusID){
+                //delete the customers current discount
                 $q2 = "DELETE FROM customerdiscount WHERE idcustomer = '$cusID'";
                 $sth2 = $db->prepare($q2);
                 $execute = $sth2->execute();
 
+                //assign the new discount
                 $q = "INSERT INTO customerdiscount(idcustomer, idDiscounts) VALUES ($cusID, $id)";
                 $sth = $db->prepare($q);
                 $sth->execute();

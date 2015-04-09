@@ -1,3 +1,4 @@
+//adds a row for a threshold to the flex discount page 
 function addRow(tableID) {
 	var table = document.getElementById(tableID);
 	var rowCount = table.rows.length;
@@ -9,11 +10,12 @@ function addRow(tableID) {
 			newcell.innerHTML = table.rows[0].cells[i].innerHTML;
 		}
 	}else{
-		 alert("You have reached the maximum amount of thresholds for this discount.");
+		 alert("You have reached the maximum amount of thresholds for this discount."); //inform user only 5 thresholds
 			   
 	}
 }
 
+//delete row from array of flex thresholds
 function deleteRow(tableID) {
 	var table = document.getElementById(tableID);
 	var rowCount = table.rows.length;
