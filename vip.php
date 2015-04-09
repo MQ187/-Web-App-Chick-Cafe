@@ -39,6 +39,13 @@
                 <input type="hidden" name="type" value="0">
             </p></td>
         </form>
+
+        <form action="vip_customers.php">
+            <td><p>
+            <input type="submit" class="vip_button" value="VIP Customers">
+            </p></td>
+        </form>
+
         </tr>      
     </nav>
 
