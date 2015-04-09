@@ -25,7 +25,7 @@ $max = count($_SESSION['basket']); //check how many items are in the basket.
     <header>
          <a href="index.php"><img align="middle" id="logo" src="images/Logo.png"/></a>
          <?php
-         require_once("nav/menus.php");
+         require_once("nav/menus.php"); //include the manager nav
          ?>
 
     </header>
@@ -34,7 +34,7 @@ $max = count($_SESSION['basket']); //check how many items are in the basket.
             <ul><li><i>My basket</i>
 		<?php 
 if ($max < 1){
-	echo "<center><h1>Your basket is empty, please refer to one of the menus above.</h1></center>";
+	echo "<center><h1>Your basket is empty, please refer to one of the menus above.</h1></center>"; //tell customer the basket is empty
 	die();
 }
 else{

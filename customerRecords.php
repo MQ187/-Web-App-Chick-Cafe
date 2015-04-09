@@ -20,7 +20,7 @@ require_once("messages.php");
          <br>
         
          <?php
-         require_once("nav/customerDash.php");
+         require_once("nav/customerDash.php"); //customer nav
          ?>
 
     </header>
@@ -38,7 +38,7 @@ require_once("messages.php");
                             $timee = $myDate = date("Y-m-d h:i:s", strtotime( date( "Y-m-d", strtotime( date("Y-m-d") ) ) . "-1 month" ) );
                             $times = $myDate = date("Y-m-d h:i:s", strtotime( date( "Y-m-d", strtotime( date("Y-m-d") ) ) . "-2 years" ) );
 
-
+                            //all orders mad by the customer for the past 2 years
                             $question="SELECT * FROM `order` WHERE idCustomer= :id AND orderTimeS BETWEEN '".$times."' AND '".$timee."' ORDER BY idOrder DESC;";
                             $sth = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
                             $sth->execute(array(':id' => $_SESSION['id']));
@@ -53,6 +53,7 @@ require_once("messages.php");
                                 echo '<tr>';
                                 echo '<td>'. $idorder[$i] .'</td>';
 
+                                    //display the items for each order
                                     $question2="SELECT quantity,name FROM orderItem JOIN item WHERE orderItem.idorder = :id AND orderItem.idItem = item.iditem";
                                     $sth2 = $db->prepare($question2, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
                                     $sth2->execute(array(':id' => $idorder[$i]));
@@ -76,9 +77,10 @@ require_once("messages.php");
                             }
                             if (count($fetch) == 0){
                                 echo '<tr><td>No orders to display</td><td></td><td></td><td></td><td></td></tr>';
-                            }
+                            } //display is nothing found in query
                         ?>
                         </table>
+                            <!--Button - Go back to the current orders-->
                            <a href="customerDash.php" style="text-decoration:none;color:white;"><center><h4>Back to current orders</h4></center></a>
 
                 </li>  

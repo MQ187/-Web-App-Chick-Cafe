@@ -2,6 +2,7 @@
 	require_once("db_config.php");
     // Connect to the Database and Select the tts database.
 
+    //check if the basket hasnt been set
     if (!isset($_SESSION['basket'])){
         $_SESSION['basket'] = array();
       }
@@ -10,6 +11,7 @@
     $quantity = 1;
 	$missing = 0;
 
+    //get availability for items from ingredients tbl
 	$question = 'SELECT availability FROM Ingredients JOIN itemIngredients WHERE itemIngredients.idItem = :id';
 	$sth = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 	$sth->execute(array(':id' => $product_id));

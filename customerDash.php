@@ -22,7 +22,7 @@ require_once("messages.php");
          <br>
         
          <?php
-         require_once("nav/customerDash.php");
+         require_once("nav/customerDash.php"); //display the customer nav
          ?>
 
     </header>
@@ -39,6 +39,7 @@ require_once("messages.php");
 
                             $time = $myDate = date("Y-m-d h:i:s", strtotime( date( "Y-m-d", strtotime( date("Y-m-d") ) ) . "-1 month" ) );
 
+                            //show all customer orders made in the last month
                             $question="SELECT * FROM `order` WHERE idCustomer= :id AND orderTimeS BETWEEN '".$time."' AND NOW() ORDER BY idOrder DESC;";
                             $sth = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
                             $sth->execute(array(':id' => $_SESSION['id']));
@@ -53,6 +54,7 @@ require_once("messages.php");
                                 echo '<tr>';
                                 echo '<td>'. $idorder[$i] .'</td>';
 
+                                    //get the quantity and name for each item in the order
                                     $question2="SELECT quantity,name FROM orderItem JOIN item WHERE orderItem.idorder = :id AND orderItem.idItem = item.iditem";
                                     $sth2 = $db->prepare($question2, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
                                     $sth2->execute(array(':id' => $idorder[$i]));
@@ -79,6 +81,7 @@ require_once("messages.php");
                             }
                         ?>
                         </table>
+                        <!--button to view older orders-->
                         <a href="customerRecords.php" style="text-decoration:none;color:white;"><center><h4>View Older</h4></center></a>
                 </li>  
             </ul>
