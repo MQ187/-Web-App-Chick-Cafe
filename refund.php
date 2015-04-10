@@ -50,7 +50,7 @@
 	                <ul><!--refund form values used to record refund-->
 	                    <li><input type="text" name="customerID" placeholder="Customer ID" class="text" required="required"/></li>
 	                    <li><input type="text" name="orderID" placeholder="Order ID" class="text" required="required"/></li>
-	                    <li><input type="password" name="accountNumber" placeholder="Account Number" class="text" required="required"/></li>
+	                    <li><input type="text" name="accountNumber" placeholder="Account Number" class="text" required="required"/></li>
 	                    <li><input type="text" name="amount" placeholder="Amount" required="required" class="text" /></li>
 	                    <li><input type="text" name="details" placeholder="Details" required="required" class="text" /></li>
 	                    <li><input type="submit" value="Submit" class="button"/></li>
