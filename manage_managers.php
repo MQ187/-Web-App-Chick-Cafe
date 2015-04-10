@@ -52,7 +52,7 @@
                             $active[$i] = $key['active'];
 
                             echo '<tr>';
-                            echo "<form action=manage_managers.php method=POST>";
+                            echo "<form action='manage_managers.php' method=POST >";
                             echo '<td><input name="owner" type=checkbox value="owner" ' . $checked . '/>';
                             echo '<td><input name="name" type="text" value='. $name[$i] .'></td>';
                             echo '<td><input name="pass" type="password" value='. $pword[$i] .'></td>';
@@ -61,7 +61,7 @@
                             echo "<td>
                                     <input type='submit' value='Update' name='Update'/>
                                     <input type=hidden name=idmanager value=$id[$i] />
-                                  </form></td>"; 
+                                  </td></form>"; 
                             echo "<td><form action=manage_managers.php method=POST>
                                     <input type='submit' value='Delete' name='Delete'/>
                                     <input type=hidden name=idmanager value=$id[$i] />
@@ -129,7 +129,7 @@
                             $i++;
                             }
                             if (count($fetch) == 0){
-                              echo '<td>Nothing to display</td><td></td><td></td><td></td><td></td><td></td><td></td>';
+                              echo '<td>Nothing to display</td><td></td><td></td><td></td><td></td><<td></td>';
                             }
 
                             if(isset($_POST['Active'])){
