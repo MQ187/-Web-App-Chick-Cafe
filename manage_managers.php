@@ -85,7 +85,7 @@
                                 $email = $_POST['email'];
                                 $password = sha1(md5($_POST['pass']));
 
-                                $question="UPDATE `manager` SET owner='$owner'name='$name', email='$email', password='$password' WHERE idmanager='$_POST[idmanager]'";
+                                $question="UPDATE `manager` SET owner='$owner', name='$name', email='$email', password='$password' WHERE idmanager='$_POST[idmanager]'";
                                 $sth = $db->prepare($question);
                                 $sth->execute();
                                 echo '<META HTTP-EQUIV="Refresh" Content="0; URL=manage_managers.php">';
