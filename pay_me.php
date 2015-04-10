@@ -61,5 +61,5 @@ echo "<form action=new_order.php method=POST id='ORDER' hidden >
                 </form>";
         ?>
         <script type="text/javascript">
-            //document.getElementById("ORDER").submit();
+            document.getElementById("ORDER").submit();
         </script>
