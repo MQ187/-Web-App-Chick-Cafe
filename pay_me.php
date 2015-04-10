@@ -34,7 +34,8 @@ if (isset($_POST['card'])){
 	$number = $_POST['cardnumber'];
 	$card4 = substr($number, -4, 4);
 	$ccv = $_POST['ccv'];
-	$expirydate = substr($_POST['yyyy'],2,2) . "-" . $_POST['mm'] . "-" .  $_POST['dd'];
+	$year = substr($_POST['yyyy'],-2,2);
+	$expirydate = $year . "-" . $_POST['mm'] . "-" .  $_POST['dd'];
 
 	$question3="INSERT INTO `card` (`idPayment`, `card4`, `cardExp`, `cardName`) VALUES(:idPayment,:card4, :exp ,:cardName)";
 	$add3 = $db->prepare($question3, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
@@ -49,7 +50,7 @@ else{
 
 	$question3="INSERT INTO `bank` (`idPayment`, `bankAccount`, `bankSortCode`, `bankAccountName`) VALUES(:idPayment,:account, :sortcode ,:name)";
 	$add3 = $db->prepare($question3, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-	$add3->execute(array(':idPayment' => $idPayment, ':account' => $number, ':sortcode' => $sortcode, ':Name' => $name));
+	$add3->execute(array(':idPayment' => $idPayment, ':account' => $number, ':sortcode' => $sortcode, ':name' => $name));
 
 }
 
@@ -60,5 +61,5 @@ echo "<form action=new_order.php method=POST id='ORDER' hidden >
                 </form>";
         ?>
         <script type="text/javascript">
-            document.getElementById("ORDER").submit();
+            //document.getElementById("ORDER").submit();
         </script>

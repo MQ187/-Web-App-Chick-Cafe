@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `card` (
 `idcard` int(11) NOT NULL,
   `idPayment` int(11) DEFAULT NULL,
   `card4` varchar(4) NOT NULL,
-  `cardExp` varchar(6) NOT NULL,
+  `cardExp` varchar(8) NOT NULL,
   `cardName` varchar(45) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
 

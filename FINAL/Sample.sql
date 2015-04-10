@@ -58,19 +58,17 @@ INSERT INTO `customer` (`idCustomer`, `name`, `surname`, `email`, `phone`, `pass
 (3, 'Sarah', 'Broklehurst', 'sarahb@mail.com', '07587679867', '63982e54a7aeb0d89910475ba6dbd3ca6dd4e5a1', 0),
 (4, 'John', 'Doe', 'john@mail.com', '07876349754', '63982e54a7aeb0d89910475ba6dbd3ca6dd4e5a1', 0);
 
-INSERT INTO `customerdiscount` (`idcustomerDiscount`, `idcustomer`, `idDiscounts`) VALUES
-(1, 1, 5),
-(2, 3, 6),
-(3, 2, 7);
-
 INSERT INTO `discounts` (`idDiscounts`, `vipMembership`, `discountType`, `discountValue`, `startTime`, `endTime`) VALUES
-(1, 0, 0, '1.00', '2015-04-09', NULL),
-(2, 0, 0, '1.00', '2015-04-09', NULL),
-(3, 0, 0, '1.00', '2015-04-09', NULL),
-(4, 0, 0, '1.00', '2015-04-09', NULL),
+(4, 0, 0, '1.00', '2015-04-09', '0000-00-00'),
 (5, 3, 0, '1.00', '2015-04-09', '0000-00-00'),
 (6, 2, 0, '2.00', '2015-04-09', '0000-00-00'),
 (7, 1, 1, '0.00', '2015-04-09', '2017-01-01');
+
+INSERT INTO `customerdiscount` (`idcustomerDiscount`, `idcustomer`, `idDiscounts`) VALUES
+(1, 1, 5),
+(2, 3, 6),
+(3, 2, 7),
+(4, 4, 4);
 
 INSERT INTO `employee` (`idemployee`, `name`, `password`, `email`, `active`) VALUES
 (250, 'Dennis Menace', 'cd621fa36524acce270970d487852698bd5a7876', 'menace@chickcafe.com', 1),
