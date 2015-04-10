@@ -70,6 +70,10 @@
 	   	$_SESSION['vipT'] = 0;
 		$_SESSION['vipD'] = 0;
 
+		$question="INSERT INTO customerDiscount(idCustomer,isDiscounts) VALUES(:customer,:discount)";
+		$get = $db->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+		$get->execute(array(':vip' => 0,':customer' => $_SESSION['id'], ':discount' => $vipid));
+
 		ini_set('session.cookie_lifetime', 28800);
 		header('Location: customerDash.php');
 

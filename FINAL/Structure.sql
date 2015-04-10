@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `discounts` (
   `discountType` tinyint(1) NOT NULL DEFAULT '0',
   `discountValue` decimal(6,2) NOT NULL,
   `startTime` date NOT NULL,
-  `endTime` date DEFAULT NULL
+  `endTime` date NOT NULL DEFAULT '0000-00-00'
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `employee`;
