@@ -9,8 +9,9 @@
 
 		include("db_config.php");
 		// Connect to the Database and Select the tts database.
-		$encrypt_accNumber = sha1(md5($_POST['accountNumber']));
+		//$encrypt_accNumber = sha1(md5($_POST['accountNumber']));
 		//insert posted fields from below into the refund table
+		//disagrement on the fact that this should be encrypted, commented out to allow for proof of writting during demo.
 		$question="INSERT INTO refund(idCustomer,idManager,idOrder,accountNumber,date,ammount,details) VALUES(:idCustomer,
 				:idManager, :idOrder, :accountNumber, :date, :ammount, :details)";
 		
