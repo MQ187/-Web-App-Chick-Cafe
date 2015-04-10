@@ -39,5 +39,9 @@ if (isset($_SESSION['message'])){
                 the current one.");</script>';
         unset($_SESSION['message']);
         }
+        elseif ($_SESSION['message'] == "10") {
+            print '<script type="text/javascript">alert("The database has been restored.");</script>';
+            unset($_SESSION['message']);
+        }
 }
 ?>
