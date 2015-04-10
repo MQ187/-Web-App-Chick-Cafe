@@ -121,7 +121,7 @@ for($i=0;$i<$max;$i++){
 
     foreach ($fetch as $key) {
         echo "<br>";
-        var_dump($key);
+        //var_dump($key);
         $idIngredient = $key['idIngredient'];
         $availability = $key['availability'];
         $q = $key['quantity'];
@@ -138,8 +138,8 @@ for($i=0;$i<$max;$i++){
     //get the current stock of each item & change it.
 }
 
-var_dump($idorder);
-var_dump($idPayment);
+//var_dump($idorder);
+//var_dump($idPayment);
 
 $question4 = 'UPDATE payment SET idOrder = :idOrder WHERE idPayment = :idPayment';
 $sth4 = $db->prepare($question4, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
