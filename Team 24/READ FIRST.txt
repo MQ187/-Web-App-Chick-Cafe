@@ -1,0 +1,8 @@
+Please note:
+
+- there is a basic DB structure + a samle DB.
+- The database (DB.sql) must be installed in mysql for any of this code to work
+- For the database backup & restore functionalities to work, mysqldump must be installed
+	on the machine. This may require adding its current location to the machine's PATH.
+- Due to the use of emails for user authentication, any required user in the sample data 
+	has been replaced by the username + @mail.com
